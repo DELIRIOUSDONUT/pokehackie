@@ -1,6 +1,8 @@
-from players.gen3player import Gen3Player
+import sys
+sys.path.append('../players')
+from players.gen6player import Gen6Player
 
-class DamagePlayer(Gen3Player):
+class DamagePlayer(Gen6Player):
     
     def choose_move(self, battle):
         if battle.available_moves:

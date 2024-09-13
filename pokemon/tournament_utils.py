@@ -25,7 +25,7 @@ def get_poke_env_player_from_path(path: str, team_path: str):
     for attr_name in dir(module):
         attr = getattr(module, attr_name)
         if isinstance(attr, type) and issubclass(attr, object) and issubclass(attr, Player):
-            return attr(team=team, battle_format="gen3ou", # Any format for which the team is legal works here.
+            return attr(team=team, battle_format="gen6ou", # Any format for which the team is legal works here.
                         server_configuration=LocalhostServerConfiguration,
                         log_level=10)
         
