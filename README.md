@@ -18,7 +18,7 @@ This can be done on either local or official PS servers
 
 1) Click on Teambuilder
 2) Select New Team
-3) Click on the Format dropdown box and select [Gen 3] OU under the Past Gens OU column
+3) Click on the Format dropdown box and select [Gen 6] OU under the Past Gens OU column
 4) Click on Add Pokemon
 5) Proceed to add your Pokemons and select their items, ability, moves and EVs (we will be capping this)
 6) Once you're done adding Pokemons, go back to the team section and click on Validate. This will tell if you if your team is valid. If not, it will tell you what to change to validate it.
