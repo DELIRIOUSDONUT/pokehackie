@@ -5,7 +5,7 @@ from players.gen6player import Gen6Player
 
 class MyPokeBot(Gen6Player):
     
-    # Define bot logic here in choose move
+    # Define bot logic here in choose_move
     # Check poke-env documentation for help 
     # Focus is on Battle, Pokemon, Player and Move classes
     # For now, default logic is to choose the move with the greatest base power..
