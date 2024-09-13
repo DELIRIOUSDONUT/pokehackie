@@ -1,0 +1,50 @@
+Aerodactyl @ Choice Band  
+Ability: Rock Head  
+EVs: 252 HP  
+- Agility  
+- Ancient Power  
+- Curse  
+- Double-Edge  
+
+Flygon @ Leftovers  
+Ability: Levitate  
+EVs: 228 HP  
+- Fire Punch  
+- Dragon Claw  
+- Double-Edge  
+- Facade  
+
+Celebi @ Choice Band  
+Ability: Natural Cure  
+Happiness: 0  
+EVs: 252 HP / 252 Atk / 4 Def  
+- Hidden Power [Ice]  
+- Calm Mind  
+- Frustration  
+- Double-Edge  
+
+Cloyster @ Leftovers  
+Ability: Shell Armor  
+EVs: 224 Atk  
+- Facade  
+- Rapid Spin  
+- Ice Beam  
+- Hidden Power [Fire]  
+
+Charizard @ Salac Berry  
+Ability: Blaze  
+Happiness: 0  
+EVs: 204 Atk  
+- Fire Punch  
+- Frustration  
+- Dragon Dance  
+- Double-Edge  
+
+Jirachi @ Leftovers  
+Ability: Serene Grace  
+Happiness: 0  
+EVs: 204 HP  
+- Body Slam  
+- Protect  
+- Frustration  
+- Double-Edge  
