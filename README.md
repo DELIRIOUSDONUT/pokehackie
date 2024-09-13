@@ -25,3 +25,13 @@ This can be done on either local or official PS servers
 7) Once validated, click on the Import/Export button at the top and save the output in a team.txt file. This will be your team we'll use for bot simulations.
 
 ## How to write a bot
+
+Write the bot logic in prod-testing/players/POKE-BOT/bot.py
+The file structure for the players directory must be maintained, but feel free to create extra files/modules
+If you do, keep them in POKE-BOT to avoid import issues
+
+As for the team, use the output from the Teambuilder tool and replace the placeholder team data in players/POKE-BOT/team.txt with it
+For useful functions to aid in decision logic, refer to [Main Modules Documentation] in https://poke-env.readthedocs.io/en/stable/modules/battle.html - especially with functions marked with the "property" tag.
+
+
+
