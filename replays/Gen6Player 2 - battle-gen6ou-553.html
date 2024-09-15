@@ -1,0 +1,1894 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<!-- version 1 -->
+<title>battle-gen6ou-553</title>
+<style>
+    html,
+    body {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        padding: 12px 0;
+    }
+
+    .battle-log {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+    }
+
+    .battle-log-inline {
+        border: 1px solid #AAAAAA;
+        background: #EEF2F5;
+        color: black;
+        max-width: 640px;
+        margin: 0 auto 80px;
+        padding-bottom: 5px;
+    }
+
+    .battle-log .inner {
+        padding: 4px 8px 0px 8px;
+    }
+
+    .battle-log .inner-preempt {
+        padding: 0 8px 4px 8px;
+    }
+
+    .battle-log .inner-after {
+        margin-top: 0.5em;
+    }
+
+    .battle-log h2 {
+        margin: 0.5em -8px;
+        padding: 4px 8px;
+        border: 1px solid #AAAAAA;
+        background: #E0E7EA;
+        border-left: 0;
+        border-right: 0;
+        font-family: Verdana, sans-serif;
+        font-size: 13pt;
+    }
+
+    .backprop {
+        top: 0;
+    }
+
+    .battle-log .chat {
+        vertical-align: middle;
+        padding: 3px 0 3px 0;
+        font-size: 8pt;
+    }
+
+    .battle-log .chat strong {
+        color: #40576A;
+    }
+
+    .battle-log .chat em {
+        padding: 1px 4px 1px 3px;
+        color: #000000;
+        font-style: normal;
+    }
+
+    .chat.mine {
+        background: rgba(0, 0, 0, 0.05);
+        margin-left: -8px;
+        margin-right: -8px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .spoiler {
+        color: #BBBBBB;
+        background: #BBBBBB;
+        padding: 0px 3px;
+    }
+
+    .spoiler:hover,
+    .spoiler:active,
+    .spoiler-shown {
+        color: #000000;
+        background: #E2E2E2;
+        padding: 0px 3px;
+    }
+
+    .spoiler a {
+        color: #BBBBBB;
+    }
+
+    .spoiler:hover a,
+    .spoiler:active a,
+    .spoiler-shown a {
+        color: #2288CC;
+    }
+
+    .chat code,
+    .chat .spoiler:hover code,
+    .chat .spoiler:active code,
+    .chat .spoiler-shown code {
+        border: 1px solid #C0C0C0;
+        background: #EEEEEE;
+        color: black;
+        padding: 0 2px;
+    }
+
+    .chat .spoiler code {
+        border: 1px solid #CCCCCC;
+        background: #CCCCCC;
+        color: #CCCCCC;
+    }
+
+    .battle-log .rated {
+        padding: 3px 4px;
+    }
+
+    .battle-log .rated strong {
+        color: white;
+        background: #89A;
+        padding: 1px 4px;
+        border-radius: 4px;
+    }
+
+    .spacer {
+        margin-top: 0.5em;
+    }
+
+    .message-announce {
+        background: #6688AA;
+        color: white;
+        padding: 1px 4px 2px;
+    }
+
+    .message-announce a,
+    .broadcast-green a,
+    .broadcast-blue a,
+    .broadcast-red a {
+        color: #DDEEFF;
+    }
+
+    .broadcast-green {
+        background-color: #559955;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .broadcast-blue {
+        background-color: #6688AA;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .infobox {
+        border: 1px solid #6688AA;
+        padding: 2px 4px;
+    }
+
+    .infobox-limited {
+        max-height: 200px;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
+    .broadcast-red {
+        background-color: #AA5544;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .message-learn-canlearn {
+        font-weight: bold;
+        color: #228822;
+        text-decoration: underline;
+    }
+
+    .message-learn-cannotlearn {
+        font-weight: bold;
+        color: #CC2222;
+        text-decoration: underline;
+    }
+
+    .message-effect-weak {
+        font-weight: bold;
+        color: #CC2222;
+    }
+
+    .message-effect-resist {
+        font-weight: bold;
+        color: #6688AA;
+    }
+
+    .message-effect-immune {
+        font-weight: bold;
+        color: #666666;
+    }
+
+    .message-learn-list {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .message-throttle-notice,
+    .message-error {
+        color: #992222;
+    }
+
+    .message-overflow,
+    .chat small.message-overflow {
+        font-size: 0pt;
+    }
+
+    .message-overflow::before {
+        font-size: 9pt;
+        content: '...';
+    }
+
+    .subtle {
+        color: #3A4A66;
+    }
+</style>
+<div class="wrapper replay-wrapper" style="max-width:1180px;margin:0 auto">
+    <input type="hidden" name="replayid" value="unregisteredserver-gen8randombattle-320064" />
+    <div class="battle"></div>
+    <div class="battle-log"></div>
+    <div class="replay-controls"></div>
+    <div class="replay-controls-2"></div>
+    <h1 style="font-weight:normal;text-align:center"><strong>poke-env battle replay</strong><br />battle-gen6ou-553<br /><a
+            href="http://pokemonshowdown.com/users/randomplayer1" class="subtle" target="_blank">Gen6Player 2</a>
+        vs. <a href="http://pokemonshowdown.com/users/randomplayer2" class="subtle"
+            target="_blank">Gen6Player 6</a></h1>
+    <script type="text/plain" class="battle-log-data">
+    >battle-gen6ou-553|init|battle
+|title|Gen6Player 2 vs. Gen6Player 6
+|j|☆Gen6Player 2
+|j|☆Gen6Player 6
+|gametype|singles
+|player|p1|Gen6Player 2|101|
+|player|p2|Gen6Player 6|170|
+|teamsize|p1|6
+|teamsize|p2|6
+|gen|6
+|tier|[Gen 6] OU
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|Species Clause: Limit one of each Pokémon
+|rule|OHKO Clause: OHKO moves are banned
+|rule|Moody Clause: Moody is banned
+|rule|Evasion Items Clause: Evasion items are banned
+|rule|Evasion Moves Clause: Evasion moves are banned
+|rule|Endless Battle Clause: Forcing endless battles is banned
+|rule|HP Percentage Mod: HP is shown in percentages
+|rule|Swagger Clause: Swagger is banned
+|clearpoke
+|poke|p1|Aerodactyl, F|item
+|poke|p1|Flygon, F|item
+|poke|p1|Celebi|item
+|poke|p1|Cloyster, F|item
+|poke|p1|Charizard, F|item
+|poke|p1|Jirachi|item
+|poke|p2|Aerodactyl, M|item
+|poke|p2|Flygon, M|item
+|poke|p2|Celebi|item
+|poke|p2|Cloyster, F|item
+|poke|p2|Charizard, F|item
+|poke|p2|Jirachi|item
+|teampreview
+|start
+|switch|p1a: Celebi|Celebi|404/404
+|switch|p2a: Flygon|Flygon, M|100/100
+|turn|1
+|switch|p2a: Celebi|Celebi|100/100
+|move|p1a: Celebi|Hidden Power|p2a: Celebi
+|-supereffective|p2a: Celebi
+|-damage|p2a: Celebi|76/100
+|upkeep
+|turn|2
+|switch|p1a: Jirachi|Jirachi|392/392
+|move|p2a: Celebi|Frustration|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|391/392
+|-heal|p1a: Jirachi|392/392|[from] item: Leftovers
+|upkeep
+|turn|3
+|switch|p2a: Jirachi|Jirachi|100/100
+|switch|p1a: Cloyster|Cloyster, F|241/241
+|upkeep
+|turn|4
+|switch|p2a: Celebi|Celebi|76/100
+|move|p1a: Cloyster|Hidden Power|p2a: Celebi
+|-supereffective|p2a: Celebi
+|-damage|p2a: Celebi|56/100
+|upkeep
+|turn|5
+|switch|p1a: Flygon|Flygon, F|358/358
+|move|p2a: Celebi|Hidden Power|p1a: Flygon
+|-supereffective|p1a: Flygon
+|-damage|p1a: Flygon|146/358
+|-heal|p1a: Flygon|168/358|[from] item: Leftovers
+|upkeep
+|turn|6
+|switch|p1a: Charizard|Charizard, F|297/297
+|move|p2a: Celebi|Hidden Power|p1a: Charizard
+|-damage|p1a: Charizard|240/297
+|upkeep
+|turn|7
+|switch|p1a: Jirachi|Jirachi|392/392
+|switch|p2a: Cloyster|Cloyster, F|100/100
+|upkeep
+|turn|8
+|switch|p2a: Celebi|Celebi|56/100
+|move|p1a: Jirachi|Double-Edge|p2a: Celebi
+|-damage|p2a: Celebi|32/100
+|-damage|p1a: Jirachi|360/392|[from] Recoil
+|-heal|p1a: Jirachi|384/392|[from] item: Leftovers
+|upkeep
+|turn|9
+|switch|p1a: Cloyster|Cloyster, F|241/241
+|switch|p2a: Flygon|Flygon, M|100/100
+|upkeep
+|turn|10
+|switch|p2a: Celebi|Celebi|32/100
+|switch|p1a: Flygon|Flygon, F|168/358
+|-heal|p1a: Flygon|190/358|[from] item: Leftovers
+|upkeep
+|turn|11
+|switch|p2a: Charizard|Charizard, F|100/100
+|move|p1a: Flygon|Dragon Claw|p2a: Charizard
+|-damage|p2a: Charizard|61/100
+|-heal|p1a: Flygon|212/358|[from] item: Leftovers
+|upkeep
+|turn|12
+|switch|p2a: Cloyster|Cloyster, F|100/100
+|move|p1a: Flygon|Double-Edge|p2a: Cloyster
+|-damage|p2a: Cloyster|75/100
+|-damage|p1a: Flygon|192/358|[from] Recoil
+|-heal|p1a: Flygon|214/358|[from] item: Leftovers
+|-heal|p2a: Cloyster|81/100|[from] item: Leftovers
+|upkeep
+|turn|13
+|switch|p1a: Charizard|Charizard, F|240/297
+|switch|p2a: Flygon|Flygon, M|100/100
+|upkeep
+|turn|14
+|switch|p1a: Flygon|Flygon, F|214/358
+|move|p2a: Flygon|Facade|p1a: Flygon
+|-damage|p1a: Flygon|150/358
+|-heal|p1a: Flygon|172/358|[from] item: Leftovers
+|upkeep
+|turn|15
+|switch|p2a: Cloyster|Cloyster, F|81/100
+|move|p1a: Flygon|Fire Punch|p2a: Cloyster
+|-damage|p2a: Cloyster|67/100
+|-heal|p1a: Flygon|194/358|[from] item: Leftovers
+|-heal|p2a: Cloyster|73/100|[from] item: Leftovers
+|upkeep
+|turn|16
+|move|p1a: Flygon|Facade|p2a: Cloyster
+|-damage|p2a: Cloyster|60/100
+|move|p2a: Cloyster|Ice Beam|p1a: Flygon
+|-supereffective|p1a: Flygon
+|-damage|p1a: Flygon|0 fnt
+|faint|p1a: Flygon
+|-heal|p2a: Cloyster|66/100|[from] item: Leftovers
+|upkeep
+|switch|p1a: Celebi|Celebi|404/404
+|turn|17
+|switch|p2a: Flygon|Flygon, M|100/100
+|move|p1a: Celebi|Double-Edge|p2a: Flygon
+|-damage|p2a: Flygon|45/100
+|-damage|p1a: Celebi|339/404|[from] Recoil
+|-heal|p2a: Flygon|51/100|[from] item: Leftovers
+|upkeep
+|turn|18
+|switch|p1a: Aerodactyl|Aerodactyl, F|364/364
+|move|p2a: Flygon|Facade|p1a: Aerodactyl
+|-resisted|p1a: Aerodactyl
+|-damage|p1a: Aerodactyl|325/364
+|-heal|p2a: Flygon|57/100|[from] item: Leftovers
+|upkeep
+|turn|19
+|switch|p1a: Cloyster|Cloyster, F|241/241
+|switch|p2a: Charizard|Charizard, F|61/100
+|upkeep
+|turn|20
+|switch|p2a: Jirachi|Jirachi|100/100
+|switch|p1a: Aerodactyl|Aerodactyl, F|325/364
+|upkeep
+|turn|21
+|switch|p2a: Celebi|Celebi|32/100
+|move|p1a: Aerodactyl|Agility|p1a: Aerodactyl
+|-boost|p1a: Aerodactyl|spe|2
+|upkeep
+|turn|22
+|switch|p1a: Jirachi|Jirachi|384/392
+|switch|p2a: Charizard|Charizard, F|61/100
+|-heal|p1a: Jirachi|392/392|[from] item: Leftovers
+|upkeep
+|turn|23
+|switch|p2a: Flygon|Flygon, M|57/100
+|move|p1a: Jirachi|Double-Edge|p2a: Flygon
+|-damage|p2a: Flygon|27/100
+|-damage|p1a: Jirachi|356/392|[from] Recoil
+|-heal|p1a: Jirachi|380/392|[from] item: Leftovers
+|-heal|p2a: Flygon|33/100|[from] item: Leftovers
+|upkeep
+|turn|24
+|switch|p2a: Celebi|Celebi|32/100
+|switch|p1a: Charizard|Charizard, F|240/297
+|upkeep
+|turn|25
+|switch|p2a: Charizard|Charizard, F|61/100
+|move|p1a: Charizard|Double-Edge|p2a: Charizard
+|-crit|p2a: Charizard
+|-damage|p2a: Charizard|0 fnt
+|faint|p2a: Charizard
+|-damage|p1a: Charizard|181/297|[from] Recoil
+|upkeep
+|switch|p2a: Cloyster|Cloyster, F|66/100
+|turn|26
+|move|p1a: Charizard|Fire Punch|p2a: Cloyster
+|-damage|p2a: Cloyster|44/100
+|move|p2a: Cloyster|Rapid Spin|p1a: Charizard
+|-damage|p1a: Charizard|157/297
+|-heal|p2a: Cloyster|51/100|[from] item: Leftovers
+|upkeep
+|turn|27
+|move|p1a: Charizard|Fire Punch|p2a: Cloyster
+|-damage|p2a: Cloyster|28/100
+|-status|p2a: Cloyster|brn
+|move|p2a: Cloyster|Rapid Spin|p1a: Charizard
+|-damage|p1a: Charizard|146/297
+|-heal|p2a: Cloyster|34/100 brn|[from] item: Leftovers
+|-damage|p2a: Cloyster|22/100 brn|[from] brn
+|upkeep
+|turn|28
+|move|p1a: Charizard|Frustration|p2a: Cloyster
+|-damage|p2a: Cloyster|21/100 brn
+|move|p2a: Cloyster|Rapid Spin|p1a: Charizard
+|-damage|p1a: Charizard|134/297
+|-heal|p2a: Cloyster|27/100 brn|[from] item: Leftovers
+|-damage|p2a: Cloyster|15/100 brn|[from] brn
+|upkeep
+|turn|29
+|switch|p1a: Jirachi|Jirachi|380/392
+|move|p2a: Cloyster|Facade|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|317/392
+|-heal|p1a: Jirachi|341/392|[from] item: Leftovers
+|-heal|p2a: Cloyster|21/100 brn|[from] item: Leftovers
+|-damage|p2a: Cloyster|9/100 brn|[from] brn
+|upkeep
+|turn|30
+|switch|p1a: Cloyster|Cloyster, F|241/241
+|move|p2a: Cloyster|Ice Beam|p1a: Cloyster
+|-resisted|p1a: Cloyster
+|-damage|p1a: Cloyster|196/241
+|-heal|p2a: Cloyster|15/100 brn|[from] item: Leftovers
+|-heal|p1a: Cloyster|211/241|[from] item: Leftovers
+|-damage|p2a: Cloyster|3/100 brn|[from] brn
+|upkeep
+|turn|31
+|switch|p1a: Aerodactyl|Aerodactyl, F|325/364
+|move|p2a: Cloyster|Hidden Power|p1a: Aerodactyl
+|-resisted|p1a: Aerodactyl
+|-damage|p1a: Aerodactyl|300/364
+|-heal|p2a: Cloyster|9/100 brn|[from] item: Leftovers
+|-damage|p2a: Cloyster|0 fnt|[from] brn
+|faint|p2a: Cloyster
+|upkeep
+|switch|p2a: Celebi|Celebi|32/100
+|turn|32
+|switch|p2a: Flygon|Flygon, M|33/100
+|move|p1a: Aerodactyl|Curse|p1a: Aerodactyl
+|-unboost|p1a: Aerodactyl|spe|1
+|-boost|p1a: Aerodactyl|atk|1
+|-boost|p1a: Aerodactyl|def|1
+|-heal|p2a: Flygon|40/100|[from] item: Leftovers
+|upkeep
+|turn|33
+|switch|p1a: Jirachi|Jirachi|341/392
+|move|p2a: Flygon|Facade|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|311/392
+|-heal|p2a: Flygon|46/100|[from] item: Leftovers
+|-heal|p1a: Jirachi|335/392|[from] item: Leftovers
+|upkeep
+|turn|34
+|switch|p1a: Aerodactyl|Aerodactyl, F|300/364
+|move|p2a: Flygon|Facade|p1a: Aerodactyl
+|-resisted|p1a: Aerodactyl
+|-damage|p1a: Aerodactyl|264/364
+|-heal|p2a: Flygon|52/100|[from] item: Leftovers
+|upkeep
+|turn|35
+|move|p1a: Aerodactyl|Curse|p1a: Aerodactyl
+|-unboost|p1a: Aerodactyl|spe|1
+|-boost|p1a: Aerodactyl|atk|1
+|-boost|p1a: Aerodactyl|def|1
+|move|p2a: Flygon|Facade|p1a: Aerodactyl
+|-resisted|p1a: Aerodactyl
+|-damage|p1a: Aerodactyl|239/364
+|-heal|p2a: Flygon|58/100|[from] item: Leftovers
+|upkeep
+|turn|36
+|switch|p2a: Aerodactyl|Aerodactyl, M|100/100
+|switch|p1a: Charizard|Charizard, F|134/297
+|upkeep
+|turn|37
+|switch|p1a: Jirachi|Jirachi|335/392
+|move|p2a: Aerodactyl|Agility|p2a: Aerodactyl
+|-boost|p2a: Aerodactyl|spe|2
+|-heal|p1a: Jirachi|359/392|[from] item: Leftovers
+|upkeep
+|turn|38
+|switch|p2a: Celebi|Celebi|32/100
+|move|p1a: Jirachi|Body Slam|p2a: Celebi
+|-damage|p2a: Celebi|17/100
+|-status|p2a: Celebi|par
+|-heal|p1a: Jirachi|383/392|[from] item: Leftovers
+|upkeep
+|turn|39
+|switch|p1a: Celebi|Celebi|339/404
+|move|p2a: Celebi|Frustration|p1a: Celebi
+|-damage|p1a: Celebi|337/404
+|upkeep
+|turn|40
+|switch|p1a: Jirachi|Jirachi|383/392
+|-curestatus|p2a: Celebi|par|[from] ability: Natural Cure
+|switch|p2a: Jirachi|Jirachi|100/100
+|-heal|p1a: Jirachi|392/392|[from] item: Leftovers
+|upkeep
+|turn|41
+|switch|p1a: Charizard|Charizard, F|134/297
+|move|p2a: Jirachi|Double-Edge|p1a: Charizard
+|-damage|p1a: Charizard|24/297
+|-enditem|p1a: Charizard|Salac Berry|[eat]
+|-boost|p1a: Charizard|spe|1|[from] item: Salac Berry
+|-damage|p2a: Jirachi|91/100|[from] Recoil
+|-heal|p2a: Jirachi|97/100|[from] item: Leftovers
+|upkeep
+|turn|42
+|switch|p1a: Jirachi|Jirachi|392/392
+|move|p2a: Jirachi|Frustration|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-crit|p1a: Jirachi
+|-damage|p1a: Jirachi|391/392
+|-heal|p1a: Jirachi|392/392|[from] item: Leftovers
+|-heal|p2a: Jirachi|100/100|[from] item: Leftovers
+|upkeep
+|turn|43
+|switch|p2a: Flygon|Flygon, M|58/100
+|switch|p1a: Aerodactyl|Aerodactyl, F|239/364
+|-heal|p2a: Flygon|64/100|[from] item: Leftovers
+|upkeep
+|turn|44
+|move|p1a: Aerodactyl|Double-Edge|p2a: Flygon
+|-damage|p2a: Flygon|14/100
+|move|p2a: Flygon|Dragon Claw|p1a: Aerodactyl
+|-damage|p1a: Aerodactyl|103/364
+|-heal|p2a: Flygon|20/100|[from] item: Leftovers
+|upkeep
+|turn|45
+|switch|p1a: Charizard|Charizard, F|24/297
+|switch|p2a: Aerodactyl|Aerodactyl, M|100/100
+|upkeep
+|turn|46
+|switch|p1a: Aerodactyl|Aerodactyl, F|103/364
+|move|p2a: Aerodactyl|Ancient Power|p1a: Aerodactyl
+|-supereffective|p1a: Aerodactyl
+|-damage|p1a: Aerodactyl|0 fnt
+|-boost|p2a: Aerodactyl|atk|1
+|-boost|p2a: Aerodactyl|def|1
+|-boost|p2a: Aerodactyl|spa|1
+|-boost|p2a: Aerodactyl|spd|1
+|-boost|p2a: Aerodactyl|spe|1
+|faint|p1a: Aerodactyl
+|upkeep
+|switch|p1a: Celebi|Celebi|337/404
+|turn|47
+|switch|p2a: Celebi|Celebi|17/100
+|move|p1a: Celebi|Hidden Power|p2a: Celebi
+|-supereffective|p2a: Celebi
+|-damage|p2a: Celebi|0 fnt
+|faint|p2a: Celebi
+|upkeep
+|switch|p2a: Flygon|Flygon, M|20/100
+|turn|48
+|switch|p1a: Jirachi|Jirachi|392/392
+|move|p2a: Flygon|Double-Edge|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|341/392
+|-damage|p2a: Flygon|15/100|[from] Recoil
+|-heal|p2a: Flygon|21/100|[from] item: Leftovers
+|-heal|p1a: Jirachi|365/392|[from] item: Leftovers
+|upkeep
+|turn|49
+|move|p1a: Jirachi|Protect|p1a: Jirachi
+|-singleturn|p1a: Jirachi|Protect
+|move|p2a: Flygon|Double-Edge|p1a: Jirachi
+|-activate|p1a: Jirachi|move: Protect
+|-heal|p1a: Jirachi|389/392|[from] item: Leftovers
+|-heal|p2a: Flygon|27/100|[from] item: Leftovers
+|upkeep
+|turn|50
+|switch|p1a: Celebi|Celebi|337/404
+|move|p2a: Flygon|Fire Punch|p1a: Celebi
+|-supereffective|p1a: Celebi
+|-damage|p1a: Celebi|215/404
+|-heal|p2a: Flygon|33/100|[from] item: Leftovers
+|upkeep
+|turn|51
+|switch|p1a: Charizard|Charizard, F|24/297
+|move|p2a: Flygon|Fire Punch|p1a: Charizard
+|-resisted|p1a: Charizard
+|-damage|p1a: Charizard|0 fnt
+|faint|p1a: Charizard
+|-heal|p2a: Flygon|40/100|[from] item: Leftovers
+|upkeep
+|switch|p1a: Cloyster|Cloyster, F|211/241
+|turn|52
+|move|p2a: Flygon|Facade|p1a: Cloyster
+|-damage|p1a: Cloyster|179/241
+|move|p1a: Cloyster|Rapid Spin|p2a: Flygon
+|-damage|p2a: Flygon|33/100
+|-heal|p2a: Flygon|39/100|[from] item: Leftovers
+|-heal|p1a: Cloyster|194/241|[from] item: Leftovers
+|upkeep
+|turn|53
+|move|p2a: Flygon|Double-Edge|p1a: Cloyster
+|-damage|p1a: Cloyster|138/241
+|-damage|p2a: Flygon|34/100|[from] Recoil
+|move|p1a: Cloyster|Rapid Spin|p2a: Flygon
+|-damage|p2a: Flygon|27/100
+|-heal|p2a: Flygon|33/100|[from] item: Leftovers
+|-heal|p1a: Cloyster|153/241|[from] item: Leftovers
+|upkeep
+|turn|54
+|switch|p2a: Aerodactyl|Aerodactyl, M|100/100
+|switch|p1a: Celebi|Celebi|215/404
+|upkeep
+|turn|55
+|move|p2a: Aerodactyl|Ancient Power|p1a: Celebi
+|-crit|p1a: Celebi
+|-damage|p1a: Celebi|145/404
+|move|p1a: Celebi|Hidden Power|p2a: Aerodactyl
+|-supereffective|p2a: Aerodactyl
+|-damage|p2a: Aerodactyl|67/100
+|upkeep
+|turn|56
+|move|p2a: Aerodactyl|Ancient Power|p1a: Celebi
+|-damage|p1a: Celebi|99/404
+|move|p1a: Celebi|Hidden Power|p2a: Aerodactyl
+|-supereffective|p2a: Aerodactyl
+|-damage|p2a: Aerodactyl|32/100
+|upkeep
+|turn|57
+|switch|p2a: Flygon|Flygon, M|33/100
+|switch|p1a: Jirachi|Jirachi|389/392
+|-heal|p2a: Flygon|40/100|[from] item: Leftovers
+|-heal|p1a: Jirachi|392/392|[from] item: Leftovers
+|upkeep
+|turn|58
+|move|p1a: Jirachi|Frustration|p2a: Flygon
+|-damage|p2a: Flygon|39/100
+|move|p2a: Flygon|Double-Edge|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|349/392
+|-damage|p2a: Flygon|35/100|[from] Recoil
+|-heal|p2a: Flygon|41/100|[from] item: Leftovers
+|-heal|p1a: Jirachi|373/392|[from] item: Leftovers
+|upkeep
+|turn|59
+|move|p2a: Flygon|Dragon Claw|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|330/392
+|move|p1a: Jirachi|Frustration|p2a: Flygon
+|-damage|p2a: Flygon|41/100
+|-heal|p2a: Flygon|47/100|[from] item: Leftovers
+|-heal|p1a: Jirachi|354/392|[from] item: Leftovers
+|upkeep
+|turn|60
+|switch|p2a: Aerodactyl|Aerodactyl, M|32/100
+|move|p1a: Jirachi|Protect||[still]
+|-fail|p1a: Jirachi
+|-heal|p1a: Jirachi|378/392|[from] item: Leftovers
+|upkeep
+|turn|61
+|switch|p1a: Celebi|Celebi|99/404
+|move|p2a: Aerodactyl|Ancient Power|p1a: Celebi
+|-damage|p1a: Celebi|51/404
+|upkeep
+|turn|62
+|switch|p2a: Jirachi|Jirachi|100/100
+|switch|p1a: Jirachi|Jirachi|378/392
+|-heal|p1a: Jirachi|392/392|[from] item: Leftovers
+|upkeep
+|turn|63
+|move|p1a: Jirachi|Body Slam|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|92/100
+|move|p2a: Jirachi|Frustration|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|391/392
+|-heal|p2a: Jirachi|98/100|[from] item: Leftovers
+|-heal|p1a: Jirachi|392/392|[from] item: Leftovers
+|upkeep
+|turn|64
+|switch|p1a: Celebi|Celebi|51/404
+|move|p2a: Jirachi|Double-Edge|p1a: Celebi
+|-damage|p1a: Celebi|0 fnt
+|faint|p1a: Celebi
+|-damage|p2a: Jirachi|93/100|[from] Recoil
+|-heal|p2a: Jirachi|99/100|[from] item: Leftovers
+|upkeep
+|switch|p1a: Cloyster|Cloyster, F|153/241
+|turn|65
+|switch|p2a: Aerodactyl|Aerodactyl, M|32/100
+|move|p1a: Cloyster|Ice Beam|p2a: Aerodactyl
+|-supereffective|p2a: Aerodactyl
+|-damage|p2a: Aerodactyl|0 fnt
+|faint|p2a: Aerodactyl
+|-heal|p1a: Cloyster|168/241|[from] item: Leftovers
+|upkeep
+|switch|p2a: Flygon|Flygon, M|47/100
+|turn|66
+|move|p2a: Flygon|Facade|p1a: Cloyster
+|-damage|p1a: Cloyster|136/241
+|move|p1a: Cloyster|Facade|p2a: Flygon
+|-damage|p2a: Flygon|25/100
+|-heal|p2a: Flygon|31/100|[from] item: Leftovers
+|-heal|p1a: Cloyster|151/241|[from] item: Leftovers
+|upkeep
+|turn|67
+|switch|p2a: Jirachi|Jirachi|99/100
+|move|p1a: Cloyster|Facade|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|90/100
+|-heal|p2a: Jirachi|96/100|[from] item: Leftovers
+|-heal|p1a: Cloyster|166/241|[from] item: Leftovers
+|upkeep
+|turn|68
+|move|p2a: Jirachi|Body Slam|p1a: Cloyster
+|-damage|p1a: Cloyster|124/241
+|-status|p1a: Cloyster|par
+|cant|p1a: Cloyster|par
+|-heal|p2a: Jirachi|100/100|[from] item: Leftovers
+|-heal|p1a: Cloyster|139/241 par|[from] item: Leftovers
+|upkeep
+|turn|69
+|move|p2a: Jirachi|Double-Edge|p1a: Cloyster
+|-damage|p1a: Cloyster|78/241 par
+|-damage|p2a: Jirachi|95/100|[from] Recoil
+|move|p1a: Cloyster|Hidden Power|p2a: Jirachi
+|-supereffective|p2a: Jirachi
+|-damage|p2a: Jirachi|75/100
+|-heal|p2a: Jirachi|82/100|[from] item: Leftovers
+|-heal|p1a: Cloyster|93/241 par|[from] item: Leftovers
+|upkeep
+|turn|70
+|move|p2a: Jirachi|Protect|p2a: Jirachi
+|-singleturn|p2a: Jirachi|Protect
+|move|p1a: Cloyster|Ice Beam|p2a: Jirachi
+|-activate|p2a: Jirachi|move: Protect
+|-heal|p2a: Jirachi|88/100|[from] item: Leftovers
+|-heal|p1a: Cloyster|108/241 par|[from] item: Leftovers
+|upkeep
+|turn|71
+|move|p2a: Jirachi|Body Slam|p1a: Cloyster
+|-damage|p1a: Cloyster|64/241 par
+|cant|p1a: Cloyster|par
+|-heal|p2a: Jirachi|94/100|[from] item: Leftovers
+|-heal|p1a: Cloyster|79/241 par|[from] item: Leftovers
+|upkeep
+|turn|72
+|move|p2a: Jirachi|Double-Edge|p1a: Cloyster
+|-damage|p1a: Cloyster|22/241 par
+|-damage|p2a: Jirachi|89/100|[from] Recoil
+|move|p1a: Cloyster|Rapid Spin|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|86/100
+|-heal|p2a: Jirachi|93/100|[from] item: Leftovers
+|-heal|p1a: Cloyster|37/241 par|[from] item: Leftovers
+|upkeep
+|turn|73
+|move|p2a: Jirachi|Protect|p2a: Jirachi
+|-singleturn|p2a: Jirachi|Protect
+|move|p1a: Cloyster|Hidden Power|p2a: Jirachi
+|-activate|p2a: Jirachi|move: Protect
+|-heal|p2a: Jirachi|99/100|[from] item: Leftovers
+|-heal|p1a: Cloyster|52/241 par|[from] item: Leftovers
+|upkeep
+|turn|74
+|switch|p1a: Jirachi|Jirachi|392/392
+|move|p2a: Jirachi|Frustration|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|391/392
+|-heal|p2a: Jirachi|100/100|[from] item: Leftovers
+|-heal|p1a: Jirachi|392/392|[from] item: Leftovers
+|upkeep
+|turn|75
+|switch|p1a: Cloyster|Cloyster, F|52/241 par
+|switch|p2a: Flygon|Flygon, M|31/100
+|-heal|p2a: Flygon|37/100|[from] item: Leftovers
+|-heal|p1a: Cloyster|67/241 par|[from] item: Leftovers
+|upkeep
+|turn|76
+|move|p2a: Flygon|Facade|p1a: Cloyster
+|-damage|p1a: Cloyster|35/241 par
+|move|p1a: Cloyster|Rapid Spin|p2a: Flygon
+|-damage|p2a: Flygon|30/100
+|-heal|p2a: Flygon|37/100|[from] item: Leftovers
+|-heal|p1a: Cloyster|50/241 par|[from] item: Leftovers
+|upkeep
+|turn|77
+|move|p2a: Flygon|Dragon Claw|p1a: Cloyster
+|-damage|p1a: Cloyster|0 fnt
+|faint|p1a: Cloyster
+|-heal|p2a: Flygon|43/100|[from] item: Leftovers
+|upkeep
+|switch|p1a: Jirachi|Jirachi|392/392
+|turn|78
+|move|p1a: Jirachi|Body Slam|p2a: Flygon
+|-damage|p2a: Flygon|19/100
+|-status|p2a: Flygon|par
+|cant|p2a: Flygon|par
+|-heal|p2a: Flygon|25/100 par|[from] item: Leftovers
+|upkeep
+|turn|79
+|move|p1a: Jirachi|Protect|p1a: Jirachi
+|-singleturn|p1a: Jirachi|Protect
+|move|p2a: Flygon|Dragon Claw|p1a: Jirachi
+|-activate|p1a: Jirachi|move: Protect
+|-heal|p2a: Flygon|31/100 par|[from] item: Leftovers
+|upkeep
+|turn|80
+|move|p1a: Jirachi|Frustration|p2a: Flygon
+|-damage|p2a: Flygon|30/100 par
+|move|p2a: Flygon|Fire Punch|p1a: Jirachi
+|-supereffective|p1a: Jirachi
+|-damage|p1a: Jirachi|278/392
+|-heal|p1a: Jirachi|302/392|[from] item: Leftovers
+|-heal|p2a: Flygon|37/100 par|[from] item: Leftovers
+|upkeep
+|turn|81
+|switch|p2a: Jirachi|Jirachi|100/100
+|move|p1a: Jirachi|Frustration|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|99/100
+|-heal|p2a: Jirachi|100/100|[from] item: Leftovers
+|-heal|p1a: Jirachi|326/392|[from] item: Leftovers
+|upkeep
+|turn|82
+|move|p2a: Jirachi|Protect|p2a: Jirachi
+|-singleturn|p2a: Jirachi|Protect
+|move|p1a: Jirachi|Double-Edge|p2a: Jirachi
+|-activate|p2a: Jirachi|move: Protect
+|-heal|p1a: Jirachi|350/392|[from] item: Leftovers
+|upkeep
+|turn|83
+|move|p1a: Jirachi|Frustration|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|99/100
+|move|p2a: Jirachi|Body Slam|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|319/392
+|-status|p1a: Jirachi|par
+|-heal|p2a: Jirachi|100/100|[from] item: Leftovers
+|-heal|p1a: Jirachi|343/392 par|[from] item: Leftovers
+|upkeep
+|turn|84
+|switch|p2a: Flygon|Flygon, M|37/100 par
+|move|p1a: Jirachi|Protect||[still]
+|-fail|p1a: Jirachi
+|-heal|p1a: Jirachi|367/392 par|[from] item: Leftovers
+|-heal|p2a: Flygon|43/100 par|[from] item: Leftovers
+|upkeep
+|turn|85
+|switch|p2a: Jirachi|Jirachi|100/100
+|move|p1a: Jirachi|Protect||[still]
+|-fail|p1a: Jirachi
+|-heal|p1a: Jirachi|391/392 par|[from] item: Leftovers
+|upkeep
+|turn|86
+|move|p2a: Jirachi|Body Slam|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|355/392 par
+|move|p1a: Jirachi|Body Slam|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|91/100
+|-status|p2a: Jirachi|par
+|-heal|p1a: Jirachi|379/392 par|[from] item: Leftovers
+|-heal|p2a: Jirachi|97/100 par|[from] item: Leftovers
+|upkeep
+|turn|87
+|move|p1a: Jirachi|Protect|p1a: Jirachi
+|-singleturn|p1a: Jirachi|Protect
+|move|p2a: Jirachi|Frustration|p1a: Jirachi
+|-activate|p1a: Jirachi|move: Protect
+|-heal|p1a: Jirachi|392/392 par|[from] item: Leftovers
+|-heal|p2a: Jirachi|100/100 par|[from] item: Leftovers
+|upkeep
+|turn|88
+|move|p2a: Jirachi|Protect|p2a: Jirachi
+|-singleturn|p2a: Jirachi|Protect
+|move|p1a: Jirachi|Protect||[still]
+|-fail|p1a: Jirachi
+|upkeep
+|turn|89
+|move|p2a: Jirachi|Body Slam|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|357/392 par
+|move|p1a: Jirachi|Double-Edge|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|89/100 par
+|-damage|p1a: Jirachi|342/392 par|[from] Recoil
+|-heal|p2a: Jirachi|95/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|366/392 par|[from] item: Leftovers
+|upkeep
+|turn|90
+|move|p2a: Jirachi|Protect|p2a: Jirachi
+|-singleturn|p2a: Jirachi|Protect
+|cant|p1a: Jirachi|par
+|-heal|p2a: Jirachi|100/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|390/392 par|[from] item: Leftovers
+|upkeep
+|turn|91
+|switch|p2a: Flygon|Flygon, M|43/100 par
+|move|p1a: Jirachi|Double-Edge|p2a: Flygon
+|-damage|p2a: Flygon|8/100 par
+|-damage|p1a: Jirachi|349/392 par|[from] Recoil
+|-heal|p1a: Jirachi|373/392 par|[from] item: Leftovers
+|-heal|p2a: Flygon|14/100 par|[from] item: Leftovers
+|upkeep
+|turn|92
+|move|p1a: Jirachi|Body Slam|p2a: Flygon
+|-crit|p2a: Flygon
+|-damage|p2a: Flygon|0 fnt
+|faint|p2a: Flygon
+|-heal|p1a: Jirachi|392/392 par|[from] item: Leftovers
+|upkeep
+|switch|p2a: Jirachi|Jirachi|100/100 par
+|turn|93
+|move|p2a: Jirachi|Double-Edge|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|348/392 par
+|-damage|p2a: Jirachi|97/100 par|[from] Recoil
+|cant|p1a: Jirachi|par
+|-heal|p1a: Jirachi|372/392 par|[from] item: Leftovers
+|-heal|p2a: Jirachi|100/100 par|[from] item: Leftovers
+|upkeep
+|turn|94
+|move|p1a: Jirachi|Frustration|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|99/100 par
+|cant|p2a: Jirachi|par
+|-heal|p1a: Jirachi|392/392 par|[from] item: Leftovers
+|-heal|p2a: Jirachi|100/100 par|[from] item: Leftovers
+|upkeep
+|turn|95
+|move|p2a: Jirachi|Protect|p2a: Jirachi
+|-singleturn|p2a: Jirachi|Protect
+|move|p1a: Jirachi|Double-Edge|p2a: Jirachi
+|-activate|p2a: Jirachi|move: Protect
+|upkeep
+|turn|96
+|move|p1a: Jirachi|Double-Edge|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|88/100 par
+|-damage|p1a: Jirachi|376/392 par|[from] Recoil
+|move|p2a: Jirachi|Body Slam|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|345/392 par
+|-heal|p2a: Jirachi|94/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|369/392 par|[from] item: Leftovers
+|upkeep
+|turn|97
+|move|p2a: Jirachi|Protect|p2a: Jirachi
+|-singleturn|p2a: Jirachi|Protect
+|cant|p1a: Jirachi|par
+|-heal|p2a: Jirachi|100/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|392/392 par|[from] item: Leftovers
+|upkeep
+|turn|98
+|move|p1a: Jirachi|Protect|p1a: Jirachi
+|-singleturn|p1a: Jirachi|Protect
+|move|p2a: Jirachi|Frustration|p1a: Jirachi
+|-activate|p1a: Jirachi|move: Protect
+|upkeep
+|turn|99
+|move|p1a: Jirachi|Protect|p1a: Jirachi
+|-singleturn|p1a: Jirachi|Protect
+|move|p2a: Jirachi|Protect||[still]
+|-fail|p2a: Jirachi
+|upkeep
+|turn|100
+|move|p1a: Jirachi|Protect||[still]
+|-fail|p1a: Jirachi
+|move|p2a: Jirachi|Body Slam|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|356/392 par
+|-heal|p1a: Jirachi|380/392 par|[from] item: Leftovers
+|upkeep
+|turn|101
+|move|p1a: Jirachi|Protect|p1a: Jirachi
+|-singleturn|p1a: Jirachi|Protect
+|cant|p2a: Jirachi|par
+|-heal|p1a: Jirachi|392/392 par|[from] item: Leftovers
+|upkeep
+|turn|102
+|cant|p1a: Jirachi|par
+|cant|p2a: Jirachi|par
+|upkeep
+|turn|103
+|move|p2a: Jirachi|Protect|p2a: Jirachi
+|-singleturn|p2a: Jirachi|Protect
+|move|p1a: Jirachi|Body Slam|p2a: Jirachi
+|-activate|p2a: Jirachi|move: Protect
+|upkeep
+|turn|104
+|move|p1a: Jirachi|Double-Edge|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|88/100 par
+|-damage|p1a: Jirachi|376/392 par|[from] Recoil
+|move|p2a: Jirachi|Frustration|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|375/392 par
+|-heal|p1a: Jirachi|392/392 par|[from] item: Leftovers
+|-heal|p2a: Jirachi|94/100 par|[from] item: Leftovers
+|upkeep
+|turn|105
+|move|p2a: Jirachi|Protect|p2a: Jirachi
+|-singleturn|p2a: Jirachi|Protect
+|move|p1a: Jirachi|Protect||[still]
+|-fail|p1a: Jirachi
+|-heal|p2a: Jirachi|99/100 par|[from] item: Leftovers
+|upkeep
+|turn|106
+|move|p2a: Jirachi|Double-Edge|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|349/392 par
+|-damage|p2a: Jirachi|97/100 par|[from] Recoil
+|cant|p1a: Jirachi|par
+|-heal|p2a: Jirachi|100/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|373/392 par|[from] item: Leftovers
+|upkeep
+|turn|107
+|move|p2a: Jirachi|Body Slam|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|342/392 par
+|move|p1a: Jirachi|Frustration|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|99/100 par
+|-heal|p1a: Jirachi|366/392 par|[from] item: Leftovers
+|-heal|p2a: Jirachi|100/100 par|[from] item: Leftovers
+|upkeep
+|turn|108
+|cant|p1a: Jirachi|par
+|move|p2a: Jirachi|Body Slam|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|333/392 par
+|-heal|p1a: Jirachi|357/392 par|[from] item: Leftovers
+|upkeep
+|turn|109
+|move|p1a: Jirachi|Protect|p1a: Jirachi
+|-singleturn|p1a: Jirachi|Protect
+|move|p2a: Jirachi|Body Slam|p1a: Jirachi
+|-activate|p1a: Jirachi|move: Protect
+|-heal|p1a: Jirachi|381/392 par|[from] item: Leftovers
+|upkeep
+|turn|110
+|move|p1a: Jirachi|Protect||[still]
+|-fail|p1a: Jirachi
+|move|p2a: Jirachi|Body Slam|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|346/392 par
+|-heal|p1a: Jirachi|370/392 par|[from] item: Leftovers
+|upkeep
+|turn|111
+|move|p2a: Jirachi|Body Slam|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|336/392 par
+|move|p1a: Jirachi|Frustration|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|99/100 par
+|-heal|p2a: Jirachi|100/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|360/392 par|[from] item: Leftovers
+|upkeep
+|turn|112
+|move|p1a: Jirachi|Protect|p1a: Jirachi
+|-singleturn|p1a: Jirachi|Protect
+|cant|p2a: Jirachi|par
+|-heal|p1a: Jirachi|384/392 par|[from] item: Leftovers
+|upkeep
+|turn|113
+|move|p1a: Jirachi|Protect|p1a: Jirachi
+|-singleturn|p1a: Jirachi|Protect
+|cant|p2a: Jirachi|par
+|-heal|p1a: Jirachi|392/392 par|[from] item: Leftovers
+|upkeep
+|turn|114
+|cant|p1a: Jirachi|par
+|move|p2a: Jirachi|Body Slam|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|358/392 par
+|-heal|p1a: Jirachi|382/392 par|[from] item: Leftovers
+|upkeep
+|turn|115
+|move|p2a: Jirachi|Protect|p2a: Jirachi
+|-singleturn|p2a: Jirachi|Protect
+|move|p1a: Jirachi|Frustration|p2a: Jirachi
+|-activate|p2a: Jirachi|move: Protect
+|-heal|p1a: Jirachi|392/392 par|[from] item: Leftovers
+|upkeep
+|turn|116
+|move|p2a: Jirachi|Protect|p2a: Jirachi
+|-singleturn|p2a: Jirachi|Protect
+|move|p1a: Jirachi|Frustration|p2a: Jirachi
+|-activate|p2a: Jirachi|move: Protect
+|upkeep
+|turn|117
+|move|p2a: Jirachi|Body Slam|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|361/392 par
+|move|p1a: Jirachi|Body Slam|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|91/100 par
+|-heal|p2a: Jirachi|97/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|385/392 par|[from] item: Leftovers
+|upkeep
+|turn|118
+|cant|p2a: Jirachi|par
+|move|p1a: Jirachi|Double-Edge|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|86/100 par
+|-damage|p1a: Jirachi|370/392 par|[from] Recoil
+|-heal|p2a: Jirachi|92/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|392/392 par|[from] item: Leftovers
+|upkeep
+|turn|119
+|move|p1a: Jirachi|Double-Edge|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|80/100 par
+|-damage|p1a: Jirachi|377/392 par|[from] Recoil
+|move|p2a: Jirachi|Frustration|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|376/392 par
+|-heal|p1a: Jirachi|392/392 par|[from] item: Leftovers
+|-heal|p2a: Jirachi|86/100 par|[from] item: Leftovers
+|upkeep
+|turn|120
+|move|p1a: Jirachi|Frustration|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|86/100 par
+|move|p2a: Jirachi|Double-Edge|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-crit|p1a: Jirachi
+|-damage|p1a: Jirachi|317/392 par
+|-damage|p2a: Jirachi|80/100 par|[from] Recoil
+|-heal|p2a: Jirachi|86/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|341/392 par|[from] item: Leftovers
+|upkeep
+|turn|121
+|move|p1a: Jirachi|Body Slam|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-crit|p2a: Jirachi
+|-damage|p2a: Jirachi|72/100 par
+|move|p2a: Jirachi|Frustration|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-crit|p1a: Jirachi
+|-damage|p1a: Jirachi|340/392 par
+|-heal|p1a: Jirachi|364/392 par|[from] item: Leftovers
+|-heal|p2a: Jirachi|79/100 par|[from] item: Leftovers
+|upkeep
+|turn|122
+|move|p1a: Jirachi|Body Slam|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|70/100 par
+|move|p2a: Jirachi|Body Slam|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|333/392 par
+|-heal|p1a: Jirachi|357/392 par|[from] item: Leftovers
+|-heal|p2a: Jirachi|77/100 par|[from] item: Leftovers
+|upkeep
+|turn|123
+|move|p2a: Jirachi|Double-Edge|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|310/392 par
+|-damage|p2a: Jirachi|72/100 par|[from] Recoil
+|move|p1a: Jirachi|Frustration|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|72/100 par
+|-heal|p1a: Jirachi|334/392 par|[from] item: Leftovers
+|-heal|p2a: Jirachi|78/100 par|[from] item: Leftovers
+|upkeep
+|turn|124
+|move|p2a: Jirachi|Protect|p2a: Jirachi
+|-singleturn|p2a: Jirachi|Protect
+|move|p1a: Jirachi|Body Slam|p2a: Jirachi
+|-activate|p2a: Jirachi|move: Protect
+|-heal|p1a: Jirachi|358/392 par|[from] item: Leftovers
+|-heal|p2a: Jirachi|84/100 par|[from] item: Leftovers
+|upkeep
+|turn|125
+|move|p2a: Jirachi|Double-Edge|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|310/392 par
+|-damage|p2a: Jirachi|80/100 par|[from] Recoil
+|move|p1a: Jirachi|Double-Edge|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|69/100 par
+|-damage|p1a: Jirachi|295/392 par|[from] Recoil
+|-heal|p1a: Jirachi|319/392 par|[from] item: Leftovers
+|-heal|p2a: Jirachi|75/100 par|[from] item: Leftovers
+|upkeep
+|turn|126
+|move|p1a: Jirachi|Frustration|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|75/100 par
+|move|p2a: Jirachi|Body Slam|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|287/392 par
+|-heal|p2a: Jirachi|81/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|311/392 par|[from] item: Leftovers
+|upkeep
+|turn|127
+|move|p1a: Jirachi|Body Slam|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|73/100 par
+|move|p2a: Jirachi|Frustration|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|310/392 par
+|-heal|p2a: Jirachi|79/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|334/392 par|[from] item: Leftovers
+|upkeep
+|turn|128
+|cant|p2a: Jirachi|par
+|cant|p1a: Jirachi|par
+|-heal|p2a: Jirachi|85/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|358/392 par|[from] item: Leftovers
+|upkeep
+|turn|129
+|move|p2a: Jirachi|Frustration|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|357/392 par
+|move|p1a: Jirachi|Double-Edge|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|73/100 par
+|-damage|p1a: Jirachi|341/392 par|[from] Recoil
+|-heal|p2a: Jirachi|79/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|365/392 par|[from] item: Leftovers
+|upkeep
+|turn|130
+|move|p2a: Jirachi|Frustration|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|364/392 par
+|cant|p1a: Jirachi|par
+|-heal|p1a: Jirachi|388/392 par|[from] item: Leftovers
+|-heal|p2a: Jirachi|85/100 par|[from] item: Leftovers
+|upkeep
+|turn|131
+|move|p1a: Jirachi|Frustration|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|85/100 par
+|move|p2a: Jirachi|Double-Edge|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|340/392 par
+|-damage|p2a: Jirachi|81/100 par|[from] Recoil
+|-heal|p1a: Jirachi|364/392 par|[from] item: Leftovers
+|-heal|p2a: Jirachi|87/100 par|[from] item: Leftovers
+|upkeep
+|turn|132
+|cant|p2a: Jirachi|par
+|move|p1a: Jirachi|Double-Edge|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|76/100 par
+|-damage|p1a: Jirachi|350/392 par|[from] Recoil
+|-heal|p1a: Jirachi|374/392 par|[from] item: Leftovers
+|-heal|p2a: Jirachi|82/100 par|[from] item: Leftovers
+|upkeep
+|turn|133
+|cant|p1a: Jirachi|par
+|move|p2a: Jirachi|Double-Edge|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|330/392 par
+|-damage|p2a: Jirachi|78/100 par|[from] Recoil
+|-heal|p1a: Jirachi|354/392 par|[from] item: Leftovers
+|-heal|p2a: Jirachi|84/100 par|[from] item: Leftovers
+|upkeep
+|turn|134
+|move|p2a: Jirachi|Protect|p2a: Jirachi
+|-singleturn|p2a: Jirachi|Protect
+|move|p1a: Jirachi|Frustration|p2a: Jirachi
+|-activate|p2a: Jirachi|move: Protect
+|-heal|p2a: Jirachi|91/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|378/392 par|[from] item: Leftovers
+|upkeep
+|turn|135
+|cant|p1a: Jirachi|par
+|move|p2a: Jirachi|Body Slam|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|342/392 par
+|-heal|p2a: Jirachi|97/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|366/392 par|[from] item: Leftovers
+|upkeep
+|turn|136
+|move|p2a: Jirachi|Body Slam|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|333/392 par
+|cant|p1a: Jirachi|par
+|-heal|p2a: Jirachi|100/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|357/392 par|[from] item: Leftovers
+|upkeep
+|turn|137
+|cant|p2a: Jirachi|par
+|cant|p1a: Jirachi|par
+|-heal|p1a: Jirachi|381/392 par|[from] item: Leftovers
+|upkeep
+|turn|138
+|move|p2a: Jirachi|Protect|p2a: Jirachi
+|-singleturn|p2a: Jirachi|Protect
+|cant|p1a: Jirachi|par
+|-heal|p1a: Jirachi|392/392 par|[from] item: Leftovers
+|upkeep
+|turn|139
+|move|p1a: Jirachi|Body Slam|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|91/100 par
+|cant|p2a: Jirachi|par
+|-heal|p2a: Jirachi|97/100 par|[from] item: Leftovers
+|upkeep
+|turn|140
+|move|p2a: Jirachi|Double-Edge|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|349/392 par
+|-damage|p2a: Jirachi|94/100 par|[from] Recoil
+|move|p1a: Jirachi|Frustration|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|94/100 par
+|-heal|p2a: Jirachi|99/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|373/392 par|[from] item: Leftovers
+|upkeep
+|turn|141
+|move|p2a: Jirachi|Body Slam|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|340/392 par
+|cant|p1a: Jirachi|par
+|-heal|p2a: Jirachi|100/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|364/392 par|[from] item: Leftovers
+|upkeep
+|turn|142
+|cant|p1a: Jirachi|par
+|cant|p2a: Jirachi|par
+|-heal|p1a: Jirachi|388/392 par|[from] item: Leftovers
+|upkeep
+|turn|143
+|move|p2a: Jirachi|Protect|p2a: Jirachi
+|-singleturn|p2a: Jirachi|Protect
+|cant|p1a: Jirachi|par
+|-heal|p1a: Jirachi|392/392 par|[from] item: Leftovers
+|upkeep
+|turn|144
+|cant|p1a: Jirachi|par
+|move|p2a: Jirachi|Body Slam|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|361/392 par
+|-heal|p1a: Jirachi|385/392 par|[from] item: Leftovers
+|upkeep
+|turn|145
+|move|p2a: Jirachi|Double-Edge|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|340/392 par
+|-damage|p2a: Jirachi|97/100 par|[from] Recoil
+|move|p1a: Jirachi|Frustration|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|96/100 par
+|-heal|p1a: Jirachi|364/392 par|[from] item: Leftovers
+|-heal|p2a: Jirachi|100/100 par|[from] item: Leftovers
+|upkeep
+|turn|146
+|cant|p1a: Jirachi|par
+|cant|p2a: Jirachi|par
+|-heal|p1a: Jirachi|388/392 par|[from] item: Leftovers
+|upkeep
+|turn|147
+|move|p1a: Jirachi|Double-Edge|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|90/100 par
+|-damage|p1a: Jirachi|374/392 par|[from] Recoil
+|move|p2a: Jirachi|Frustration|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|373/392 par
+|-heal|p2a: Jirachi|96/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|392/392 par|[from] item: Leftovers
+|upkeep
+|turn|148
+|move|p2a: Jirachi|Frustration|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|391/392 par
+|move|p1a: Jirachi|Frustration|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|95/100 par
+|-heal|p2a: Jirachi|100/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|392/392 par|[from] item: Leftovers
+|upkeep
+|turn|149
+|cant|p2a: Jirachi|par
+|move|p1a: Jirachi|Frustration|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|99/100 par
+|-heal|p2a: Jirachi|100/100 par|[from] item: Leftovers
+|upkeep
+|turn|150
+|move|p1a: Jirachi|Frustration|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|99/100 par
+|move|p2a: Jirachi|Double-Edge|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|348/392 par
+|-damage|p2a: Jirachi|96/100 par|[from] Recoil
+|-heal|p2a: Jirachi|100/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|372/392 par|[from] item: Leftovers
+|upkeep
+|turn|151
+|move|p2a: Jirachi|Body Slam|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|337/392 par
+|move|p1a: Jirachi|Double-Edge|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|88/100 par
+|-damage|p1a: Jirachi|321/392 par|[from] Recoil
+|-heal|p1a: Jirachi|345/392 par|[from] item: Leftovers
+|-heal|p2a: Jirachi|94/100 par|[from] item: Leftovers
+|upkeep
+|turn|152
+|move|p1a: Jirachi|Double-Edge|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|83/100 par
+|-damage|p1a: Jirachi|330/392 par|[from] Recoil
+|cant|p2a: Jirachi|par
+|-heal|p2a: Jirachi|89/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|354/392 par|[from] item: Leftovers
+|upkeep
+|turn|153
+|move|p1a: Jirachi|Frustration|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|89/100 par
+|move|p2a: Jirachi|Body Slam|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|321/392 par
+|-heal|p1a: Jirachi|345/392 par|[from] item: Leftovers
+|-heal|p2a: Jirachi|95/100 par|[from] item: Leftovers
+|upkeep
+|turn|154
+|move|p1a: Jirachi|Double-Edge|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|83/100 par
+|-damage|p1a: Jirachi|330/392 par|[from] Recoil
+|move|p2a: Jirachi|Double-Edge|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|287/392 par
+|-damage|p2a: Jirachi|80/100 par|[from] Recoil
+|-heal|p2a: Jirachi|86/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|311/392 par|[from] item: Leftovers
+|upkeep
+|turn|155
+|cant|p2a: Jirachi|par
+|move|p1a: Jirachi|Frustration|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|85/100 par
+|-heal|p1a: Jirachi|335/392 par|[from] item: Leftovers
+|-heal|p2a: Jirachi|92/100 par|[from] item: Leftovers
+|upkeep
+|turn|156
+|move|p1a: Jirachi|Body Slam|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|83/100 par
+|move|p2a: Jirachi|Frustration|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|334/392 par
+|-heal|p2a: Jirachi|89/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|358/392 par|[from] item: Leftovers
+|upkeep
+|turn|157
+|move|p1a: Jirachi|Frustration|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|89/100 par
+|move|p2a: Jirachi|Frustration|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|357/392 par
+|-heal|p2a: Jirachi|95/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|381/392 par|[from] item: Leftovers
+|upkeep
+|turn|158
+|cant|p2a: Jirachi|par
+|move|p1a: Jirachi|Double-Edge|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|84/100 par
+|-damage|p1a: Jirachi|367/392 par|[from] Recoil
+|-heal|p1a: Jirachi|391/392 par|[from] item: Leftovers
+|-heal|p2a: Jirachi|90/100 par|[from] item: Leftovers
+|upkeep
+|turn|159
+|move|p1a: Jirachi|Double-Edge|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|79/100 par
+|-damage|p1a: Jirachi|377/392 par|[from] Recoil
+|move|p2a: Jirachi|Body Slam|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|343/392 par
+|-heal|p2a: Jirachi|85/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|367/392 par|[from] item: Leftovers
+|upkeep
+|turn|160
+|move|p1a: Jirachi|Double-Edge|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|74/100 par
+|-damage|p1a: Jirachi|353/392 par|[from] Recoil
+|move|p2a: Jirachi|Frustration|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|352/392 par
+|-heal|p2a: Jirachi|80/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|376/392 par|[from] item: Leftovers
+|upkeep
+|turn|161
+|cant|p2a: Jirachi|par
+|cant|p1a: Jirachi|par
+|-heal|p1a: Jirachi|392/392 par|[from] item: Leftovers
+|-heal|p2a: Jirachi|86/100 par|[from] item: Leftovers
+|upkeep
+|turn|162
+|move|p1a: Jirachi|Body Slam|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|77/100 par
+|move|p2a: Jirachi|Body Slam|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|358/392 par
+|-heal|p1a: Jirachi|382/392 par|[from] item: Leftovers
+|-heal|p2a: Jirachi|83/100 par|[from] item: Leftovers
+|upkeep
+|turn|163
+|move|p2a: Jirachi|Frustration|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|381/392 par
+|cant|p1a: Jirachi|par
+|-heal|p2a: Jirachi|89/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|392/392 par|[from] item: Leftovers
+|upkeep
+|turn|164
+|move|p1a: Jirachi|Frustration|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|89/100 par
+|move|p2a: Jirachi|Double-Edge|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|347/392 par
+|-damage|p2a: Jirachi|85/100 par|[from] Recoil
+|-heal|p1a: Jirachi|371/392 par|[from] item: Leftovers
+|-heal|p2a: Jirachi|91/100 par|[from] item: Leftovers
+|upkeep
+|turn|165
+|move|p1a: Jirachi|Double-Edge|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|79/100 par
+|-damage|p1a: Jirachi|354/392 par|[from] Recoil
+|move|p2a: Jirachi|Double-Edge|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|305/392 par
+|-damage|p2a: Jirachi|74/100 par|[from] Recoil
+|-heal|p2a: Jirachi|81/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|329/392 par|[from] item: Leftovers
+|upkeep
+|turn|166
+|move|p1a: Jirachi|Frustration|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|80/100 par
+|move|p2a: Jirachi|Frustration|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|328/392 par
+|-heal|p1a: Jirachi|352/392 par|[from] item: Leftovers
+|-heal|p2a: Jirachi|86/100 par|[from] item: Leftovers
+|upkeep
+|turn|167
+|cant|p1a: Jirachi|par
+|move|p2a: Jirachi|Frustration|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-crit|p1a: Jirachi
+|-damage|p1a: Jirachi|351/392 par
+|-heal|p2a: Jirachi|93/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|375/392 par|[from] item: Leftovers
+|upkeep
+|turn|168
+|cant|p1a: Jirachi|par
+|cant|p2a: Jirachi|par
+|-heal|p1a: Jirachi|392/392 par|[from] item: Leftovers
+|-heal|p2a: Jirachi|99/100 par|[from] item: Leftovers
+|upkeep
+|turn|169
+|move|p1a: Jirachi|Frustration|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|98/100 par
+|move|p2a: Jirachi|Double-Edge|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|344/392 par
+|-damage|p2a: Jirachi|94/100 par|[from] Recoil
+|-heal|p2a: Jirachi|100/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|368/392 par|[from] item: Leftovers
+|upkeep
+|turn|170
+|move|p1a: Jirachi|Double-Edge|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|88/100 par
+|-damage|p1a: Jirachi|352/392 par|[from] Recoil
+|move|p2a: Jirachi|Frustration|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|351/392 par
+|-heal|p2a: Jirachi|94/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|375/392 par|[from] item: Leftovers
+|upkeep
+|turn|171
+|move|p1a: Jirachi|Double-Edge|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|83/100 par
+|-damage|p1a: Jirachi|360/392 par|[from] Recoil
+|move|p2a: Jirachi|Frustration|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|359/392 par
+|-heal|p2a: Jirachi|89/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|383/392 par|[from] item: Leftovers
+|upkeep
+|turn|172
+|move|p1a: Jirachi|Frustration|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|89/100 par
+|move|p2a: Jirachi|Double-Edge|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|333/392 par
+|-damage|p2a: Jirachi|84/100 par|[from] Recoil
+|-heal|p2a: Jirachi|91/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|357/392 par|[from] item: Leftovers
+|upkeep
+|turn|173
+|move|p2a: Jirachi|Double-Edge|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|309/392 par
+|-damage|p2a: Jirachi|86/100 par|[from] Recoil
+|move|p1a: Jirachi|Body Slam|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|77/100 par
+|-heal|p2a: Jirachi|83/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|333/392 par|[from] item: Leftovers
+|upkeep
+|turn|174
+|move|p1a: Jirachi|Body Slam|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|75/100 par
+|move|p2a: Jirachi|Frustration|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|332/392 par
+|-heal|p1a: Jirachi|356/392 par|[from] item: Leftovers
+|-heal|p2a: Jirachi|81/100 par|[from] item: Leftovers
+|upkeep
+|turn|175
+|move|p1a: Jirachi|Frustration|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|81/100 par
+|move|p2a: Jirachi|Frustration|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-crit|p1a: Jirachi
+|-damage|p1a: Jirachi|355/392 par
+|-heal|p2a: Jirachi|87/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|379/392 par|[from] item: Leftovers
+|upkeep
+|turn|176
+|move|p2a: Jirachi|Frustration|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|378/392 par
+|move|p1a: Jirachi|Body Slam|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|78/100 par
+|-heal|p2a: Jirachi|84/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|392/392 par|[from] item: Leftovers
+|upkeep
+|turn|177
+|move|p1a: Jirachi|Double-Edge|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|73/100 par
+|-damage|p1a: Jirachi|377/392 par|[from] Recoil
+|cant|p2a: Jirachi|par
+|-heal|p2a: Jirachi|79/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|392/392 par|[from] item: Leftovers
+|upkeep
+|turn|178
+|move|p1a: Jirachi|Frustration|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|79/100 par
+|move|p2a: Jirachi|Frustration|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|391/392 par
+|-heal|p2a: Jirachi|85/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|392/392 par|[from] item: Leftovers
+|upkeep
+|turn|179
+|cant|p1a: Jirachi|par
+|cant|p2a: Jirachi|par
+|-heal|p2a: Jirachi|91/100 par|[from] item: Leftovers
+|upkeep
+|turn|180
+|move|p1a: Jirachi|Frustration|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|91/100 par
+|move|p2a: Jirachi|Double-Edge|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|346/392 par
+|-damage|p2a: Jirachi|87/100 par|[from] Recoil
+|-heal|p2a: Jirachi|93/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|370/392 par|[from] item: Leftovers
+|upkeep
+|turn|181
+|move|p1a: Jirachi|Body Slam|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|84/100 par
+|move|p2a: Jirachi|Frustration|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|369/392 par
+|-heal|p1a: Jirachi|392/392 par|[from] item: Leftovers
+|-heal|p2a: Jirachi|90/100 par|[from] item: Leftovers
+|upkeep
+|turn|182
+|cant|p2a: Jirachi|par
+|move|p1a: Jirachi|Body Slam|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|82/100 par
+|-heal|p2a: Jirachi|88/100 par|[from] item: Leftovers
+|upkeep
+|turn|183
+|move|p2a: Jirachi|Frustration|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|391/392 par
+|move|p1a: Jirachi|Frustration|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|87/100 par
+|-heal|p2a: Jirachi|94/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|392/392 par|[from] item: Leftovers
+|upkeep
+|turn|184
+|move|p1a: Jirachi|Frustration|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|93/100 par
+|move|p2a: Jirachi|Frustration|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|391/392 par
+|-heal|p1a: Jirachi|392/392 par|[from] item: Leftovers
+|-heal|p2a: Jirachi|99/100 par|[from] item: Leftovers
+|upkeep
+|turn|185
+|cant|p1a: Jirachi|par
+|move|p2a: Jirachi|Frustration|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|391/392 par
+|-heal|p2a: Jirachi|100/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|392/392 par|[from] item: Leftovers
+|upkeep
+|turn|186
+|move|p2a: Jirachi|Double-Edge|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|344/392 par
+|-damage|p2a: Jirachi|96/100 par|[from] Recoil
+|move|p1a: Jirachi|Body Slam|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|88/100 par
+|-heal|p1a: Jirachi|368/392 par|[from] item: Leftovers
+|-heal|p2a: Jirachi|94/100 par|[from] item: Leftovers
+|upkeep
+|turn|187
+|move|p2a: Jirachi|Double-Edge|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|321/392 par
+|-damage|p2a: Jirachi|90/100 par|[from] Recoil
+|move|p1a: Jirachi|Body Slam|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|81/100 par
+|-heal|p2a: Jirachi|87/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|345/392 par|[from] item: Leftovers
+|upkeep
+|turn|188
+|cant|p1a: Jirachi|par
+|cant|p2a: Jirachi|par
+|-heal|p1a: Jirachi|369/392 par|[from] item: Leftovers
+|-heal|p2a: Jirachi|94/100 par|[from] item: Leftovers
+|upkeep
+|turn|189
+|move|p2a: Jirachi|Double-Edge|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|319/392 par
+|-damage|p2a: Jirachi|89/100 par|[from] Recoil
+|move|p1a: Jirachi|Body Slam|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|81/100 par
+|-heal|p1a: Jirachi|343/392 par|[from] item: Leftovers
+|-heal|p2a: Jirachi|87/100 par|[from] item: Leftovers
+|upkeep
+|turn|190
+|cant|p1a: Jirachi|par
+|move|p2a: Jirachi|Frustration|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|342/392 par
+|-heal|p1a: Jirachi|366/392 par|[from] item: Leftovers
+|-heal|p2a: Jirachi|93/100 par|[from] item: Leftovers
+|upkeep
+|turn|191
+|cant|p2a: Jirachi|par
+|move|p1a: Jirachi|Body Slam|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|84/100 par
+|-heal|p1a: Jirachi|390/392 par|[from] item: Leftovers
+|-heal|p2a: Jirachi|91/100 par|[from] item: Leftovers
+|upkeep
+|turn|192
+|move|p2a: Jirachi|Frustration|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|389/392 par
+|move|p1a: Jirachi|Body Slam|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|82/100 par
+|-heal|p1a: Jirachi|392/392 par|[from] item: Leftovers
+|-heal|p2a: Jirachi|89/100 par|[from] item: Leftovers
+|upkeep
+|turn|193
+|cant|p1a: Jirachi|par
+|move|p2a: Jirachi|Frustration|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|391/392 par
+|-heal|p2a: Jirachi|95/100 par|[from] item: Leftovers
+|-heal|p1a: Jirachi|392/392 par|[from] item: Leftovers
+|upkeep
+|turn|194
+|-activate|p1a: Jirachi|move: Struggle
+|move|p1a: Jirachi|Struggle|p2a: Jirachi
+|-damage|p2a: Jirachi|85/100 par
+|-damage|p1a: Jirachi|294/392 par|[from] recoil
+|-activate|p2a: Jirachi|move: Struggle
+|move|p2a: Jirachi|Struggle|p1a: Jirachi
+|-damage|p1a: Jirachi|256/392 par
+|-damage|p2a: Jirachi|60/100 par|[from] recoil
+|-heal|p1a: Jirachi|280/392 par|[from] item: Leftovers
+|-heal|p2a: Jirachi|66/100 par|[from] item: Leftovers
+|upkeep
+|turn|195
+|-activate|p2a: Jirachi|move: Struggle
+|move|p2a: Jirachi|Struggle|p1a: Jirachi
+|-damage|p1a: Jirachi|241/392 par
+|-damage|p2a: Jirachi|41/100 par|[from] recoil
+|-activate|p1a: Jirachi|move: Struggle
+|move|p1a: Jirachi|Struggle|p2a: Jirachi
+|-damage|p2a: Jirachi|30/100 par
+|-damage|p1a: Jirachi|143/392 par|[from] recoil
+|-heal|p1a: Jirachi|167/392 par|[from] item: Leftovers
+|-heal|p2a: Jirachi|36/100 par|[from] item: Leftovers
+|upkeep
+|turn|196
+|-activate|p2a: Jirachi|move: Struggle
+|move|p2a: Jirachi|Struggle|p1a: Jirachi
+|-damage|p1a: Jirachi|129/392 par
+|-damage|p2a: Jirachi|11/100 par|[from] recoil
+|cant|p1a: Jirachi|par
+|-heal|p1a: Jirachi|153/392 par|[from] item: Leftovers
+|-heal|p2a: Jirachi|18/100 par|[from] item: Leftovers
+|upkeep
+|turn|197
+|-activate|p2a: Jirachi|move: Struggle
+|move|p2a: Jirachi|Struggle|p1a: Jirachi
+|-damage|p1a: Jirachi|114/392 par
+|-damage|p2a: Jirachi|0 fnt|[from] recoil
+|faint|p2a: Jirachi
+    </script>
+</div>
+
+<div class="battle-log battle-log-inline" style="display:none"></div>
+
+<script>
+    let daily = Math.floor(Date.now() / 1000 / 60 / 60 / 24); document.write('<script src="https://play.pokemonshowdown.com/js/replay-embed.js?version' + daily + '"></' + 'script>');
+</script>
+
+<p style="text-align:center"> Replay created by <a href="https://github.com/hsahovic/poke-env">poke-env</a>, with code from <a
+        href="https://github.com/smogon/pokemon-showdown"> pokemon-showdown</a>. If something goes wrong, don't hesitate
+    to open an <a href="https://github.com/hsahovic/poke-env/issues">issue!</a></p>

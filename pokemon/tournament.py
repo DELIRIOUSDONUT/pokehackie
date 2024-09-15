@@ -5,7 +5,7 @@ import time
 import asyncio
 from collections import defaultdict
 
-NUM_PLAYERS_AFTER_GROUPS = 8
+NUM_PLAYERS_AFTER_GROUPS = 4
 
 class Tournament:
     def __init__(self):
@@ -16,6 +16,12 @@ class Tournament:
         self.players.append(player)
 
     async def play(self, player_one: TournamentPlayer, player_two: TournamentPlayer) -> TournamentPlayer:
+        if(player_one == None and player_two == None):
+            return None
+        if(player_one == None and player_two != None):
+            return player_two
+        if(player_one != None and player_two == None):
+            return player_one
         print(f"\t\tMatch between {player_one} and {player_two} started")
         print(player_one.bot.format)
         print(player_two.bot.format)

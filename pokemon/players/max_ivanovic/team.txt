@@ -1,0 +1,56 @@
+Sableye @ Leftovers  
+Ability: Prankster  
+EVs: 252 HP / 4 Def / 252 SpD  
+IVs: 0 Atk  
+- Will-O-Wisp  
+- Recover  
+- Foul Play  
+- Toxic  
+
+Shuckle @ Leftovers  
+Ability: Contrary  
+EVs: 252 HP / 252 Def / 4 SpD  
+Relaxed Nature  
+- Sand Tomb  
+- Toxic  
+- Protect  
+- Power Split  
+
+Whimsicott @ Leftovers  
+Ability: Prankster  
+EVs: 252 HP / 4 Def / 252 Spe  
+Timid Nature  
+IVs: 0 Atk  
+- Leech Seed  
+- Moonblast  
+- Giga Drain  
+- Protect  
+
+Dugtrio @ Focus Sash  
+Ability: Sand Veil  
+EVs: 4 HP / 252 Atk / 252 Spe  
+Jolly Nature  
+- Earthquake  
+- Reversal  
+- Endure  
+- Sucker Punch  
+
+Shedinja @ Focus Sash  
+Ability: Wonder Guard  
+EVs: 252 Atk / 4 Def / 252 Spe  
+Adamant Nature  
+- Shadow Sneak  
+- Swords Dance  
+- X-Scissor  
+- Protect  
+
+Togekiss @ King's Rock  
+Ability: Serene Grace  
+EVs: 252 HP / 4 SpA / 252 Spe  
+Timid Nature  
+IVs: 0 Atk  
+- Air Slash  
+- Thunder Wave  
+- Roost  
+- Flamethrower  
+

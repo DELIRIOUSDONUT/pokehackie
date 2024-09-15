@@ -1,0 +1,56 @@
+Cloyster @ Focus Sash  
+Ability: Shell Armor  
+EVs: 4 HP / 252 Atk / 252 Spe  
+Adamant Nature  
+- Shell Smash  
+- Icicle Spear  
+- Rapid Spin  
+- Explosion  
+
+Aerodactyl @ Rocky Helmet  
+Ability: Pressure  
+EVs: 72 HP / 252 Def / 184 Spe  
+Jolly Nature  
+- Taunt  
+- Stealth Rock  
+- Double-Edge  
+- Earthquake  
+
+Scizor-Mega @ Scizorite  
+Ability: Technician  
+EVs: 32 HP / 252 Atk / 224 Spe  
+Adamant Nature  
+- Swords Dance  
+- Bullet Punch  
+- Bug Bite  
+- Knock Off  
+
+Weavile @ Focus Sash  
+Ability: Pickpocket  
+EVs: 252 Atk / 4 Def / 252 Spe  
+Jolly Nature  
+- Swords Dance  
+- Knock Off  
+- Icicle Crash  
+- Low Kick  
+
+Volcarona @ Lum Berry  
+Ability: Flame Body  
+EVs: 84 HP / 252 SpA / 172 Spe  
+Modest Nature  
+IVs: 1 Atk / 30 SpA / 30 SpD  
+- Quiver Dance  
+- Flamethrower  
+- Giga Drain  
+- Hidden Power [Ground]  
+
+Thundurus-Therian (M) @ Sitrus Berry  
+Ability: Volt Absorb  
+EVs: 4 HP / 252 SpA / 252 Spe  
+Timid Nature  
+IVs: 0 Atk / 30 Def  
+- Nasty Plot  
+- Thunderbolt  
+- Hidden Power [Ice]  
+- Focus Blast  
+
