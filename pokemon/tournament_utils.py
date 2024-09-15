@@ -6,8 +6,9 @@ from poke_env.ps_client.server_configuration import (
     LocalhostServerConfiguration,
     ServerConfiguration,
 )
+from poke_env import AccountConfiguration
 
-def get_poke_env_player_from_path(path: str, team_path: str):
+def get_poke_env_player_from_path(path: str, team_path: str, name: str):
     # Name the module (you can give it any name)
     module_name = path.stem  # This will use the file name (without extension) as the module name
 
@@ -27,7 +28,8 @@ def get_poke_env_player_from_path(path: str, team_path: str):
         if isinstance(attr, type) and issubclass(attr, object) and issubclass(attr, Player):
             return attr(team=team, battle_format="gen6ou", # Any format for which the team is legal works here.
                         server_configuration=LocalhostServerConfiguration,
-                        log_level=10)
+                        log_level=10,
+                        account_configuration=AccountConfiguration(name, None))
         
     raise AttributeError("No suitable class found in the module.")
 

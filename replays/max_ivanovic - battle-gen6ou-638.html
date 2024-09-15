@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<!-- version 1 -->
+<title>battle-gen6ou-638</title>
+<style>
+    html,
+    body {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        padding: 12px 0;
+    }
+
+    .battle-log {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+    }
+
+    .battle-log-inline {
+        border: 1px solid #AAAAAA;
+        background: #EEF2F5;
+        color: black;
+        max-width: 640px;
+        margin: 0 auto 80px;
+        padding-bottom: 5px;
+    }
+
+    .battle-log .inner {
+        padding: 4px 8px 0px 8px;
+    }
+
+    .battle-log .inner-preempt {
+        padding: 0 8px 4px 8px;
+    }
+
+    .battle-log .inner-after {
+        margin-top: 0.5em;
+    }
+
+    .battle-log h2 {
+        margin: 0.5em -8px;
+        padding: 4px 8px;
+        border: 1px solid #AAAAAA;
+        background: #E0E7EA;
+        border-left: 0;
+        border-right: 0;
+        font-family: Verdana, sans-serif;
+        font-size: 13pt;
+    }
+
+    .backprop {
+        top: 0;
+    }
+
+    .battle-log .chat {
+        vertical-align: middle;
+        padding: 3px 0 3px 0;
+        font-size: 8pt;
+    }
+
+    .battle-log .chat strong {
+        color: #40576A;
+    }
+
+    .battle-log .chat em {
+        padding: 1px 4px 1px 3px;
+        color: #000000;
+        font-style: normal;
+    }
+
+    .chat.mine {
+        background: rgba(0, 0, 0, 0.05);
+        margin-left: -8px;
+        margin-right: -8px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .spoiler {
+        color: #BBBBBB;
+        background: #BBBBBB;
+        padding: 0px 3px;
+    }
+
+    .spoiler:hover,
+    .spoiler:active,
+    .spoiler-shown {
+        color: #000000;
+        background: #E2E2E2;
+        padding: 0px 3px;
+    }
+
+    .spoiler a {
+        color: #BBBBBB;
+    }
+
+    .spoiler:hover a,
+    .spoiler:active a,
+    .spoiler-shown a {
+        color: #2288CC;
+    }
+
+    .chat code,
+    .chat .spoiler:hover code,
+    .chat .spoiler:active code,
+    .chat .spoiler-shown code {
+        border: 1px solid #C0C0C0;
+        background: #EEEEEE;
+        color: black;
+        padding: 0 2px;
+    }
+
+    .chat .spoiler code {
+        border: 1px solid #CCCCCC;
+        background: #CCCCCC;
+        color: #CCCCCC;
+    }
+
+    .battle-log .rated {
+        padding: 3px 4px;
+    }
+
+    .battle-log .rated strong {
+        color: white;
+        background: #89A;
+        padding: 1px 4px;
+        border-radius: 4px;
+    }
+
+    .spacer {
+        margin-top: 0.5em;
+    }
+
+    .message-announce {
+        background: #6688AA;
+        color: white;
+        padding: 1px 4px 2px;
+    }
+
+    .message-announce a,
+    .broadcast-green a,
+    .broadcast-blue a,
+    .broadcast-red a {
+        color: #DDEEFF;
+    }
+
+    .broadcast-green {
+        background-color: #559955;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .broadcast-blue {
+        background-color: #6688AA;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .infobox {
+        border: 1px solid #6688AA;
+        padding: 2px 4px;
+    }
+
+    .infobox-limited {
+        max-height: 200px;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
+    .broadcast-red {
+        background-color: #AA5544;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .message-learn-canlearn {
+        font-weight: bold;
+        color: #228822;
+        text-decoration: underline;
+    }
+
+    .message-learn-cannotlearn {
+        font-weight: bold;
+        color: #CC2222;
+        text-decoration: underline;
+    }
+
+    .message-effect-weak {
+        font-weight: bold;
+        color: #CC2222;
+    }
+
+    .message-effect-resist {
+        font-weight: bold;
+        color: #6688AA;
+    }
+
+    .message-effect-immune {
+        font-weight: bold;
+        color: #666666;
+    }
+
+    .message-learn-list {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .message-throttle-notice,
+    .message-error {
+        color: #992222;
+    }
+
+    .message-overflow,
+    .chat small.message-overflow {
+        font-size: 0pt;
+    }
+
+    .message-overflow::before {
+        font-size: 9pt;
+        content: '...';
+    }
+
+    .subtle {
+        color: #3A4A66;
+    }
+</style>
+<div class="wrapper replay-wrapper" style="max-width:1180px;margin:0 auto">
+    <input type="hidden" name="replayid" value="unregisteredserver-gen8randombattle-320064" />
+    <div class="battle"></div>
+    <div class="battle-log"></div>
+    <div class="replay-controls"></div>
+    <div class="replay-controls-2"></div>
+    <h1 style="font-weight:normal;text-align:center"><strong>poke-env battle replay</strong><br />battle-gen6ou-638<br /><a
+            href="http://pokemonshowdown.com/users/randomplayer1" class="subtle" target="_blank">max_ivanovic</a>
+        vs. <a href="http://pokemonshowdown.com/users/randomplayer2" class="subtle"
+            target="_blank">bingus_bingus</a></h1>
+    <script type="text/plain" class="battle-log-data">
+    >battle-gen6ou-638|init|battle
+|title|bingus_bingus vs. max_ivanovic
+|j|☆bingus_bingus
+|j|☆max_ivanovic
+|gametype|singles
+|player|p1|bingus_bingus|169|
+|player|p2|max_ivanovic|170|
+|teamsize|p1|6
+|teamsize|p2|6
+|gen|6
+|tier|[Gen 6] OU
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|Species Clause: Limit one of each Pokémon
+|rule|OHKO Clause: OHKO moves are banned
+|rule|Moody Clause: Moody is banned
+|rule|Evasion Items Clause: Evasion items are banned
+|rule|Evasion Moves Clause: Evasion moves are banned
+|rule|Endless Battle Clause: Forcing endless battles is banned
+|rule|HP Percentage Mod: HP is shown in percentages
+|rule|Swagger Clause: Swagger is banned
+|clearpoke
+|poke|p1|Shuckle, M|item
+|poke|p1|Scizor, M|item
+|poke|p1|Azumarill, M|item
+|poke|p1|Hoopa|item
+|poke|p1|Thundurus, M|item
+|poke|p1|Bisharp, M|item
+|poke|p2|Sableye, M|item
+|poke|p2|Shuckle, F|item
+|poke|p2|Whimsicott, M|item
+|poke|p2|Dugtrio, F|item
+|poke|p2|Shedinja|item
+|poke|p2|Togekiss, F|item
+|teampreview
+|start
+|switch|p1a: Azumogus|Azumarill, M|100/100
+|switch|p2a: Shuckle|Shuckle, F|244/244
+|turn|1
+|switch|p1a: ThatShuckle|Shuckle, M, shiny|100/100
+|move|p2a: Shuckle|Sand Tomb|p1a: ThatShuckle
+|-damage|p1a: ThatShuckle|99/100
+|-activate|p1a: ThatShuckle|move: Sand Tomb|[of] p2a: Shuckle
+|-damage|p1a: ThatShuckle|87/100|[from] move: Sand Tomb|[partiallytrapped]
+|upkeep
+|turn|2
+|switch|p2a: Sableye|Sableye, M|304/304
+|move|p1a: ThatShuckle|Sticky Web|p2a: Sableye
+|-sidestart|p2: max_ivanovic|move: Sticky Web
+|-end|p1a: ThatShuckle|Sand Tomb|[partiallytrapped]|[silent]
+|upkeep
+|turn|3
+|switch|p2a: Whimsicott|Whimsicott, M|324/324
+|-activate|p2a: Whimsicott|move: Sticky Web
+|-unboost|p2a: Whimsicott|spe|1
+|move|p1a: ThatShuckle|Sticky Web||[still]
+|-fail|p1a: ThatShuckle
+|upkeep
+|turn|4
+|move|p2a: Whimsicott|Moonblast|p1a: ThatShuckle
+|-damage|p1a: ThatShuckle|68/100
+|-unboost|p1a: ThatShuckle|spa|1
+|move|p1a: ThatShuckle|Infestation|p2a: Whimsicott
+|-damage|p2a: Whimsicott|318/324
+|-activate|p2a: Whimsicott|move: Infestation|[of] p1a: ThatShuckle
+|-heal|p2a: Whimsicott|324/324|[from] item: Leftovers
+|-damage|p2a: Whimsicott|284/324|[from] move: Infestation|[partiallytrapped]
+|upkeep
+|turn|5
+|switch|p1a: Hoopa|Hoopa|100/100
+|move|p2a: Whimsicott|Giga Drain|p1a: Hoopa
+|-damage|p1a: Hoopa|82/100
+|-heal|p2a: Whimsicott|313/324|[from] drain|[of] p1a: Hoopa
+|-heal|p2a: Whimsicott|324/324|[from] item: Leftovers
+|-end|p2a: Whimsicott|Infestation|[partiallytrapped]|[silent]
+|upkeep
+|turn|6
+|switch|p1a: melbourne weather|Thundurus, M|100/100
+|move|p2a: Whimsicott|Moonblast|p1a: melbourne weather
+|-damage|p1a: melbourne weather|64/100
+|-unboost|p1a: melbourne weather|spa|1
+|-ability|p1a: melbourne weather|Defiant|boost
+|-boost|p1a: melbourne weather|atk|2
+|-heal|p1a: melbourne weather|70/100|[from] item: Leftovers
+|upkeep
+|turn|7
+|move|p1a: melbourne weather|Thunder|p2a: Whimsicott
+|-resisted|p2a: Whimsicott
+|-damage|p2a: Whimsicott|239/324
+|move|p2a: Whimsicott|Moonblast|p1a: melbourne weather
+|-damage|p1a: melbourne weather|36/100
+|-heal|p1a: melbourne weather|42/100|[from] item: Leftovers
+|-heal|p2a: Whimsicott|259/324|[from] item: Leftovers
+|upkeep
+|turn|8
+|switch|p2a: Togekiss|Togekiss, F|374/374
+|move|p1a: melbourne weather|Thunder|p2a: Togekiss
+|-supereffective|p2a: Togekiss
+|-damage|p2a: Togekiss|134/374
+|-heal|p1a: melbourne weather|48/100|[from] item: Leftovers
+|upkeep
+|turn|9
+|switch|p1a: Skibidizor|Scizor, M|100/100
+|switch|p2a: Whimsicott|Whimsicott, M|259/324
+|-activate|p2a: Whimsicott|move: Sticky Web
+|-unboost|p2a: Whimsicott|spe|1
+|-heal|p2a: Whimsicott|279/324|[from] item: Leftovers
+|upkeep
+|turn|10
+|switch|p1a: Azumogus|Azumarill, M|100/100
+|move|p2a: Whimsicott|Leech Seed|p1a: Azumogus
+|-start|p1a: Azumogus|move: Leech Seed
+|-heal|p2a: Whimsicott|299/324|[from] item: Leftovers
+|-damage|p1a: Azumogus|88/100|[from] Leech Seed|[of] p2a: Whimsicott
+|-heal|p2a: Whimsicott|324/324|[silent]
+|upkeep
+|turn|11
+|switch|p2a: Shuckle|Shuckle, F|244/244
+|-activate|p2a: Shuckle|move: Sticky Web
+|-boost|p2a: Shuckle|spe|1
+|switch|p1a: Skibidizor|Scizor, M|100/100
+|upkeep
+|turn|12
+|switch|p1a: chess reference|Bisharp, M, shiny|100/100
+|switch|p2a: Whimsicott|Whimsicott, M|324/324
+|-activate|p2a: Whimsicott|move: Sticky Web
+|-unboost|p2a: Whimsicott|spe|1
+|upkeep
+|turn|13
+|switch|p2a: Shedinja|Shedinja|1/1
+|-activate|p2a: Shedinja|move: Sticky Web
+|-unboost|p2a: Shedinja|spe|1
+|switch|p1a: Azumogus|Azumarill, M|88/100
+|upkeep
+|turn|14
+|switch|p1a: chess reference|Bisharp, M, shiny|100/100
+|switch|p2a: Shuckle|Shuckle, F|244/244
+|-activate|p2a: Shuckle|move: Sticky Web
+|-boost|p2a: Shuckle|spe|1
+|upkeep
+|turn|15
+|switch|p2a: Shedinja|Shedinja|1/1
+|-activate|p2a: Shedinja|move: Sticky Web
+|-unboost|p2a: Shedinja|spe|1
+|move|p1a: chess reference|Focus Blast|p2a: Shedinja
+|-immune|p2a: Shedinja
+|upkeep
+|turn|16
+|switch|p1a: Skibidizor|Scizor, M|100/100
+|switch|p2a: Sableye|Sableye, M|304/304
+|-activate|p2a: Sableye|move: Sticky Web
+|-unboost|p2a: Sableye|spe|1
+|upkeep
+|turn|17
+|switch|p2a: Dugtrio|Dugtrio, F|212/212
+|-activate|p2a: Dugtrio|move: Sticky Web
+|-unboost|p2a: Dugtrio|spe|1
+|move|p1a: Skibidizor|Double-Edge|p2a: Dugtrio
+|-enditem|p2a: Dugtrio|Focus Sash
+|-damage|p2a: Dugtrio|1/212
+|-damage|p1a: Skibidizor|76/100|[from] Recoil
+|upkeep
+|turn|18
+|switch|p2a: Sableye|Sableye, M|304/304
+|-activate|p2a: Sableye|move: Sticky Web
+|-unboost|p2a: Sableye|spe|1
+|switch|p1a: chess reference|Bisharp, M, shiny|100/100
+|upkeep
+|turn|19
+|switch|p1a: ThatShuckle|Shuckle, M, shiny|68/100
+|move|p2a: Sableye|Foul Play|p1a: ThatShuckle
+|-damage|p1a: ThatShuckle|63/100
+|upkeep
+|turn|20
+|switch|p2a: Shuckle|Shuckle, F|244/244
+|-activate|p2a: Shuckle|move: Sticky Web
+|-boost|p2a: Shuckle|spe|1
+|switch|p1a: Azumogus|Azumarill, M|88/100
+|upkeep
+|turn|21
+|switch|p1a: chess reference|Bisharp, M, shiny|100/100
+|move|p2a: Shuckle|Sand Tomb|p1a: chess reference
+|-supereffective|p1a: chess reference
+|-damage|p1a: chess reference|96/100
+|-activate|p1a: chess reference|move: Sand Tomb|[of] p2a: Shuckle
+|-damage|p1a: chess reference|84/100|[from] move: Sand Tomb|[partiallytrapped]
+|upkeep
+|turn|22
+|move|p2a: Shuckle|Protect|p2a: Shuckle
+|-singleturn|p2a: Shuckle|Protect
+|move|p1a: chess reference|Focus Blast|p2a: Shuckle
+|-activate|p2a: Shuckle|move: Protect
+|-damage|p1a: chess reference|72/100|[from] move: Sand Tomb|[partiallytrapped]
+|upkeep
+|turn|23
+|switch|p2a: Dugtrio|Dugtrio, F|1/212
+|-activate|p2a: Dugtrio|move: Sticky Web
+|-unboost|p2a: Dugtrio|spe|1
+|move|p1a: chess reference|Iron Head|p2a: Dugtrio
+|-damage|p2a: Dugtrio|0 fnt
+|faint|p2a: Dugtrio
+|-end|p1a: chess reference|Sand Tomb|[partiallytrapped]|[silent]
+|upkeep
+|switch|p2a: Sableye|Sableye, M|304/304
+|-activate|p2a: Sableye|move: Sticky Web
+|-unboost|p2a: Sableye|spe|1
+|turn|24
+|switch|p1a: Skibidizor|Scizor, M|76/100
+|move|p2a: Sableye|Recover||[still]
+|-fail|p2a: Sableye|heal
+|upkeep
+|turn|25
+|switch|p1a: chess reference|Bisharp, M, shiny|72/100
+|move|p2a: Sableye|Toxic|p1a: chess reference
+|-immune|p1a: chess reference
+|upkeep
+|turn|26
+|switch|p2a: Togekiss|Togekiss, F|134/374
+|move|p1a: chess reference|Focus Blast|p2a: Togekiss|[miss]
+|-miss|p1a: chess reference|p2a: Togekiss
+|upkeep
+|turn|27
+|switch|p2a: Shedinja|Shedinja|1/1
+|-activate|p2a: Shedinja|move: Sticky Web
+|-unboost|p2a: Shedinja|spe|1
+|move|p1a: chess reference|Iron Head|p2a: Shedinja
+|-immune|p2a: Shedinja|[from] ability: Wonder Guard
+|upkeep
+|turn|28
+|switch|p2a: Whimsicott|Whimsicott, M|324/324
+|-activate|p2a: Whimsicott|move: Sticky Web
+|-unboost|p2a: Whimsicott|spe|1
+|move|p1a: chess reference|Focus Blast|p2a: Whimsicott
+|-resisted|p2a: Whimsicott
+|-damage|p2a: Whimsicott|289/324
+|-heal|p2a: Whimsicott|309/324|[from] item: Leftovers
+|upkeep
+|turn|29
+|switch|p1a: melbourne weather|Thundurus, M|48/100
+|move|p2a: Whimsicott|Protect||[still]
+|-fail|p2a: Whimsicott
+|-heal|p1a: melbourne weather|54/100|[from] item: Leftovers
+|-heal|p2a: Whimsicott|324/324|[from] item: Leftovers
+|upkeep
+|turn|30
+|move|p1a: melbourne weather|Thunder|p2a: Whimsicott
+|-resisted|p2a: Whimsicott
+|-damage|p2a: Whimsicott|207/324
+|move|p2a: Whimsicott|Moonblast|p1a: melbourne weather
+|-damage|p1a: melbourne weather|17/100
+|-heal|p1a: melbourne weather|23/100|[from] item: Leftovers
+|-heal|p2a: Whimsicott|227/324|[from] item: Leftovers
+|upkeep
+|turn|31
+|switch|p2a: Togekiss|Togekiss, F|134/374
+|move|p1a: melbourne weather|Hidden Power|p2a: Togekiss
+|-supereffective|p2a: Togekiss
+|-damage|p2a: Togekiss|8/374
+|-heal|p1a: melbourne weather|29/100|[from] item: Leftovers
+|upkeep
+|turn|32
+|switch|p2a: Whimsicott|Whimsicott, M|227/324
+|-activate|p2a: Whimsicott|move: Sticky Web
+|-unboost|p2a: Whimsicott|spe|1
+|move|p1a: melbourne weather|Hidden Power|p2a: Whimsicott
+|-supereffective|p2a: Whimsicott
+|-damage|p2a: Whimsicott|39/324
+|-heal|p1a: melbourne weather|35/100|[from] item: Leftovers
+|-heal|p2a: Whimsicott|59/324|[from] item: Leftovers
+|upkeep
+|turn|33
+|switch|p1a: Skibidizor|Scizor, M|76/100
+|switch|p2a: Shedinja|Shedinja|1/1
+|-activate|p2a: Shedinja|move: Sticky Web
+|-unboost|p2a: Shedinja|spe|1
+|upkeep
+|turn|34
+|switch|p1a: melbourne weather|Thundurus, M|35/100
+|switch|p2a: Sableye|Sableye, M|304/304
+|-activate|p2a: Sableye|move: Sticky Web
+|-unboost|p2a: Sableye|spe|1
+|-heal|p1a: melbourne weather|41/100|[from] item: Leftovers
+|upkeep
+|turn|35
+|switch|p2a: Togekiss|Togekiss, F|8/374
+|move|p1a: melbourne weather|Thunder|p2a: Togekiss|[miss]
+|-miss|p1a: melbourne weather|p2a: Togekiss
+|-heal|p1a: melbourne weather|47/100|[from] item: Leftovers
+|upkeep
+|turn|36
+|move|p1a: melbourne weather|Hidden Power|p2a: Togekiss
+|-supereffective|p2a: Togekiss
+|-damage|p2a: Togekiss|0 fnt
+|faint|p2a: Togekiss
+|-heal|p1a: melbourne weather|53/100|[from] item: Leftovers
+|upkeep
+|switch|p2a: Shuckle|Shuckle, F|244/244
+|-activate|p2a: Shuckle|move: Sticky Web
+|-boost|p2a: Shuckle|spe|1
+|turn|37
+|switch|p1a: ThatShuckle|Shuckle, M, shiny|63/100
+|move|p2a: Shuckle|Power Split|p1a: ThatShuckle
+|-activate|p2a: Shuckle|move: Power Split|[of] p1a: ThatShuckle
+|upkeep
+|turn|38
+|switch|p2a: Sableye|Sableye, M|304/304
+|-activate|p2a: Sableye|move: Sticky Web
+|-unboost|p2a: Sableye|spe|1
+|switch|p1a: Azumogus|Azumarill, M|88/100
+|upkeep
+|turn|39
+|move|p2a: Sableye|Toxic|p1a: Azumogus
+|-status|p1a: Azumogus|tox
+|move|p1a: Azumogus|Knock Off|p2a: Sableye
+|-damage|p2a: Sableye|135/304
+|-enditem|p2a: Sableye|Leftovers|[from] move: Knock Off|[of] p1a: Azumogus
+|-damage|p1a: Azumogus|82/100 tox|[from] psn
+|upkeep
+|turn|40
+|switch|p1a: Skibidizor|Scizor, M|76/100
+|move|p2a: Sableye|Foul Play|p1a: Skibidizor
+|-damage|p1a: Skibidizor|8/100
+|-enditem|p1a: Skibidizor|Sitrus Berry|[eat]
+|-heal|p1a: Skibidizor|33/100|[from] item: Sitrus Berry
+|upkeep
+|turn|41
+|move|p2a: Sableye|Recover|p2a: Sableye
+|-heal|p2a: Sableye|287/304
+|move|p1a: Skibidizor|Bug Bite|p2a: Sableye
+|-crit|p2a: Sableye
+|-damage|p2a: Sableye|0 fnt
+|faint|p2a: Sableye
+|upkeep
+|switch|p2a: Shuckle|Shuckle, F|244/244
+|-activate|p2a: Shuckle|move: Sticky Web
+|-boost|p2a: Shuckle|spe|1
+|turn|42
+|move|p1a: Skibidizor|Double-Edge|p2a: Shuckle
+|-resisted|p2a: Shuckle
+|-damage|p2a: Shuckle|215/244
+|-damage|p1a: Skibidizor|29/100|[from] Recoil
+|move|p2a: Shuckle|Toxic|p1a: Skibidizor
+|-immune|p1a: Skibidizor
+|-heal|p2a: Shuckle|230/244|[from] item: Leftovers
+|upkeep
+|turn|43
+|switch|p1a: Azumogus|Azumarill, M|82/100 tox
+|move|p2a: Shuckle|Toxic|p1a: Azumogus
+|-fail|p1a: Azumogus|tox
+|-heal|p2a: Shuckle|244/244|[from] item: Leftovers
+|-damage|p1a: Azumogus|76/100 tox|[from] psn
+|upkeep
+|turn|44
+|move|p1a: Azumogus|Aqua Jet|p2a: Shuckle
+|-supereffective|p2a: Shuckle
+|-damage|p2a: Shuckle|172/244
+|move|p2a: Shuckle|Toxic|p1a: Azumogus
+|-fail|p1a: Azumogus|tox
+|-heal|p2a: Shuckle|187/244|[from] item: Leftovers
+|-damage|p1a: Azumogus|64/100 tox|[from] psn
+|upkeep
+|turn|45
+|switch|p1a: Hoopa|Hoopa|82/100
+|move|p2a: Shuckle|Power Split|p1a: Hoopa
+|-activate|p2a: Shuckle|move: Power Split|[of] p1a: Hoopa
+|-heal|p2a: Shuckle|202/244|[from] item: Leftovers
+|upkeep
+|turn|46
+|switch|p1a: ThatShuckle|Shuckle, M, shiny|63/100
+|move|p2a: Shuckle|Power Split|p1a: ThatShuckle
+|-activate|p2a: Shuckle|move: Power Split|[of] p1a: ThatShuckle
+|-heal|p2a: Shuckle|217/244|[from] item: Leftovers
+|upkeep
+|turn|47
+|switch|p2a: Shedinja|Shedinja|1/1
+|-activate|p2a: Shedinja|move: Sticky Web
+|-unboost|p2a: Shedinja|spe|1
+|move|p1a: ThatShuckle|Infestation|p2a: Shedinja
+|-immune|p2a: Shedinja|[from] ability: Wonder Guard
+|upkeep
+|turn|48
+|move|p2a: Shedinja|X-Scissor|p1a: ThatShuckle
+|-damage|p1a: ThatShuckle|44/100
+|move|p1a: ThatShuckle|Stealth Rock|p2a: Shedinja
+|-sidestart|p2: max_ivanovic|move: Stealth Rock
+|upkeep
+|turn|49
+|switch|p2a: Shuckle|Shuckle, F|217/244
+|-activate|p2a: Shuckle|move: Sticky Web
+|-boost|p2a: Shuckle|spe|1
+|-damage|p2a: Shuckle|156/244|[from] Stealth Rock
+|switch|p1a: Skibidizor|Scizor, M|29/100
+|-heal|p2a: Shuckle|171/244|[from] item: Leftovers
+|upkeep
+|turn|50
+|switch|p1a: Hoopa|Hoopa|82/100
+|move|p2a: Shuckle|Power Split|p1a: Hoopa
+|-activate|p2a: Shuckle|move: Power Split|[of] p1a: Hoopa
+|-heal|p2a: Shuckle|186/244|[from] item: Leftovers
+|upkeep
+|turn|51
+|switch|p1a: ThatShuckle|Shuckle, M, shiny|44/100
+|switch|p2a: Whimsicott|Whimsicott, M|59/324
+|-activate|p2a: Whimsicott|move: Sticky Web
+|-unboost|p2a: Whimsicott|spe|1
+|-damage|p2a: Whimsicott|19/324|[from] Stealth Rock
+|-heal|p2a: Whimsicott|39/324|[from] item: Leftovers
+|upkeep
+|turn|52
+|switch|p1a: Skibidizor|Scizor, M|29/100
+|move|p2a: Whimsicott|Moonblast|p1a: Skibidizor
+|-resisted|p1a: Skibidizor
+|-damage|p1a: Skibidizor|9/100
+|-heal|p2a: Whimsicott|59/324|[from] item: Leftovers
+|upkeep
+|turn|53
+|switch|p1a: melbourne weather|Thundurus, M|53/100
+|move|p2a: Whimsicott|Moonblast|p1a: melbourne weather
+|-damage|p1a: melbourne weather|19/100
+|-heal|p1a: melbourne weather|25/100|[from] item: Leftovers
+|-heal|p2a: Whimsicott|79/324|[from] item: Leftovers
+|upkeep
+|turn|54
+|switch|p1a: chess reference|Bisharp, M, shiny|72/100
+|switch|p2a: Shedinja|Shedinja|1/1
+|-activate|p2a: Shedinja|move: Sticky Web
+|-unboost|p2a: Shedinja|spe|1
+|-damage|p2a: Shedinja|0 fnt|[from] Stealth Rock
+|faint|p2a: Shedinja
+|upkeep
+|switch|p2a: Shuckle|Shuckle, F|186/244
+|-activate|p2a: Shuckle|move: Sticky Web
+|-boost|p2a: Shuckle|spe|1
+|-damage|p2a: Shuckle|125/244|[from] Stealth Rock
+|turn|55
+|move|p1a: chess reference|Focus Blast|p2a: Shuckle
+|-crit|p2a: Shuckle
+|-damage|p2a: Shuckle|83/244
+|move|p2a: Shuckle|Sand Tomb|p1a: chess reference|[miss]
+|-miss|p2a: Shuckle|p1a: chess reference
+|-heal|p2a: Shuckle|98/244|[from] item: Leftovers
+|upkeep
+|turn|56
+|switch|p1a: Skibidizor|Scizor, M|9/100
+|move|p2a: Shuckle|Toxic|p1a: Skibidizor
+|-immune|p1a: Skibidizor
+|-heal|p2a: Shuckle|113/244|[from] item: Leftovers
+|upkeep
+|turn|57
+|switch|p1a: melbourne weather|Thundurus, M|25/100
+|move|p2a: Shuckle|Toxic|p1a: melbourne weather
+|-status|p1a: melbourne weather|tox
+|-heal|p1a: melbourne weather|31/100 tox|[from] item: Leftovers
+|-heal|p2a: Shuckle|128/244|[from] item: Leftovers
+|-damage|p1a: melbourne weather|25/100 tox|[from] psn
+|upkeep
+|turn|58
+|switch|p1a: ThatShuckle|Shuckle, M, shiny|44/100
+|move|p2a: Shuckle|Toxic|p1a: ThatShuckle
+|-status|p1a: ThatShuckle|tox
+|-heal|p2a: Shuckle|143/244|[from] item: Leftovers
+|-damage|p1a: ThatShuckle|38/100 tox|[from] psn
+|upkeep
+|turn|59
+|move|p2a: Shuckle|Sand Tomb|p1a: ThatShuckle
+|-damage|p1a: ThatShuckle|37/100 tox
+|-activate|p1a: ThatShuckle|move: Sand Tomb|[of] p2a: Shuckle
+|move|p1a: ThatShuckle|Body Slam|p2a: Shuckle
+|-resisted|p2a: Shuckle
+|-damage|p2a: Shuckle|140/244
+|-heal|p2a: Shuckle|155/244|[from] item: Leftovers
+|-damage|p1a: ThatShuckle|24/100 tox|[from] psn
+|-damage|p1a: ThatShuckle|12/100 tox|[from] move: Sand Tomb|[partiallytrapped]
+|upkeep
+|turn|60
+|move|p2a: Shuckle|Sand Tomb|p1a: ThatShuckle
+|-damage|p1a: ThatShuckle|11/100 tox
+|move|p1a: ThatShuckle|Stealth Rock||[still]
+|-fail|p1a: ThatShuckle
+|-heal|p2a: Shuckle|170/244|[from] item: Leftovers
+|-damage|p1a: ThatShuckle|0 fnt|[from] psn
+|faint|p1a: ThatShuckle
+|upkeep
+|switch|p1a: Skibidizor|Scizor, M|9/100
+|turn|61
+|switch|p1a: Azumogus|Azumarill, M|64/100 tox
+|move|p2a: Shuckle|Sand Tomb|p1a: Azumogus
+|-damage|p1a: Azumogus|61/100 tox
+|-activate|p1a: Azumogus|move: Sand Tomb|[of] p2a: Shuckle
+|-heal|p2a: Shuckle|185/244|[from] item: Leftovers
+|-damage|p1a: Azumogus|55/100 tox|[from] psn
+|-damage|p1a: Azumogus|43/100 tox|[from] move: Sand Tomb|[partiallytrapped]
+|upkeep
+|-enditem|p1a: Azumogus|Sitrus Berry|[eat]
+|-heal|p1a: Azumogus|68/100 tox|[from] item: Sitrus Berry
+|turn|62
+|move|p2a: Shuckle|Protect|p2a: Shuckle
+|-singleturn|p2a: Shuckle|Protect
+|move|p1a: Azumogus|Focus Blast|p2a: Shuckle
+|-activate|p2a: Shuckle|move: Protect
+|-heal|p2a: Shuckle|200/244|[from] item: Leftovers
+|-damage|p1a: Azumogus|56/100 tox|[from] psn
+|-damage|p1a: Azumogus|43/100 tox|[from] move: Sand Tomb|[partiallytrapped]
+|upkeep
+|turn|63
+|move|p1a: Azumogus|Aqua Jet|p2a: Shuckle
+|-supereffective|p2a: Shuckle
+|-damage|p2a: Shuckle|128/244
+|move|p2a: Shuckle|Power Split|p1a: Azumogus
+|-activate|p2a: Shuckle|move: Power Split|[of] p1a: Azumogus
+|-heal|p2a: Shuckle|143/244|[from] item: Leftovers
+|-damage|p1a: Azumogus|25/100 tox|[from] psn
+|-damage|p1a: Azumogus|12/100 tox|[from] move: Sand Tomb|[partiallytrapped]
+|upkeep
+|turn|64
+|move|p1a: Azumogus|Knock Off|p2a: Shuckle
+|-damage|p2a: Shuckle|106/244
+|-enditem|p2a: Shuckle|Leftovers|[from] move: Knock Off|[of] p1a: Azumogus
+|move|p2a: Shuckle|Power Split|p1a: Azumogus
+|-activate|p2a: Shuckle|move: Power Split|[of] p1a: Azumogus
+|-damage|p1a: Azumogus|0 fnt|[from] psn
+|faint|p1a: Azumogus
+|upkeep
+|switch|p1a: melbourne weather|Thundurus, M|25/100 tox
+|turn|65
+|move|p1a: melbourne weather|Iron Tail|p2a: Shuckle
+|-supereffective|p2a: Shuckle
+|-damage|p2a: Shuckle|40/244
+|-boost|p2a: Shuckle|def|1
+|move|p2a: Shuckle|Sand Tomb|p1a: melbourne weather
+|-immune|p1a: melbourne weather
+|-heal|p1a: melbourne weather|31/100 tox|[from] item: Leftovers
+|-damage|p1a: melbourne weather|25/100 tox|[from] psn
+|upkeep
+|turn|66
+|move|p1a: melbourne weather|Thunder|p2a: Shuckle|[miss]
+|-miss|p1a: melbourne weather|p2a: Shuckle
+|move|p2a: Shuckle|Toxic|p1a: melbourne weather
+|-fail|p1a: melbourne weather|tox
+|-heal|p1a: melbourne weather|31/100 tox|[from] item: Leftovers
+|-damage|p1a: melbourne weather|19/100 tox|[from] psn
+|upkeep
+|turn|67
+|move|p1a: melbourne weather|Iron Tail|p2a: Shuckle
+|-supereffective|p2a: Shuckle
+|-damage|p2a: Shuckle|0 fnt
+|faint|p2a: Shuckle
+|-heal|p1a: melbourne weather|25/100 tox|[from] item: Leftovers
+|-damage|p1a: melbourne weather|7/100 tox|[from] psn
+|upkeep
+|switch|p2a: Whimsicott|Whimsicott, M|79/324
+|-activate|p2a: Whimsicott|move: Sticky Web
+|-unboost|p2a: Whimsicott|spe|1
+|-damage|p2a: Whimsicott|39/324|[from] Stealth Rock
+|turn|68
+|switch|p1a: Skibidizor|Scizor, M|9/100
+|move|p2a: Whimsicott|Moonblast|p1a: Skibidizor
+|-resisted|p1a: Skibidizor
+|-damage|p1a: Skibidizor|0 fnt
+|faint|p1a: Skibidizor
+|-heal|p2a: Whimsicott|59/324|[from] item: Leftovers
+|upkeep
+|switch|p1a: melbourne weather|Thundurus, M|7/100 tox
+|turn|69
+|switch|p1a: Hoopa|Hoopa|82/100
+|move|p2a: Whimsicott|Protect||[still]
+|-fail|p2a: Whimsicott
+|-heal|p2a: Whimsicott|79/324|[from] item: Leftovers
+|upkeep
+|turn|70
+|move|p2a: Whimsicott|Leech Seed|p1a: Hoopa
+|-start|p1a: Hoopa|move: Leech Seed
+|move|p1a: Hoopa|Hyperspace Hole|p2a: Whimsicott
+|-crit|p2a: Whimsicott
+|-damage|p2a: Whimsicott|0 fnt
+|faint|p2a: Whimsicott
+    </script>
+</div>
+
+<div class="battle-log battle-log-inline" style="display:none"></div>
+
+<script>
+    let daily = Math.floor(Date.now() / 1000 / 60 / 60 / 24); document.write('<script src="https://play.pokemonshowdown.com/js/replay-embed.js?version' + daily + '"></' + 'script>');
+</script>
+
+<p style="text-align:center"> Replay created by <a href="https://github.com/hsahovic/poke-env">poke-env</a>, with code from <a
+        href="https://github.com/smogon/pokemon-showdown"> pokemon-showdown</a>. If something goes wrong, don't hesitate
+    to open an <a href="https://github.com/hsahovic/poke-env/issues">issue!</a></p>

@@ -6,7 +6,7 @@ class TournamentPlayer:
     def __init__(self, name: str, bot_path: str, team_path: str):
         self.id = TournamentPlayer.num_players
         self.name = name
-        self.bot = get_poke_env_player_from_path(bot_path, team_path)
+        self.bot = get_poke_env_player_from_path(bot_path, team_path, name)
 
         print(f"Instantiated player {self.id} - {self.name}, format: {self.bot.format}")
 

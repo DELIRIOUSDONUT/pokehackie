@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<!-- version 1 -->
+<title>battle-gen6ou-660</title>
+<style>
+    html,
+    body {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        padding: 12px 0;
+    }
+
+    .battle-log {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+    }
+
+    .battle-log-inline {
+        border: 1px solid #AAAAAA;
+        background: #EEF2F5;
+        color: black;
+        max-width: 640px;
+        margin: 0 auto 80px;
+        padding-bottom: 5px;
+    }
+
+    .battle-log .inner {
+        padding: 4px 8px 0px 8px;
+    }
+
+    .battle-log .inner-preempt {
+        padding: 0 8px 4px 8px;
+    }
+
+    .battle-log .inner-after {
+        margin-top: 0.5em;
+    }
+
+    .battle-log h2 {
+        margin: 0.5em -8px;
+        padding: 4px 8px;
+        border: 1px solid #AAAAAA;
+        background: #E0E7EA;
+        border-left: 0;
+        border-right: 0;
+        font-family: Verdana, sans-serif;
+        font-size: 13pt;
+    }
+
+    .backprop {
+        top: 0;
+    }
+
+    .battle-log .chat {
+        vertical-align: middle;
+        padding: 3px 0 3px 0;
+        font-size: 8pt;
+    }
+
+    .battle-log .chat strong {
+        color: #40576A;
+    }
+
+    .battle-log .chat em {
+        padding: 1px 4px 1px 3px;
+        color: #000000;
+        font-style: normal;
+    }
+
+    .chat.mine {
+        background: rgba(0, 0, 0, 0.05);
+        margin-left: -8px;
+        margin-right: -8px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .spoiler {
+        color: #BBBBBB;
+        background: #BBBBBB;
+        padding: 0px 3px;
+    }
+
+    .spoiler:hover,
+    .spoiler:active,
+    .spoiler-shown {
+        color: #000000;
+        background: #E2E2E2;
+        padding: 0px 3px;
+    }
+
+    .spoiler a {
+        color: #BBBBBB;
+    }
+
+    .spoiler:hover a,
+    .spoiler:active a,
+    .spoiler-shown a {
+        color: #2288CC;
+    }
+
+    .chat code,
+    .chat .spoiler:hover code,
+    .chat .spoiler:active code,
+    .chat .spoiler-shown code {
+        border: 1px solid #C0C0C0;
+        background: #EEEEEE;
+        color: black;
+        padding: 0 2px;
+    }
+
+    .chat .spoiler code {
+        border: 1px solid #CCCCCC;
+        background: #CCCCCC;
+        color: #CCCCCC;
+    }
+
+    .battle-log .rated {
+        padding: 3px 4px;
+    }
+
+    .battle-log .rated strong {
+        color: white;
+        background: #89A;
+        padding: 1px 4px;
+        border-radius: 4px;
+    }
+
+    .spacer {
+        margin-top: 0.5em;
+    }
+
+    .message-announce {
+        background: #6688AA;
+        color: white;
+        padding: 1px 4px 2px;
+    }
+
+    .message-announce a,
+    .broadcast-green a,
+    .broadcast-blue a,
+    .broadcast-red a {
+        color: #DDEEFF;
+    }
+
+    .broadcast-green {
+        background-color: #559955;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .broadcast-blue {
+        background-color: #6688AA;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .infobox {
+        border: 1px solid #6688AA;
+        padding: 2px 4px;
+    }
+
+    .infobox-limited {
+        max-height: 200px;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
+    .broadcast-red {
+        background-color: #AA5544;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .message-learn-canlearn {
+        font-weight: bold;
+        color: #228822;
+        text-decoration: underline;
+    }
+
+    .message-learn-cannotlearn {
+        font-weight: bold;
+        color: #CC2222;
+        text-decoration: underline;
+    }
+
+    .message-effect-weak {
+        font-weight: bold;
+        color: #CC2222;
+    }
+
+    .message-effect-resist {
+        font-weight: bold;
+        color: #6688AA;
+    }
+
+    .message-effect-immune {
+        font-weight: bold;
+        color: #666666;
+    }
+
+    .message-learn-list {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .message-throttle-notice,
+    .message-error {
+        color: #992222;
+    }
+
+    .message-overflow,
+    .chat small.message-overflow {
+        font-size: 0pt;
+    }
+
+    .message-overflow::before {
+        font-size: 9pt;
+        content: '...';
+    }
+
+    .subtle {
+        color: #3A4A66;
+    }
+</style>
+<div class="wrapper replay-wrapper" style="max-width:1180px;margin:0 auto">
+    <input type="hidden" name="replayid" value="unregisteredserver-gen8randombattle-320064" />
+    <div class="battle"></div>
+    <div class="battle-log"></div>
+    <div class="replay-controls"></div>
+    <div class="replay-controls-2"></div>
+    <h1 style="font-weight:normal;text-align:center"><strong>poke-env battle replay</strong><br />battle-gen6ou-660<br /><a
+            href="http://pokemonshowdown.com/users/randomplayer1" class="subtle" target="_blank">max_ivanovic</a>
+        vs. <a href="http://pokemonshowdown.com/users/randomplayer2" class="subtle"
+            target="_blank">meow</a></h1>
+    <script type="text/plain" class="battle-log-data">
+    >battle-gen6ou-660|init|battle
+|title|meow vs. max_ivanovic
+|j|☆meow
+|j|☆max_ivanovic
+|gametype|singles
+|player|p1|meow|265|
+|player|p2|max_ivanovic|170|
+|teamsize|p1|6
+|teamsize|p2|6
+|gen|6
+|tier|[Gen 6] OU
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|Species Clause: Limit one of each Pokémon
+|rule|OHKO Clause: OHKO moves are banned
+|rule|Moody Clause: Moody is banned
+|rule|Evasion Items Clause: Evasion items are banned
+|rule|Evasion Moves Clause: Evasion moves are banned
+|rule|Endless Battle Clause: Forcing endless battles is banned
+|rule|HP Percentage Mod: HP is shown in percentages
+|rule|Swagger Clause: Swagger is banned
+|clearpoke
+|poke|p1|Keldeo|item
+|poke|p1|Excadrill, M|item
+|poke|p1|Thundurus, M|item
+|poke|p1|Bisharp, F|item
+|poke|p1|Garchomp, M|item
+|poke|p1|Latias, F|item
+|poke|p2|Sableye, F|item
+|poke|p2|Shuckle, F|item
+|poke|p2|Whimsicott, F|item
+|poke|p2|Dugtrio, M|item
+|poke|p2|Shedinja|item
+|poke|p2|Togekiss, M|item
+|teampreview
+|start
+|switch|p1a: Garchomp|Garchomp, M|100/100
+|switch|p2a: Shedinja|Shedinja|1/1
+|turn|1
+|move|p2a: Shedinja|Shadow Sneak|p1a: Garchomp
+|-crit|p1a: Garchomp
+|-damage|p1a: Garchomp|82/100
+|-damage|p2a: Shedinja|0 fnt|[from] ability: Rough Skin|[of] p1a: Garchomp
+|faint|p2a: Shedinja
+|move|p1a: Garchomp|Earthquake|p2: Shedinja|[notarget]
+|-fail|p1a: Garchomp
+|upkeep
+|switch|p2a: Whimsicott|Whimsicott, F|324/324
+|turn|2
+|switch|p2a: Togekiss|Togekiss, M|374/374
+|switch|p1a: Latias|Latias, F|100/100
+|upkeep
+|turn|3
+|switch|p1a: Excadrill|Excadrill, M|100/100
+|-ability|p1a: Excadrill|Mold Breaker
+|-item|p1a: Excadrill|Air Balloon
+|move|p2a: Togekiss|Thunder Wave|p1a: Excadrill
+|-immune|p1a: Excadrill
+|upkeep
+|turn|4
+|switch|p1a: Bisharp|Bisharp, F|100/100
+|move|p2a: Togekiss|Flamethrower|p1a: Bisharp
+|-supereffective|p1a: Bisharp
+|-crit|p1a: Bisharp
+|-damage|p1a: Bisharp|0 fnt
+|faint|p1a: Bisharp
+|upkeep
+|switch|p1a: Latias|Latias, F|100/100
+|turn|5
+|switch|p1a: Excadrill|Excadrill, M|100/100
+|-ability|p1a: Excadrill|Mold Breaker
+|-item|p1a: Excadrill|Air Balloon
+|switch|p2a: Dugtrio|Dugtrio, M|212/212
+|upkeep
+|turn|6
+|move|p2a: Dugtrio|Reversal|p1a: Excadrill
+|-supereffective|p1a: Excadrill
+|-damage|p1a: Excadrill|85/100
+|-enditem|p1a: Excadrill|Air Balloon
+|move|p1a: Excadrill|Iron Head|p2a: Dugtrio
+|-enditem|p2a: Dugtrio|Focus Sash
+|-damage|p2a: Dugtrio|1/212
+|upkeep
+|turn|7
+|switch|p2a: Togekiss|Togekiss, M|374/374
+|switch|p1a: Keldeo|Keldeo|100/100
+|upkeep
+|turn|8
+|move|p1a: Keldeo|Icy Wind|p2a: Togekiss
+|-supereffective|p2a: Togekiss
+|-crit|p2a: Togekiss
+|-damage|p2a: Togekiss|136/374
+|-unboost|p2a: Togekiss|spe|1
+|move|p2a: Togekiss|Thunder Wave|p1a: Keldeo
+|-status|p1a: Keldeo|par
+|upkeep
+|turn|9
+|switch|p1a: Excadrill|Excadrill, M|85/100
+|-ability|p1a: Excadrill|Mold Breaker
+|move|p2a: Togekiss|Roost|p2a: Togekiss
+|-heal|p2a: Togekiss|323/374
+|-singleturn|p2a: Togekiss|move: Roost
+|upkeep
+|turn|10
+|switch|p1a: Latias|Latias, F|100/100
+|move|p2a: Togekiss|Flamethrower|p1a: Latias
+|-resisted|p1a: Latias
+|-damage|p1a: Latias|91/100
+|-heal|p1a: Latias|97/100|[from] item: Leftovers
+|upkeep
+|turn|11
+|switch|p1a: Thundurus|Thundurus, M|100/100
+|switch|p2a: Whimsicott|Whimsicott, F|324/324
+|upkeep
+|turn|12
+|move|p2a: Whimsicott|Giga Drain|p1a: Thundurus
+|-resisted|p1a: Thundurus
+|-damage|p1a: Thundurus|86/100
+|move|p1a: Thundurus|Thunderbolt|p2a: Whimsicott
+|-resisted|p2a: Whimsicott
+|-damage|p2a: Whimsicott|195/324
+|-damage|p1a: Thundurus|77/100|[from] item: Life Orb
+|-heal|p2a: Whimsicott|215/324|[from] item: Leftovers
+|upkeep
+|turn|13
+|switch|p1a: Latias|Latias, F|97/100
+|move|p2a: Whimsicott|Giga Drain|p1a: Latias
+|-resisted|p1a: Latias
+|-damage|p1a: Latias|89/100
+|-heal|p2a: Whimsicott|230/324|[from] drain|[of] p1a: Latias
+|-heal|p2a: Whimsicott|250/324|[from] item: Leftovers
+|-heal|p1a: Latias|95/100|[from] item: Leftovers
+|upkeep
+|turn|14
+|switch|p1a: Keldeo|Keldeo|100/100 par
+|move|p2a: Whimsicott|Giga Drain|p1a: Keldeo
+|-supereffective|p1a: Keldeo
+|-damage|p1a: Keldeo|50/100 par
+|-heal|p2a: Whimsicott|324/324|[from] drain|[of] p1a: Keldeo
+|upkeep
+|turn|15
+|switch|p1a: Latias|Latias, F|95/100
+|move|p2a: Whimsicott|Protect||[still]
+|-fail|p2a: Whimsicott
+|-heal|p1a: Latias|100/100|[from] item: Leftovers
+|upkeep
+|turn|16
+|move|p2a: Whimsicott|Giga Drain|p1a: Latias
+|-resisted|p1a: Latias
+|-damage|p1a: Latias|93/100
+|move|p1a: Latias|Defog|p2a: Whimsicott
+|-unboost|p2a: Whimsicott|evasion|1
+|-heal|p1a: Latias|99/100|[from] item: Leftovers
+|upkeep
+|turn|17
+|switch|p2a: Dugtrio|Dugtrio, M|1/212
+|move|p1a: Latias|Roost|p1a: Latias
+|-heal|p1a: Latias|100/100
+|-singleturn|p1a: Latias|move: Roost
+|upkeep
+|turn|18
+|move|p2a: Dugtrio|Endure|p2a: Dugtrio
+|-singleturn|p2a: Dugtrio|move: Endure
+|move|p1a: Latias|Psyshock|p2a: Dugtrio
+|-activate|p2a: Dugtrio|move: Endure
+|-damage|p2a: Dugtrio|1/212
+|upkeep
+|turn|19
+|switch|p1a: Thundurus|Thundurus, M|77/100
+|move|p2a: Dugtrio|Endure||[still]
+|-fail|p2a: Dugtrio
+|upkeep
+|turn|20
+|switch|p2a: Whimsicott|Whimsicott, F|324/324
+|switch|p1a: Latias|Latias, F|100/100
+|upkeep
+|turn|21
+|move|p2a: Whimsicott|Leech Seed|p1a: Latias
+|-start|p1a: Latias|move: Leech Seed
+|move|p1a: Latias|Defog|p2a: Whimsicott
+|-unboost|p2a: Whimsicott|evasion|1
+|-damage|p1a: Latias|88/100|[from] Leech Seed|[of] p2a: Whimsicott
+|upkeep
+|turn|22
+|move|p2a: Whimsicott|Protect|p2a: Whimsicott
+|-singleturn|p2a: Whimsicott|Protect
+|move|p1a: Latias|Psyshock|p2a: Whimsicott
+|-activate|p2a: Whimsicott|move: Protect
+|-heal|p1a: Latias|94/100|[from] item: Leftovers
+|-damage|p1a: Latias|82/100|[from] Leech Seed|[of] p2a: Whimsicott
+|upkeep
+|turn|23
+|move|p2a: Whimsicott|Moonblast|p1a: Latias
+|-supereffective|p1a: Latias
+|-damage|p1a: Latias|42/100
+|move|p1a: Latias|Psyshock|p2a: Whimsicott
+|-damage|p2a: Whimsicott|216/324
+|-heal|p2a: Whimsicott|236/324|[from] item: Leftovers
+|-heal|p1a: Latias|48/100|[from] item: Leftovers
+|-damage|p1a: Latias|35/100|[from] Leech Seed|[of] p2a: Whimsicott
+|-heal|p2a: Whimsicott|281/324|[silent]
+|upkeep
+|turn|24
+|switch|p2a: Togekiss|Togekiss, M|323/374
+|switch|p1a: Excadrill|Excadrill, M|85/100
+|-ability|p1a: Excadrill|Mold Breaker
+|upkeep
+|turn|25
+|switch|p1a: Thundurus|Thundurus, M|77/100
+|switch|p2a: Sableye|Sableye, F|304/304
+|upkeep
+|turn|26
+|switch|p2a: Togekiss|Togekiss, M|323/374
+|move|p1a: Thundurus|Thunder Wave|p2a: Togekiss
+|-status|p2a: Togekiss|par
+|upkeep
+|turn|27
+|switch|p1a: Excadrill|Excadrill, M|85/100
+|-ability|p1a: Excadrill|Mold Breaker
+|move|p2a: Togekiss|Roost|p2a: Togekiss
+|-heal|p2a: Togekiss|374/374 par
+|-singleturn|p2a: Togekiss|move: Roost
+|upkeep
+|turn|28
+|switch|p1a: Thundurus|Thundurus, M|77/100
+|move|p2a: Togekiss|Air Slash|p1a: Thundurus
+|-resisted|p1a: Thundurus
+|-damage|p1a: Thundurus|55/100
+|upkeep
+|turn|29
+|switch|p2a: Dugtrio|Dugtrio, M|1/212
+|move|p1a: Thundurus|Focus Blast|p2a: Dugtrio
+|-damage|p2a: Dugtrio|0 fnt
+|faint|p2a: Dugtrio
+|-damage|p1a: Thundurus|46/100|[from] item: Life Orb
+|upkeep
+|switch|p2a: Shuckle|Shuckle, F|244/244
+|turn|30
+|move|p2a: Shuckle|Protect|p2a: Shuckle
+|-singleturn|p2a: Shuckle|Protect
+|move|p1a: Thundurus|Focus Blast|p2a: Shuckle
+|-activate|p2a: Shuckle|move: Protect
+|upkeep
+|turn|31
+|move|p1a: Thundurus|Thunderbolt|p2a: Shuckle
+|-damage|p2a: Shuckle|143/244
+|-damage|p1a: Thundurus|36/100|[from] item: Life Orb
+|move|p2a: Shuckle|Toxic|p1a: Thundurus|[miss]
+|-miss|p2a: Shuckle|p1a: Thundurus
+|-heal|p2a: Shuckle|158/244|[from] item: Leftovers
+|upkeep
+|turn|32
+|switch|p2a: Sableye|Sableye, F|304/304
+|move|p1a: Thundurus|Thunder Wave|p2a: Sableye
+|-status|p2a: Sableye|par
+|upkeep
+|turn|33
+|switch|p1a: Latias|Latias, F|35/100
+|cant|p2a: Sableye|par
+|-heal|p1a: Latias|41/100|[from] item: Leftovers
+|upkeep
+|turn|34
+|switch|p1a: Keldeo|Keldeo|50/100 par
+|cant|p2a: Sableye|par
+|upkeep
+|turn|35
+|cant|p2a: Sableye|par
+|cant|p1a: Keldeo|par
+|upkeep
+|turn|36
+|switch|p2a: Whimsicott|Whimsicott, F|281/324
+|move|p1a: Keldeo|Hydro Pump|p2a: Whimsicott
+|-resisted|p2a: Whimsicott
+|-damage|p2a: Whimsicott|112/324
+|-heal|p2a: Whimsicott|132/324|[from] item: Leftovers
+|upkeep
+|turn|37
+|switch|p2a: Sableye|Sableye, F|304/304 par
+|switch|p1a: Excadrill|Excadrill, M|85/100
+|-ability|p1a: Excadrill|Mold Breaker
+|upkeep
+|turn|38
+|move|p2a: Sableye|Recover||[still]
+|-fail|p2a: Sableye|heal
+|move|p1a: Excadrill|Iron Head|p2a: Sableye
+|-damage|p2a: Sableye|130/304 par
+|-heal|p2a: Sableye|149/304 par|[from] item: Leftovers
+|upkeep
+|turn|39
+|cant|p2a: Sableye|par
+|move|p1a: Excadrill|Earthquake|p2a: Sableye
+|-damage|p2a: Sableye|0 fnt
+|faint|p2a: Sableye
+|upkeep
+|switch|p2a: Togekiss|Togekiss, M|374/374 par
+|turn|40
+|switch|p1a: Thundurus|Thundurus, M|36/100
+|move|p2a: Togekiss|Roost||[still]
+|-fail|p2a: Togekiss|heal
+|upkeep
+|turn|41
+|switch|p2a: Shuckle|Shuckle, F|158/244
+|move|p1a: Thundurus|Hidden Power|p2a: Shuckle
+|-damage|p2a: Shuckle|115/244
+|-damage|p1a: Thundurus|26/100|[from] item: Life Orb
+|-heal|p2a: Shuckle|130/244|[from] item: Leftovers
+|upkeep
+|turn|42
+|switch|p2a: Togekiss|Togekiss, M|374/374 par
+|move|p1a: Thundurus|Thunder Wave|p2a: Togekiss
+|-fail|p2a: Togekiss|par
+|upkeep
+|turn|43
+|switch|p1a: Keldeo|Keldeo|50/100 par
+|move|p2a: Togekiss|Air Slash|p1a: Keldeo
+|-supereffective|p1a: Keldeo
+|-damage|p1a: Keldeo|0 fnt
+|faint|p1a: Keldeo
+|upkeep
+|switch|p1a: Thundurus|Thundurus, M|26/100
+|turn|44
+|switch|p1a: Latias|Latias, F|41/100
+|switch|p2a: Shuckle|Shuckle, F|130/244
+|-heal|p1a: Latias|47/100|[from] item: Leftovers
+|-heal|p2a: Shuckle|145/244|[from] item: Leftovers
+|upkeep
+|turn|45
+|switch|p1a: Garchomp|Garchomp, M|82/100
+|move|p2a: Shuckle|Protect||[still]
+|-fail|p2a: Shuckle
+|-heal|p2a: Shuckle|160/244|[from] item: Leftovers
+|upkeep
+|turn|46
+|move|p2a: Shuckle|Sand Tomb|p1a: Garchomp
+|-damage|p1a: Garchomp|81/100
+|-activate|p1a: Garchomp|move: Sand Tomb|[of] p2a: Shuckle
+|move|p1a: Garchomp|Dragon Tail|p2a: Shuckle
+|-damage|p2a: Shuckle|126/244
+|drag|p2a: Whimsicott|Whimsicott, F|132/324
+|-heal|p2a: Whimsicott|152/324|[from] item: Leftovers
+|-end|p1a: Garchomp|Sand Tomb|[partiallytrapped]|[silent]
+|upkeep
+|turn|47
+|switch|p2a: Togekiss|Togekiss, M|374/374 par
+|switch|p1a: Latias|Latias, F|47/100
+|-heal|p1a: Latias|54/100|[from] item: Leftovers
+|upkeep
+|turn|48
+|move|p1a: Latias|Defog|p2a: Togekiss
+|-unboost|p2a: Togekiss|evasion|1
+|move|p2a: Togekiss|Flamethrower|p1a: Latias
+|-resisted|p1a: Latias
+|-damage|p1a: Latias|44/100
+|-heal|p1a: Latias|50/100|[from] item: Leftovers
+|upkeep
+|turn|49
+|move|p1a: Latias|Defog|p2a: Togekiss
+|-unboost|p2a: Togekiss|evasion|1
+|cant|p2a: Togekiss|par
+|-heal|p1a: Latias|57/100|[from] item: Leftovers
+|upkeep
+|turn|50
+|switch|p2a: Shuckle|Shuckle, F|126/244
+|move|p1a: Latias|Psyshock|p2a: Shuckle
+|-damage|p2a: Shuckle|83/244
+|-heal|p1a: Latias|63/100|[from] item: Leftovers
+|-heal|p2a: Shuckle|98/244|[from] item: Leftovers
+|upkeep
+|turn|51
+|switch|p2a: Whimsicott|Whimsicott, F|152/324
+|move|p1a: Latias|Draco Meteor|p2a: Whimsicott
+|-immune|p2a: Whimsicott
+|-heal|p2a: Whimsicott|172/324|[from] item: Leftovers
+|-heal|p1a: Latias|69/100|[from] item: Leftovers
+|upkeep
+|turn|52
+|switch|p1a: Thundurus|Thundurus, M|26/100
+|move|p2a: Whimsicott|Protect||[still]
+|-fail|p2a: Whimsicott
+|-heal|p2a: Whimsicott|192/324|[from] item: Leftovers
+|upkeep
+|turn|53
+|move|p2a: Whimsicott|Leech Seed|p1a: Thundurus
+|-start|p1a: Thundurus|move: Leech Seed
+|move|p1a: Thundurus|Thunder Wave|p2a: Whimsicott
+|-status|p2a: Whimsicott|par
+|-heal|p2a: Whimsicott|212/324 par|[from] item: Leftovers
+|-damage|p1a: Thundurus|14/100|[from] Leech Seed|[of] p2a: Whimsicott
+|-heal|p2a: Whimsicott|249/324 par|[silent]
+|upkeep
+|turn|54
+|switch|p1a: Excadrill|Excadrill, M|85/100
+|-ability|p1a: Excadrill|Mold Breaker
+|switch|p2a: Togekiss|Togekiss, M|374/374 par
+|upkeep
+|turn|55
+|move|p1a: Excadrill|Rapid Spin|p2a: Togekiss
+|-damage|p2a: Togekiss|349/374 par
+|move|p2a: Togekiss|Flamethrower|p1a: Excadrill
+|-supereffective|p1a: Excadrill
+|-damage|p1a: Excadrill|15/100
+|upkeep
+|turn|56
+|switch|p1a: Latias|Latias, F|69/100
+|move|p2a: Togekiss|Air Slash|p1a: Latias
+|-damage|p1a: Latias|46/100
+|-heal|p1a: Latias|52/100|[from] item: Leftovers
+|upkeep
+|turn|57
+|move|p1a: Latias|Defog|p2a: Togekiss
+|-unboost|p2a: Togekiss|evasion|1
+|move|p2a: Togekiss|Thunder Wave|p1a: Latias
+|-status|p1a: Latias|par
+|-heal|p1a: Latias|58/100 par|[from] item: Leftovers
+|upkeep
+|turn|58
+|switch|p1a: Excadrill|Excadrill, M|15/100
+|-ability|p1a: Excadrill|Mold Breaker
+|move|p2a: Togekiss|Flamethrower|p1a: Excadrill
+|-supereffective|p1a: Excadrill
+|-damage|p1a: Excadrill|0 fnt
+|faint|p1a: Excadrill
+|upkeep
+|switch|p1a: Thundurus|Thundurus, M|14/100
+|turn|59
+|switch|p1a: Latias|Latias, F|58/100 par
+|move|p2a: Togekiss|Flamethrower|p1a: Latias
+|-resisted|p1a: Latias
+|-damage|p1a: Latias|49/100 par
+|-heal|p1a: Latias|55/100 par|[from] item: Leftovers
+|upkeep
+|turn|60
+|switch|p2a: Shuckle|Shuckle, F|98/244
+|move|p1a: Latias|Draco Meteor|p2a: Shuckle
+|-damage|p2a: Shuckle|19/244
+|-unboost|p1a: Latias|spa|2
+|-heal|p1a: Latias|61/100 par|[from] item: Leftovers
+|-heal|p2a: Shuckle|34/244|[from] item: Leftovers
+|upkeep
+|turn|61
+|move|p1a: Latias|Roost|p1a: Latias
+|-heal|p1a: Latias|100/100 par
+|-singleturn|p1a: Latias|move: Roost
+|move|p2a: Shuckle|Sand Tomb|p1a: Latias
+|-immune|p1a: Latias|[from] ability: Levitate
+|-heal|p2a: Shuckle|49/244|[from] item: Leftovers
+|upkeep
+|turn|62
+|move|p1a: Latias|Defog|p2a: Shuckle
+|-boost|p2a: Shuckle|evasion|1
+|move|p2a: Shuckle|Sand Tomb|p1a: Latias
+|-immune|p1a: Latias|[from] ability: Levitate
+|-heal|p2a: Shuckle|64/244|[from] item: Leftovers
+|upkeep
+|turn|63
+|switch|p1a: Garchomp|Garchomp, M|81/100
+|move|p2a: Shuckle|Protect||[still]
+|-fail|p2a: Shuckle
+|-heal|p2a: Shuckle|79/244|[from] item: Leftovers
+|upkeep
+|turn|64
+|switch|p1a: Latias|Latias, F|100/100 par
+|switch|p2a: Togekiss|Togekiss, M|349/374 par
+|upkeep
+|turn|65
+|move|p1a: Latias|Draco Meteor|p2a: Togekiss
+|-immune|p2a: Togekiss
+|move|p2a: Togekiss|Roost|p2a: Togekiss
+|-heal|p2a: Togekiss|374/374 par
+|-singleturn|p2a: Togekiss|move: Roost
+|upkeep
+|turn|66
+|switch|p1a: Thundurus|Thundurus, M|14/100
+|cant|p2a: Togekiss|par
+|upkeep
+|turn|67
+|move|p1a: Thundurus|Focus Blast|p2a: Togekiss|[miss]
+|-miss|p1a: Thundurus|p2a: Togekiss
+|cant|p2a: Togekiss|par
+|upkeep
+|turn|68
+|switch|p1a: Garchomp|Garchomp, M|81/100
+|switch|p2a: Whimsicott|Whimsicott, F|249/324 par
+|-heal|p2a: Whimsicott|269/324 par|[from] item: Leftovers
+|upkeep
+|turn|69
+|move|p1a: Garchomp|Fire Blast|p2a: Whimsicott
+|-supereffective|p2a: Whimsicott
+|-damage|p2a: Whimsicott|93/324 par
+|move|p2a: Whimsicott|Giga Drain|p1a: Garchomp
+|-crit|p1a: Garchomp
+|-damage|p1a: Garchomp|52/100
+|-heal|p2a: Whimsicott|154/324 par|[from] drain|[of] p1a: Garchomp
+|-heal|p2a: Whimsicott|174/324 par|[from] item: Leftovers
+|upkeep
+|turn|70
+|move|p2a: Whimsicott|Leech Seed|p1a: Garchomp
+|-start|p1a: Garchomp|move: Leech Seed
+|move|p1a: Garchomp|Dragon Tail|p2a: Whimsicott
+|-immune|p2a: Whimsicott
+|-heal|p2a: Whimsicott|194/324 par|[from] item: Leftovers
+|-damage|p1a: Garchomp|40/100|[from] Leech Seed|[of] p2a: Whimsicott
+|-heal|p2a: Whimsicott|246/324 par|[silent]
+|upkeep
+|turn|71
+|cant|p2a: Whimsicott|par
+|move|p1a: Garchomp|Dragon Tail|p2a: Whimsicott
+|-immune|p2a: Whimsicott
+|-heal|p2a: Whimsicott|266/324 par|[from] item: Leftovers
+|-damage|p1a: Garchomp|27/100|[from] Leech Seed|[of] p2a: Whimsicott
+|-heal|p2a: Whimsicott|318/324 par|[silent]
+|upkeep
+|turn|72
+|switch|p1a: Latias|Latias, F|100/100 par
+|switch|p2a: Togekiss|Togekiss, M|374/374 par
+|upkeep
+|turn|73
+|move|p1a: Latias|Psyshock|p2a: Togekiss
+|-damage|p2a: Togekiss|271/374 par
+|move|p2a: Togekiss|Thunder Wave|p1a: Latias
+|-fail|p1a: Latias|par
+|upkeep
+|turn|74
+|move|p1a: Latias|Defog|p2a: Togekiss
+|-unboost|p2a: Togekiss|evasion|1
+|move|p2a: Togekiss|Thunder Wave|p1a: Latias
+|-fail|p1a: Latias|par
+|upkeep
+|turn|75
+|switch|p2a: Shuckle|Shuckle, F|79/244
+|move|p1a: Latias|Defog|p2a: Shuckle
+|-boost|p2a: Shuckle|evasion|1
+|-heal|p2a: Shuckle|94/244|[from] item: Leftovers
+|upkeep
+|turn|76
+|move|p1a: Latias|Defog|p2a: Shuckle
+|-boost|p2a: Shuckle|evasion|1
+|move|p2a: Shuckle|Power Split|p1a: Latias
+|-activate|p2a: Shuckle|move: Power Split|[of] p1a: Latias
+|-heal|p2a: Shuckle|109/244|[from] item: Leftovers
+|upkeep
+|turn|77
+|switch|p2a: Togekiss|Togekiss, M|271/374 par
+|cant|p1a: Latias|par
+|upkeep
+|turn|78
+|switch|p2a: Shuckle|Shuckle, F|109/244
+|move|p1a: Latias|Defog|p2a: Shuckle
+|-boost|p2a: Shuckle|evasion|1
+|-heal|p2a: Shuckle|124/244|[from] item: Leftovers
+|upkeep
+|turn|79
+|move|p1a: Latias|Roost||[still]
+|-fail|p1a: Latias|heal
+|move|p2a: Shuckle|Toxic||[still]
+|-fail|p2a: Shuckle
+|-heal|p2a: Shuckle|139/244|[from] item: Leftovers
+|upkeep
+|turn|80
+|switch|p2a: Whimsicott|Whimsicott, F|318/324 par
+|move|p1a: Latias|Roost||[still]
+|-fail|p1a: Latias|heal
+|-heal|p2a: Whimsicott|324/324 par|[from] item: Leftovers
+|upkeep
+|turn|81
+|switch|p2a: Togekiss|Togekiss, M|271/374 par
+|move|p1a: Latias|Draco Meteor|p2a: Togekiss
+|-immune|p2a: Togekiss
+|upkeep
+|turn|82
+|switch|p1a: Garchomp|Garchomp, M|27/100
+|switch|p2a: Whimsicott|Whimsicott, F|324/324 par
+|upkeep
+|turn|83
+|switch|p2a: Shuckle|Shuckle, F|139/244
+|move|p1a: Garchomp|Earthquake|p2a: Shuckle
+|-damage|p2a: Shuckle|84/244
+|-heal|p2a: Shuckle|99/244|[from] item: Leftovers
+|upkeep
+|turn|84
+|switch|p1a: Thundurus|Thundurus, M|14/100
+|switch|p2a: Togekiss|Togekiss, M|271/374 par
+|upkeep
+|turn|85
+|switch|p1a: Latias|Latias, F|100/100 par
+|move|p2a: Togekiss|Roost|p2a: Togekiss
+|-heal|p2a: Togekiss|374/374 par
+|-singleturn|p2a: Togekiss|move: Roost
+|upkeep
+|turn|86
+|move|p1a: Latias|Psyshock|p2a: Togekiss
+|-damage|p2a: Togekiss|269/374 par
+|move|p2a: Togekiss|Air Slash|p1a: Latias|[miss]
+|-miss|p2a: Togekiss|p1a: Latias
+|upkeep
+|turn|87
+|switch|p2a: Shuckle|Shuckle, F|99/244
+|cant|p1a: Latias|par
+|-heal|p2a: Shuckle|114/244|[from] item: Leftovers
+|upkeep
+|turn|88
+|switch|p2a: Togekiss|Togekiss, M|269/374 par
+|move|p1a: Latias|Defog|p2a: Togekiss
+|-unboost|p2a: Togekiss|evasion|1
+|upkeep
+|turn|89
+|cant|p1a: Latias|par
+|cant|p2a: Togekiss|par
+|upkeep
+|turn|90
+|move|p1a: Latias|Defog|p2a: Togekiss
+|-unboost|p2a: Togekiss|evasion|1
+|move|p2a: Togekiss|Thunder Wave|p1a: Latias
+|-fail|p1a: Latias|par
+|upkeep
+|turn|91
+|move|p1a: Latias|Defog|p2a: Togekiss
+|-unboost|p2a: Togekiss|evasion|1
+|cant|p2a: Togekiss|par
+|upkeep
+|turn|92
+|move|p1a: Latias|Roost||[still]
+|-fail|p1a: Latias|heal
+|cant|p2a: Togekiss|par
+|upkeep
+|turn|93
+|move|p1a: Latias|Roost||[still]
+|-fail|p1a: Latias|heal
+|move|p2a: Togekiss|Air Slash|p1a: Latias|[miss]
+|-miss|p2a: Togekiss|p1a: Latias
+|upkeep
+|turn|94
+|switch|p2a: Whimsicott|Whimsicott, F|324/324 par
+|move|p1a: Latias|Draco Meteor|p2a: Whimsicott
+|-immune|p2a: Whimsicott
+|upkeep
+|turn|95
+|switch|p1a: Garchomp|Garchomp, M|27/100
+|move|p2a: Whimsicott|Moonblast|p1a: Garchomp
+|-supereffective|p1a: Garchomp
+|-damage|p1a: Garchomp|0 fnt
+|faint|p1a: Garchomp
+|upkeep
+|switch|p1a: Thundurus|Thundurus, M|14/100
+|turn|96
+|switch|p2a: Togekiss|Togekiss, M|269/374 par
+|move|p1a: Thundurus|Focus Blast|p2a: Togekiss
+|-resisted|p2a: Togekiss
+|-damage|p2a: Togekiss|229/374 par
+|-damage|p1a: Thundurus|4/100|[from] item: Life Orb
+|upkeep
+|turn|97
+|switch|p1a: Latias|Latias, F|100/100 par
+|cant|p2a: Togekiss|par
+|upkeep
+|turn|98
+|switch|p2a: Whimsicott|Whimsicott, F|324/324 par
+|move|p1a: Latias|Draco Meteor|p2a: Whimsicott
+|-immune|p2a: Whimsicott
+|upkeep
+|turn|99
+|move|p2a: Whimsicott|Giga Drain|p1a: Latias
+|-resisted|p1a: Latias
+|-damage|p1a: Latias|92/100 par
+|move|p1a: Latias|Psyshock|p2a: Whimsicott
+|-damage|p2a: Whimsicott|203/324 par
+|-heal|p2a: Whimsicott|223/324 par|[from] item: Leftovers
+|-heal|p1a: Latias|98/100 par|[from] item: Leftovers
+|upkeep
+|turn|100
+|cant|p2a: Whimsicott|par
+|move|p1a: Latias|Defog|p2a: Whimsicott
+|-unboost|p2a: Whimsicott|evasion|1
+|-heal|p2a: Whimsicott|243/324 par|[from] item: Leftovers
+|-heal|p1a: Latias|100/100 par|[from] item: Leftovers
+|upkeep
+|turn|101
+|switch|p2a: Togekiss|Togekiss, M|229/374 par
+|move|p1a: Latias|Psyshock|p2a: Togekiss
+|-damage|p2a: Togekiss|126/374 par
+|upkeep
+|turn|102
+|switch|p2a: Shuckle|Shuckle, F|114/244
+|move|p1a: Latias|Roost||[still]
+|-fail|p1a: Latias|heal
+|-heal|p2a: Shuckle|129/244|[from] item: Leftovers
+|upkeep
+|turn|103
+|cant|p1a: Latias|par
+|move|p2a: Shuckle|Power Split|p1a: Latias
+|-activate|p2a: Shuckle|move: Power Split|[of] p1a: Latias
+|-heal|p2a: Shuckle|144/244|[from] item: Leftovers
+|upkeep
+|turn|104
+|move|p2a: Shuckle|Protect|p2a: Shuckle
+|-singleturn|p2a: Shuckle|Protect
+|move|p1a: Latias|Roost||[still]
+|-fail|p1a: Latias|heal
+|-heal|p2a: Shuckle|159/244|[from] item: Leftovers
+|upkeep
+|turn|105
+|switch|p1a: Thundurus|Thundurus, M|4/100
+|move|p2a: Shuckle|Sand Tomb|p1a: Thundurus
+|-immune|p1a: Thundurus
+|-heal|p2a: Shuckle|174/244|[from] item: Leftovers
+|upkeep
+|turn|106
+|switch|p2a: Togekiss|Togekiss, M|126/374 par
+|move|p1a: Thundurus|Hidden Power|p2a: Togekiss
+|-supereffective|p2a: Togekiss
+|-damage|p2a: Togekiss|0 fnt
+|faint|p2a: Togekiss
+|-damage|p1a: Thundurus|0 fnt|[from] item: Life Orb
+|faint|p1a: Thundurus
+|upkeep
+|switch|p1a: Latias|Latias, F|100/100 par
+|switch|p2a: Whimsicott|Whimsicott, F|243/324 par
+|turn|107
+|cant|p2a: Whimsicott|par
+|move|p1a: Latias|Defog|p2a: Whimsicott
+|-unboost|p2a: Whimsicott|evasion|1
+|-heal|p2a: Whimsicott|263/324 par|[from] item: Leftovers
+|upkeep
+|turn|108
+|switch|p2a: Shuckle|Shuckle, F|174/244
+|cant|p1a: Latias|par
+|-heal|p2a: Shuckle|189/244|[from] item: Leftovers
+|upkeep
+|turn|109
+|switch|p2a: Whimsicott|Whimsicott, F|263/324 par
+|move|p1a: Latias|Draco Meteor|p2a: Whimsicott
+|-immune|p2a: Whimsicott
+|-heal|p2a: Whimsicott|283/324 par|[from] item: Leftovers
+|upkeep
+|turn|110
+|cant|p2a: Whimsicott|par
+|move|p1a: Latias|Psyshock|p2a: Whimsicott
+|-damage|p2a: Whimsicott|175/324 par
+|-heal|p2a: Whimsicott|195/324 par|[from] item: Leftovers
+|upkeep
+|turn|111
+|move|p2a: Whimsicott|Giga Drain|p1a: Latias
+|-resisted|p1a: Latias
+|-damage|p1a: Latias|92/100 par
+|-heal|p2a: Whimsicott|210/324 par|[from] drain|[of] p1a: Latias
+|move|p1a: Latias|Draco Meteor|p2a: Whimsicott
+|-immune|p2a: Whimsicott
+|-heal|p2a: Whimsicott|230/324 par|[from] item: Leftovers
+|-heal|p1a: Latias|98/100 par|[from] item: Leftovers
+|upkeep
+|turn|112
+|move|p2a: Whimsicott|Giga Drain|p1a: Latias
+|-resisted|p1a: Latias
+|-damage|p1a: Latias|91/100 par
+|-heal|p2a: Whimsicott|244/324 par|[from] drain|[of] p1a: Latias
+|move|p1a: Latias|Roost|p1a: Latias
+|-heal|p1a: Latias|100/100 par
+|-singleturn|p1a: Latias|move: Roost
+|-heal|p2a: Whimsicott|264/324 par|[from] item: Leftovers
+|upkeep
+|turn|113
+|cant|p2a: Whimsicott|par
+|move|p1a: Latias|Roost||[still]
+|-fail|p1a: Latias|heal
+|-heal|p2a: Whimsicott|284/324 par|[from] item: Leftovers
+|upkeep
+|turn|114
+|cant|p2a: Whimsicott|par
+|move|p1a: Latias|Roost||[still]
+|-fail|p1a: Latias|heal
+|-heal|p2a: Whimsicott|304/324 par|[from] item: Leftovers
+|upkeep
+|turn|115
+|move|p2a: Whimsicott|Leech Seed|p1a: Latias
+|-start|p1a: Latias|move: Leech Seed
+|cant|p1a: Latias|par
+|-heal|p2a: Whimsicott|324/324 par|[from] item: Leftovers
+|-damage|p1a: Latias|88/100 par|[from] Leech Seed|[of] p2a: Whimsicott
+|upkeep
+|turn|116
+|switch|p2a: Shuckle|Shuckle, F|189/244
+|move|p1a: Latias|Roost|p1a: Latias
+|-heal|p1a: Latias|100/100 par
+|-singleturn|p1a: Latias|move: Roost
+|-heal|p2a: Shuckle|204/244|[from] item: Leftovers
+|-damage|p1a: Latias|88/100 par|[from] Leech Seed|[of] p2a: Shuckle
+|-heal|p2a: Shuckle|244/244|[silent]
+|upkeep
+|turn|117
+|move|p2a: Shuckle|Protect|p2a: Shuckle
+|-singleturn|p2a: Shuckle|Protect
+|move|p1a: Latias|Psyshock|p2a: Shuckle
+|-activate|p2a: Shuckle|move: Protect
+|-heal|p1a: Latias|94/100 par|[from] item: Leftovers
+|-damage|p1a: Latias|82/100 par|[from] Leech Seed|[of] p2a: Shuckle
+|upkeep
+|turn|118
+|move|p1a: Latias|Defog|p2a: Shuckle
+|-boost|p2a: Shuckle|evasion|1
+|move|p2a: Shuckle|Toxic||[still]
+|-fail|p2a: Shuckle
+|-heal|p1a: Latias|88/100 par|[from] item: Leftovers
+|-damage|p1a: Latias|75/100 par|[from] Leech Seed|[of] p2a: Shuckle
+|upkeep
+|turn|119
+|move|p1a: Latias|Defog|p2a: Shuckle
+|-boost|p2a: Shuckle|evasion|1
+|move|p2a: Shuckle|Sand Tomb|p1a: Latias
+|-immune|p1a: Latias|[from] ability: Levitate
+|-heal|p1a: Latias|82/100 par|[from] item: Leftovers
+|-damage|p1a: Latias|69/100 par|[from] Leech Seed|[of] p2a: Shuckle
+|upkeep
+|turn|120
+|move|p2a: Shuckle|Protect|p2a: Shuckle
+|-singleturn|p2a: Shuckle|Protect
+|move|p1a: Latias|Roost|p1a: Latias
+|-heal|p1a: Latias|100/100 par
+|-singleturn|p1a: Latias|move: Roost
+|-damage|p1a: Latias|88/100 par|[from] Leech Seed|[of] p2a: Shuckle
+|upkeep
+|turn|121
+|move|p1a: Latias|Roost|p1a: Latias
+|-heal|p1a: Latias|100/100 par
+|-singleturn|p1a: Latias|move: Roost
+|move|p2a: Shuckle|Power Split|p1a: Latias
+|-activate|p2a: Shuckle|move: Power Split|[of] p1a: Latias
+|-damage|p1a: Latias|88/100 par|[from] Leech Seed|[of] p2a: Shuckle
+|upkeep
+|turn|122
+|move|p1a: Latias|Defog|p2a: Shuckle
+|-boost|p2a: Shuckle|evasion|1
+|move|p2a: Shuckle|Sand Tomb|p1a: Latias
+|-immune|p1a: Latias|[from] ability: Levitate
+|-heal|p1a: Latias|94/100 par|[from] item: Leftovers
+|-damage|p1a: Latias|82/100 par|[from] Leech Seed|[of] p2a: Shuckle
+|upkeep
+|turn|123
+|move|p1a: Latias|Defog|p2a: Shuckle
+|-boost|p2a: Shuckle|evasion|1
+|move|p2a: Shuckle|Toxic||[still]
+|-fail|p2a: Shuckle
+|-heal|p1a: Latias|88/100 par|[from] item: Leftovers
+|-damage|p1a: Latias|75/100 par|[from] Leech Seed|[of] p2a: Shuckle
+|upkeep
+|turn|124
+|switch|p2a: Whimsicott|Whimsicott, F|324/324 par
+|move|p1a: Latias|Roost|p1a: Latias
+|-heal|p1a: Latias|100/100 par
+|-singleturn|p1a: Latias|move: Roost
+|-damage|p1a: Latias|88/100 par|[from] Leech Seed|[of] p2a: Whimsicott
+|upkeep
+|turn|125
+|move|p2a: Whimsicott|Protect|p2a: Whimsicott
+|-singleturn|p2a: Whimsicott|Protect
+|move|p1a: Latias|Psyshock|p2a: Whimsicott
+|-activate|p2a: Whimsicott|move: Protect
+|-heal|p1a: Latias|94/100 par|[from] item: Leftovers
+|-damage|p1a: Latias|82/100 par|[from] Leech Seed|[of] p2a: Whimsicott
+|upkeep
+|turn|126
+|move|p2a: Whimsicott|Leech Seed||[still]
+|-fail|p2a: Whimsicott
+|move|p1a: Latias|Psyshock|p2a: Whimsicott
+|-damage|p2a: Whimsicott|246/324 par
+|-heal|p2a: Whimsicott|266/324 par|[from] item: Leftovers
+|-heal|p1a: Latias|88/100 par|[from] item: Leftovers
+|-damage|p1a: Latias|75/100 par|[from] Leech Seed|[of] p2a: Whimsicott
+|-heal|p2a: Whimsicott|311/324 par|[silent]
+|upkeep
+|turn|127
+|move|p2a: Whimsicott|Giga Drain|p1a: Latias
+|-resisted|p1a: Latias
+|-damage|p1a: Latias|67/100 par
+|-heal|p2a: Whimsicott|324/324 par|[from] drain|[of] p1a: Latias
+|move|p1a: Latias|Psyshock|p2a: Whimsicott
+|-damage|p2a: Whimsicott|255/324 par
+|-heal|p2a: Whimsicott|275/324 par|[from] item: Leftovers
+|-heal|p1a: Latias|73/100 par|[from] item: Leftovers
+|-damage|p1a: Latias|61/100 par|[from] Leech Seed|[of] p2a: Whimsicott
+|-heal|p2a: Whimsicott|320/324 par|[silent]
+|upkeep
+|turn|128
+|switch|p2a: Shuckle|Shuckle, F|244/244
+|move|p1a: Latias|Roost|p1a: Latias
+|-heal|p1a: Latias|100/100 par
+|-singleturn|p1a: Latias|move: Roost
+|-damage|p1a: Latias|88/100 par|[from] Leech Seed|[of] p2a: Shuckle
+|upkeep
+|turn|129
+|move|p1a: Latias|Psyshock|p2a: Shuckle
+|-damage|p2a: Shuckle|216/244
+|move|p2a: Shuckle|Toxic||[still]
+|-fail|p2a: Shuckle
+|-heal|p1a: Latias|94/100 par|[from] item: Leftovers
+|-heal|p2a: Shuckle|231/244|[from] item: Leftovers
+|-damage|p1a: Latias|82/100 par|[from] Leech Seed|[of] p2a: Shuckle
+|-heal|p2a: Shuckle|244/244|[silent]
+|upkeep
+|turn|130
+|move|p1a: Latias|Psyshock|p2a: Shuckle
+|-damage|p2a: Shuckle|217/244
+|move|p2a: Shuckle|Toxic||[still]
+|-fail|p2a: Shuckle
+|-heal|p1a: Latias|88/100 par|[from] item: Leftovers
+|-heal|p2a: Shuckle|232/244|[from] item: Leftovers
+|-damage|p1a: Latias|75/100 par|[from] Leech Seed|[of] p2a: Shuckle
+|-heal|p2a: Shuckle|244/244|[silent]
+|upkeep
+|turn|131
+|move|p2a: Shuckle|Protect|p2a: Shuckle
+|-singleturn|p2a: Shuckle|Protect
+|move|p1a: Latias|Defog|p2a: Shuckle
+|-activate|p2a: Shuckle|move: Protect
+|-heal|p1a: Latias|82/100 par|[from] item: Leftovers
+|-damage|p1a: Latias|69/100 par|[from] Leech Seed|[of] p2a: Shuckle
+|upkeep
+|turn|132
+|cant|p1a: Latias|par
+|move|p2a: Shuckle|Sand Tomb|p1a: Latias
+|-immune|p1a: Latias|[from] ability: Levitate
+|-heal|p1a: Latias|75/100 par|[from] item: Leftovers
+|-damage|p1a: Latias|63/100 par|[from] Leech Seed|[of] p2a: Shuckle
+|upkeep
+|turn|133
+|switch|p2a: Whimsicott|Whimsicott, F|320/324 par
+|move|p1a: Latias|Psyshock|p2a: Whimsicott
+|-damage|p2a: Whimsicott|245/324 par
+|-heal|p2a: Whimsicott|265/324 par|[from] item: Leftovers
+|-heal|p1a: Latias|69/100 par|[from] item: Leftovers
+|-damage|p1a: Latias|57/100 par|[from] Leech Seed|[of] p2a: Whimsicott
+|-heal|p2a: Whimsicott|310/324 par|[silent]
+|upkeep
+|turn|134
+|cant|p2a: Whimsicott|par
+|move|p1a: Latias|Defog|p2a: Whimsicott
+|-unboost|p2a: Whimsicott|evasion|1
+|-heal|p2a: Whimsicott|324/324 par|[from] item: Leftovers
+|-heal|p1a: Latias|63/100 par|[from] item: Leftovers
+|-damage|p1a: Latias|50/100 par|[from] Leech Seed|[of] p2a: Whimsicott
+|upkeep
+|turn|135
+|switch|p2a: Shuckle|Shuckle, F|244/244
+|move|p1a: Latias|Defog|p2a: Shuckle
+|-boost|p2a: Shuckle|evasion|1
+|-heal|p1a: Latias|56/100 par|[from] item: Leftovers
+|-damage|p1a: Latias|44/100 par|[from] Leech Seed|[of] p2a: Shuckle
+|upkeep
+|turn|136
+|move|p1a: Latias|Defog|p2a: Shuckle
+|-boost|p2a: Shuckle|evasion|1
+|move|p2a: Shuckle|Sand Tomb|p1a: Latias
+|-immune|p1a: Latias|[from] ability: Levitate
+|-heal|p1a: Latias|50/100 par|[from] item: Leftovers
+|-damage|p1a: Latias|38/100 par|[from] Leech Seed|[of] p2a: Shuckle
+|upkeep
+|turn|137
+|switch|p2a: Whimsicott|Whimsicott, F|324/324 par
+|move|p1a: Latias|Defog|p2a: Whimsicott
+|-unboost|p2a: Whimsicott|evasion|1
+|-heal|p1a: Latias|44/100 par|[from] item: Leftovers
+|-damage|p1a: Latias|31/100 par|[from] Leech Seed|[of] p2a: Whimsicott
+|upkeep
+|turn|138
+|move|p2a: Whimsicott|Protect|p2a: Whimsicott
+|-singleturn|p2a: Whimsicott|Protect
+|-activate|p1a: Latias|move: Struggle
+|move|p1a: Latias|Struggle|p2a: Whimsicott
+|-activate|p2a: Whimsicott|move: Protect
+|-heal|p1a: Latias|37/100 par|[from] item: Leftovers
+|-damage|p1a: Latias|25/100 par|[from] Leech Seed|[of] p2a: Whimsicott
+|upkeep
+|turn|139
+|move|p2a: Whimsicott|Moonblast|p1a: Latias
+|-supereffective|p1a: Latias
+|-damage|p1a: Latias|0 fnt
+|faint|p1a: Latias
+    </script>
+</div>
+
+<div class="battle-log battle-log-inline" style="display:none"></div>
+
+<script>
+    let daily = Math.floor(Date.now() / 1000 / 60 / 60 / 24); document.write('<script src="https://play.pokemonshowdown.com/js/replay-embed.js?version' + daily + '"></' + 'script>');
+</script>
+
+<p style="text-align:center"> Replay created by <a href="https://github.com/hsahovic/poke-env">poke-env</a>, with code from <a
+        href="https://github.com/smogon/pokemon-showdown"> pokemon-showdown</a>. If something goes wrong, don't hesitate
+    to open an <a href="https://github.com/hsahovic/poke-env/issues">issue!</a></p>

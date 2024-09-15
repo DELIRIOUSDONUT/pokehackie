@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<!-- version 1 -->
+<title>battle-gen6ou-663</title>
+<style>
+    html,
+    body {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        padding: 12px 0;
+    }
+
+    .battle-log {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+    }
+
+    .battle-log-inline {
+        border: 1px solid #AAAAAA;
+        background: #EEF2F5;
+        color: black;
+        max-width: 640px;
+        margin: 0 auto 80px;
+        padding-bottom: 5px;
+    }
+
+    .battle-log .inner {
+        padding: 4px 8px 0px 8px;
+    }
+
+    .battle-log .inner-preempt {
+        padding: 0 8px 4px 8px;
+    }
+
+    .battle-log .inner-after {
+        margin-top: 0.5em;
+    }
+
+    .battle-log h2 {
+        margin: 0.5em -8px;
+        padding: 4px 8px;
+        border: 1px solid #AAAAAA;
+        background: #E0E7EA;
+        border-left: 0;
+        border-right: 0;
+        font-family: Verdana, sans-serif;
+        font-size: 13pt;
+    }
+
+    .backprop {
+        top: 0;
+    }
+
+    .battle-log .chat {
+        vertical-align: middle;
+        padding: 3px 0 3px 0;
+        font-size: 8pt;
+    }
+
+    .battle-log .chat strong {
+        color: #40576A;
+    }
+
+    .battle-log .chat em {
+        padding: 1px 4px 1px 3px;
+        color: #000000;
+        font-style: normal;
+    }
+
+    .chat.mine {
+        background: rgba(0, 0, 0, 0.05);
+        margin-left: -8px;
+        margin-right: -8px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .spoiler {
+        color: #BBBBBB;
+        background: #BBBBBB;
+        padding: 0px 3px;
+    }
+
+    .spoiler:hover,
+    .spoiler:active,
+    .spoiler-shown {
+        color: #000000;
+        background: #E2E2E2;
+        padding: 0px 3px;
+    }
+
+    .spoiler a {
+        color: #BBBBBB;
+    }
+
+    .spoiler:hover a,
+    .spoiler:active a,
+    .spoiler-shown a {
+        color: #2288CC;
+    }
+
+    .chat code,
+    .chat .spoiler:hover code,
+    .chat .spoiler:active code,
+    .chat .spoiler-shown code {
+        border: 1px solid #C0C0C0;
+        background: #EEEEEE;
+        color: black;
+        padding: 0 2px;
+    }
+
+    .chat .spoiler code {
+        border: 1px solid #CCCCCC;
+        background: #CCCCCC;
+        color: #CCCCCC;
+    }
+
+    .battle-log .rated {
+        padding: 3px 4px;
+    }
+
+    .battle-log .rated strong {
+        color: white;
+        background: #89A;
+        padding: 1px 4px;
+        border-radius: 4px;
+    }
+
+    .spacer {
+        margin-top: 0.5em;
+    }
+
+    .message-announce {
+        background: #6688AA;
+        color: white;
+        padding: 1px 4px 2px;
+    }
+
+    .message-announce a,
+    .broadcast-green a,
+    .broadcast-blue a,
+    .broadcast-red a {
+        color: #DDEEFF;
+    }
+
+    .broadcast-green {
+        background-color: #559955;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .broadcast-blue {
+        background-color: #6688AA;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .infobox {
+        border: 1px solid #6688AA;
+        padding: 2px 4px;
+    }
+
+    .infobox-limited {
+        max-height: 200px;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
+    .broadcast-red {
+        background-color: #AA5544;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .message-learn-canlearn {
+        font-weight: bold;
+        color: #228822;
+        text-decoration: underline;
+    }
+
+    .message-learn-cannotlearn {
+        font-weight: bold;
+        color: #CC2222;
+        text-decoration: underline;
+    }
+
+    .message-effect-weak {
+        font-weight: bold;
+        color: #CC2222;
+    }
+
+    .message-effect-resist {
+        font-weight: bold;
+        color: #6688AA;
+    }
+
+    .message-effect-immune {
+        font-weight: bold;
+        color: #666666;
+    }
+
+    .message-learn-list {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .message-throttle-notice,
+    .message-error {
+        color: #992222;
+    }
+
+    .message-overflow,
+    .chat small.message-overflow {
+        font-size: 0pt;
+    }
+
+    .message-overflow::before {
+        font-size: 9pt;
+        content: '...';
+    }
+
+    .subtle {
+        color: #3A4A66;
+    }
+</style>
+<div class="wrapper replay-wrapper" style="max-width:1180px;margin:0 auto">
+    <input type="hidden" name="replayid" value="unregisteredserver-gen8randombattle-320064" />
+    <div class="battle"></div>
+    <div class="battle-log"></div>
+    <div class="replay-controls"></div>
+    <div class="replay-controls-2"></div>
+    <h1 style="font-weight:normal;text-align:center"><strong>poke-env battle replay</strong><br />battle-gen6ou-663<br /><a
+            href="http://pokemonshowdown.com/users/randomplayer1" class="subtle" target="_blank">max_ivanovic</a>
+        vs. <a href="http://pokemonshowdown.com/users/randomplayer2" class="subtle"
+            target="_blank">devin_armani</a></h1>
+    <script type="text/plain" class="battle-log-data">
+    >battle-gen6ou-663|init|battle
+|title|devin_armani vs. max_ivanovic
+|j|☆devin_armani
+|j|☆max_ivanovic
+|gametype|singles
+|player|p1|devin_armani|102|
+|player|p2|max_ivanovic|170|
+|teamsize|p1|6
+|teamsize|p2|6
+|gen|6
+|tier|[Gen 6] OU
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|Species Clause: Limit one of each Pokémon
+|rule|OHKO Clause: OHKO moves are banned
+|rule|Moody Clause: Moody is banned
+|rule|Evasion Items Clause: Evasion items are banned
+|rule|Evasion Moves Clause: Evasion moves are banned
+|rule|Endless Battle Clause: Forcing endless battles is banned
+|rule|HP Percentage Mod: HP is shown in percentages
+|rule|Swagger Clause: Swagger is banned
+|clearpoke
+|poke|p1|Garchomp, M|item
+|poke|p1|Cloyster, M|item
+|poke|p1|Azumarill, M|item
+|poke|p1|Talonflame, F|item
+|poke|p1|Serperior, F|item
+|poke|p1|Jirachi|item
+|poke|p2|Sableye, M|item
+|poke|p2|Shuckle, F|item
+|poke|p2|Whimsicott, F|item
+|poke|p2|Dugtrio, M|item
+|poke|p2|Shedinja|item
+|poke|p2|Togekiss, M|item
+|teampreview
+|start
+|switch|p1a: Azumarill|Azumarill, M|100/100
+|switch|p2a: Shuckle|Shuckle, F|244/244
+|turn|1
+|switch|p2a: Shedinja|Shedinja|1/1
+|move|p1a: Azumarill|Belly Drum|p1a: Azumarill
+|-damage|p1a: Azumarill|50/100
+|-setboost|p1a: Azumarill|atk|6|[from] move: Belly Drum
+|-enditem|p1a: Azumarill|Sitrus Berry|[eat]
+|-heal|p1a: Azumarill|75/100|[from] item: Sitrus Berry
+|upkeep
+|turn|2
+|move|p2a: Shedinja|Swords Dance|p2a: Shedinja
+|-boost|p2a: Shedinja|atk|2
+|move|p1a: Azumarill|Belly Drum||[still]
+|-fail|p1a: Azumarill
+|upkeep
+|turn|3
+|switch|p1a: Cloyster|Cloyster, M|100/100
+|move|p2a: Shedinja|X-Scissor|p1a: Cloyster
+|-damage|p1a: Cloyster|45/100
+|upkeep
+|turn|4
+|move|p1a: Cloyster|Shell Smash|p1a: Cloyster
+|-unboost|p1a: Cloyster|def|1
+|-unboost|p1a: Cloyster|spd|1
+|-boost|p1a: Cloyster|atk|2
+|-boost|p1a: Cloyster|spa|2
+|-boost|p1a: Cloyster|spe|2
+|move|p2a: Shedinja|X-Scissor|p1a: Cloyster
+|-damage|p1a: Cloyster|0 fnt
+|faint|p1a: Cloyster
+|upkeep
+|switch|p1a: Talonflame|Talonflame, F|100/100
+|turn|5
+|move|p2a: Shedinja|Protect|p2a: Shedinja
+|-singleturn|p2a: Shedinja|Protect
+|move|p1a: Talonflame|Flare Blitz|p2a: Shedinja
+|-activate|p2a: Shedinja|move: Protect
+|upkeep
+|turn|6
+|switch|p1a: Garchomp|Garchomp, M|100/100
+|move|p2a: Shedinja|Swords Dance|p2a: Shedinja
+|-boost|p2a: Shedinja|atk|2
+|upkeep
+|turn|7
+|move|p2a: Shedinja|Shadow Sneak|p1a: Garchomp
+|-damage|p1a: Garchomp|69/100
+|-damage|p2a: Shedinja|0 fnt|[from] ability: Rough Skin|[of] p1a: Garchomp
+|faint|p2a: Shedinja
+|move|p1a: Garchomp|Crunch|p2: Shedinja|[notarget]
+|-fail|p1a: Garchomp
+|upkeep
+|switch|p2a: Whimsicott|Whimsicott, F|324/324
+|turn|8
+|move|p2a: Whimsicott|Leech Seed|p1a: Garchomp
+|-start|p1a: Garchomp|move: Leech Seed
+|move|p1a: Garchomp|Earthquake|p2a: Whimsicott
+|-resisted|p2a: Whimsicott
+|-damage|p2a: Whimsicott|234/324
+|-heal|p2a: Whimsicott|254/324|[from] item: Leftovers
+|-damage|p1a: Garchomp|56/100|[from] Leech Seed|[of] p2a: Whimsicott
+|-heal|p2a: Whimsicott|306/324|[silent]
+|upkeep
+|turn|9
+|switch|p1a: Serperior|Serperior, F|100/100
+|move|p2a: Whimsicott|Leech Seed|p1a: Serperior
+|-immune|p1a: Serperior
+|-heal|p2a: Whimsicott|324/324|[from] item: Leftovers
+|upkeep
+|turn|10
+|switch|p2a: Dugtrio|Dugtrio, M|212/212
+|switch|p1a: Garchomp|Garchomp, M|56/100
+|upkeep
+|turn|11
+|switch|p2a: Shuckle|Shuckle, F|244/244
+|switch|p1a: Azumarill|Azumarill, M|75/100
+|upkeep
+|turn|12
+|switch|p2a: Sableye|Sableye, M|304/304
+|move|p1a: Azumarill|Belly Drum|p1a: Azumarill
+|-damage|p1a: Azumarill|25/100
+|-setboost|p1a: Azumarill|atk|6|[from] move: Belly Drum
+|upkeep
+|turn|13
+|switch|p1a: Serperior|Serperior, F|100/100
+|switch|p2a: Togekiss|Togekiss, M|374/374
+|upkeep
+|turn|14
+|switch|p1a: Garchomp|Garchomp, M|56/100
+|move|p2a: Togekiss|Flamethrower|p1a: Garchomp
+|-resisted|p1a: Garchomp
+|-damage|p1a: Garchomp|45/100
+|upkeep
+|turn|15
+|move|p2a: Togekiss|Air Slash|p1a: Garchomp
+|-damage|p1a: Garchomp|16/100
+|move|p1a: Garchomp|Earthquake|p2a: Togekiss
+|-immune|p2a: Togekiss
+|upkeep
+|turn|16
+|switch|p2a: Sableye|Sableye, M|304/304
+|move|p1a: Garchomp|Earthquake|p2a: Sableye
+|-damage|p2a: Sableye|120/304
+|-heal|p2a: Sableye|139/304|[from] item: Leftovers
+|upkeep
+|turn|17
+|move|p2a: Sableye|Will-O-Wisp|p1a: Garchomp
+|-status|p1a: Garchomp|brn
+|move|p1a: Garchomp|Earthquake|p2a: Sableye
+|-damage|p2a: Sableye|46/304
+|-heal|p2a: Sableye|65/304|[from] item: Leftovers
+|-damage|p1a: Garchomp|4/100 brn|[from] brn
+|upkeep
+|turn|18
+|switch|p2a: Shuckle|Shuckle, F|244/244
+|move|p1a: Garchomp|Earthquake|p2a: Shuckle
+|-damage|p2a: Shuckle|218/244
+|-heal|p2a: Shuckle|233/244|[from] item: Leftovers
+|-damage|p1a: Garchomp|0 fnt|[from] brn
+|faint|p1a: Garchomp
+|upkeep
+|switch|p1a: Serperior|Serperior, F|100/100
+|turn|19
+|switch|p1a: Talonflame|Talonflame, F|100/100
+|switch|p2a: Dugtrio|Dugtrio, M|212/212
+|upkeep
+|turn|20
+|switch|p2a: Togekiss|Togekiss, M|374/374
+|switch|p1a: Azumarill|Azumarill, M|25/100
+|upkeep
+|turn|21
+|switch|p2a: Sableye|Sableye, M|65/304
+|switch|p1a: Jirachi|Jirachi|100/100
+|-heal|p2a: Sableye|84/304|[from] item: Leftovers
+|upkeep
+|turn|22
+|move|p1a: Jirachi|Heart Stamp|p2a: Sableye
+|-immune|p2a: Sableye
+|move|p2a: Sableye|Foul Play|p1a: Jirachi
+|-supereffective|p1a: Jirachi
+|-damage|p1a: Jirachi|14/100
+|-heal|p2a: Sableye|103/304|[from] item: Leftovers
+|upkeep
+|turn|23
+|switch|p1a: Talonflame|Talonflame, F|100/100
+|move|p2a: Sableye|Recover|p2a: Sableye
+|-heal|p2a: Sableye|255/304
+|-heal|p2a: Sableye|274/304|[from] item: Leftovers
+|upkeep
+|turn|24
+|switch|p1a: Serperior|Serperior, F|100/100
+|switch|p2a: Togekiss|Togekiss, M|374/374
+|upkeep
+|turn|25
+|switch|p1a: Talonflame|Talonflame, F|100/100
+|move|p2a: Togekiss|Thunder Wave|p1a: Talonflame
+|-status|p1a: Talonflame|par
+|upkeep
+|turn|26
+|switch|p1a: Serperior|Serperior, F|100/100
+|move|p2a: Togekiss|Roost||[still]
+|-fail|p2a: Togekiss|heal
+|upkeep
+|turn|27
+|switch|p2a: Shuckle|Shuckle, F|233/244
+|move|p1a: Serperior|Leaf Storm|p2a: Shuckle
+|-damage|p2a: Shuckle|149/244
+|-boost|p1a: Serperior|spa|2
+|-heal|p2a: Shuckle|164/244|[from] item: Leftovers
+|upkeep
+|turn|28
+|switch|p1a: Talonflame|Talonflame, F|100/100 par
+|move|p2a: Shuckle|Power Split|p1a: Talonflame
+|-activate|p2a: Shuckle|move: Power Split|[of] p1a: Talonflame
+|-heal|p2a: Shuckle|179/244|[from] item: Leftovers
+|upkeep
+|turn|29
+|switch|p2a: Togekiss|Togekiss, M|374/374
+|move|p1a: Talonflame|U-turn|p2a: Togekiss
+|-resisted|p2a: Togekiss
+|-damage|p2a: Togekiss|358/374
+|switch|p1a: Azumarill|Azumarill, M|25/100|[from] U-turn
+|upkeep
+|turn|30
+|switch|p2a: Shuckle|Shuckle, F|179/244
+|move|p1a: Azumarill|Play Rough|p2a: Shuckle
+|-damage|p2a: Shuckle|107/244
+|-heal|p2a: Shuckle|122/244|[from] item: Leftovers
+|upkeep
+|turn|31
+|switch|p1a: Jirachi|Jirachi|14/100
+|move|p2a: Shuckle|Protect||[still]
+|-fail|p2a: Shuckle
+|-heal|p2a: Shuckle|137/244|[from] item: Leftovers
+|upkeep
+|turn|32
+|switch|p1a: Azumarill|Azumarill, M|25/100
+|switch|p2a: Whimsicott|Whimsicott, F|324/324
+|upkeep
+|turn|33
+|switch|p2a: Shuckle|Shuckle, F|137/244
+|switch|p1a: Talonflame|Talonflame, F|100/100 par
+|-heal|p2a: Shuckle|152/244|[from] item: Leftovers
+|upkeep
+|turn|34
+|move|p2a: Shuckle|Protect|p2a: Shuckle
+|-singleturn|p2a: Shuckle|Protect
+|move|p1a: Talonflame|Brave Bird|p2a: Shuckle
+|-activate|p2a: Shuckle|move: Protect
+|-heal|p2a: Shuckle|167/244|[from] item: Leftovers
+|upkeep
+|turn|35
+|switch|p1a: Azumarill|Azumarill, M|25/100
+|move|p2a: Shuckle|Sand Tomb|p1a: Azumarill|[miss]
+|-miss|p2a: Shuckle|p1a: Azumarill
+|-heal|p2a: Shuckle|182/244|[from] item: Leftovers
+|upkeep
+|turn|36
+|switch|p1a: Jirachi|Jirachi|14/100
+|switch|p2a: Togekiss|Togekiss, M|358/374
+|upkeep
+|turn|37
+|switch|p1a: Azumarill|Azumarill, M|25/100
+|move|p2a: Togekiss|Flamethrower|p1a: Azumarill
+|-resisted|p1a: Azumarill
+|-damage|p1a: Azumarill|12/100
+|upkeep
+|turn|38
+|switch|p1a: Jirachi|Jirachi|14/100
+|move|p2a: Togekiss|Roost|p2a: Togekiss
+|-heal|p2a: Togekiss|374/374
+|-singleturn|p2a: Togekiss|move: Roost
+|upkeep
+|turn|39
+|switch|p1a: Talonflame|Talonflame, F|100/100 par
+|move|p2a: Togekiss|Roost||[still]
+|-fail|p2a: Togekiss|heal
+|upkeep
+|turn|40
+|switch|p2a: Dugtrio|Dugtrio, M|212/212
+|switch|p1a: Jirachi|Jirachi|14/100
+|upkeep
+|turn|41
+|switch|p1a: Serperior|Serperior, F|100/100
+|switch|p2a: Whimsicott|Whimsicott, F|324/324
+|upkeep
+|turn|42
+|switch|p2a: Togekiss|Togekiss, M|374/374
+|switch|p1a: Jirachi|Jirachi|14/100
+|upkeep
+|turn|43
+|move|p1a: Jirachi|Heart Stamp|p2a: Togekiss
+|-damage|p2a: Togekiss|283/374
+|move|p2a: Togekiss|Thunder Wave|p1a: Jirachi
+|-status|p1a: Jirachi|par
+|upkeep
+|turn|44
+|switch|p2a: Whimsicott|Whimsicott, F|324/324
+|cant|p1a: Jirachi|par
+|upkeep
+|turn|45
+|switch|p2a: Sableye|Sableye, M|274/304
+|switch|p1a: Azumarill|Azumarill, M|12/100
+|-heal|p2a: Sableye|293/304|[from] item: Leftovers
+|upkeep
+|turn|46
+|move|p2a: Sableye|Recover|p2a: Sableye
+|-heal|p2a: Sableye|304/304
+|move|p1a: Azumarill|Play Rough|p2a: Sableye
+|-supereffective|p2a: Sableye
+|-damage|p2a: Sableye|0 fnt
+|faint|p2a: Sableye
+|upkeep
+|switch|p2a: Togekiss|Togekiss, M|283/374
+|turn|47
+|switch|p1a: Serperior|Serperior, F|100/100
+|move|p2a: Togekiss|Roost|p2a: Togekiss
+|-heal|p2a: Togekiss|374/374
+|-singleturn|p2a: Togekiss|move: Roost
+|upkeep
+|turn|48
+|switch|p1a: Jirachi|Jirachi|14/100 par
+|move|p2a: Togekiss|Air Slash|p1a: Jirachi
+|-resisted|p1a: Jirachi
+|-damage|p1a: Jirachi|0 fnt
+|faint|p1a: Jirachi
+|upkeep
+|switch|p1a: Serperior|Serperior, F|100/100
+|turn|49
+|move|p1a: Serperior|Leaf Storm|p2a: Togekiss
+|-resisted|p2a: Togekiss
+|-damage|p2a: Togekiss|299/374
+|-boost|p1a: Serperior|spa|2
+|move|p2a: Togekiss|Thunder Wave|p1a: Serperior
+|-status|p1a: Serperior|par
+|upkeep
+|turn|50
+|switch|p2a: Shuckle|Shuckle, F|182/244
+|cant|p1a: Serperior|par
+|-heal|p2a: Shuckle|197/244|[from] item: Leftovers
+|upkeep
+|turn|51
+|switch|p1a: Talonflame|Talonflame, F|100/100 par
+|switch|p2a: Togekiss|Togekiss, M|299/374
+|upkeep
+|turn|52
+|cant|p1a: Talonflame|par
+|move|p2a: Togekiss|Air Slash|p1a: Talonflame
+|-damage|p1a: Talonflame|55/100 par
+|upkeep
+|turn|53
+|move|p2a: Togekiss|Air Slash|p1a: Talonflame
+|-damage|p1a: Talonflame|7/100 par
+|cant|p1a: Talonflame|flinch
+|upkeep
+|turn|54
+|switch|p1a: Serperior|Serperior, F|100/100 par
+|move|p2a: Togekiss|Thunder Wave|p1a: Serperior
+|-fail|p1a: Serperior|par
+|upkeep
+|turn|55
+|switch|p2a: Whimsicott|Whimsicott, F|324/324
+|switch|p1a: Azumarill|Azumarill, M|12/100
+|upkeep
+|turn|56
+|switch|p2a: Togekiss|Togekiss, M|299/374
+|switch|p1a: Serperior|Serperior, F|100/100 par
+|upkeep
+|turn|57
+|move|p2a: Togekiss|Flamethrower|p1a: Serperior
+|-supereffective|p1a: Serperior
+|-crit|p1a: Serperior
+|-damage|p1a: Serperior|13/100 par
+|move|p1a: Serperior|Dragon Pulse|p2a: Togekiss
+|-immune|p2a: Togekiss
+|-heal|p1a: Serperior|19/100 par|[from] item: Leftovers
+|upkeep
+|turn|58
+|switch|p1a: Azumarill|Azumarill, M|12/100
+|move|p2a: Togekiss|Thunder Wave|p1a: Azumarill
+|-status|p1a: Azumarill|par
+|upkeep
+|turn|59
+|move|p2a: Togekiss|Air Slash|p1a: Azumarill
+|-damage|p1a: Azumarill|0 fnt
+|faint|p1a: Azumarill
+|upkeep
+|switch|p1a: Talonflame|Talonflame, F|7/100 par
+|turn|60
+|switch|p2a: Shuckle|Shuckle, F|197/244
+|move|p1a: Talonflame|Tailwind|p1a: Talonflame
+|-sidestart|p1: devin_armani|move: Tailwind
+|-heal|p2a: Shuckle|212/244|[from] item: Leftovers
+|upkeep
+|turn|61
+|switch|p1a: Serperior|Serperior, F|19/100 par
+|switch|p2a: Whimsicott|Whimsicott, F|324/324
+|-heal|p1a: Serperior|25/100 par|[from] item: Leftovers
+|upkeep
+|turn|62
+|switch|p2a: Togekiss|Togekiss, M|299/374
+|switch|p1a: Talonflame|Talonflame, F|7/100 par
+|upkeep
+|turn|63
+|move|p2a: Togekiss|Flamethrower|p1a: Talonflame
+|-resisted|p1a: Talonflame
+|-damage|p1a: Talonflame|0 fnt
+|faint|p1a: Talonflame
+|-sideend|p1: devin_armani|move: Tailwind
+|upkeep
+|switch|p1a: Serperior|Serperior, F|25/100 par
+|turn|64
+|move|p2a: Togekiss|Air Slash|p1a: Serperior
+|-supereffective|p1a: Serperior
+|-damage|p1a: Serperior|0 fnt
+|faint|p1a: Serperior
+    </script>
+</div>
+
+<div class="battle-log battle-log-inline" style="display:none"></div>
+
+<script>
+    let daily = Math.floor(Date.now() / 1000 / 60 / 60 / 24); document.write('<script src="https://play.pokemonshowdown.com/js/replay-embed.js?version' + daily + '"></' + 'script>');
+</script>
+
+<p style="text-align:center"> Replay created by <a href="https://github.com/hsahovic/poke-env">poke-env</a>, with code from <a
+        href="https://github.com/smogon/pokemon-showdown"> pokemon-showdown</a>. If something goes wrong, don't hesitate
+    to open an <a href="https://github.com/hsahovic/poke-env/issues">issue!</a></p>

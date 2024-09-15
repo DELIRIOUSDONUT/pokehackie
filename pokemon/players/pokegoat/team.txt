@@ -1,0 +1,56 @@
+Heatran @ Leftovers  
+Ability: Flash Fire  
+EVs: 252 SpA / 4 SpD / 252 Spe  
+Timid Nature  
+IVs: 0 Atk  
+- Magma Storm  
+- Earth Power  
+- Flash Cannon  
+- Dark Pulse  
+
+Garchomp @ Rocky Helmet  
+Ability: Rough Skin  
+EVs: 240 HP / 176 Def / 92 Spe  
+Impish Nature  
+- Stealth Rock  
+- Earthquake  
+- Dragon Tail  
+- Fire Blast  
+
+Talonflame @ Choice Band  
+Ability: Gale Wings  
+EVs: 44 HP / 244 Atk / 220 Spe  
+Adamant Nature  
+- Brave Bird  
+- Flare Blitz  
+- U-turn  
+- Facade  
+
+Gengar @ Life Orb  
+Ability: Levitate  
+EVs: 252 SpA / 4 SpD / 252 Spe  
+Timid Nature  
+IVs: 29 HP / 0 Atk  
+- Shadow Ball  
+- Sludge Wave  
+- Focus Blast  
+- Psychic  
+
+Serperior @ Leftovers  
+Ability: Contrary  
+EVs: 252 SpA / 4 SpD / 252 Spe  
+Timid Nature  
+- Leaf Storm  
+- Dragon Pulse  
+- Hidden Power [Fire]  
+- Knock Off  
+
+Lopunny-Mega (F) @ Lopunnite  
+Ability: Limber  
+EVs: 252 Atk / 4 SpD / 252 Spe  
+Jolly Nature  
+- Return  
+- Fake Out  
+- High Jump Kick  
+- Quick Attack  
+

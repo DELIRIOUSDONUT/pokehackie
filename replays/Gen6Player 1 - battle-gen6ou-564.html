@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<!-- version 1 -->
+<title>battle-gen6ou-564</title>
+<style>
+    html,
+    body {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        padding: 12px 0;
+    }
+
+    .battle-log {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+    }
+
+    .battle-log-inline {
+        border: 1px solid #AAAAAA;
+        background: #EEF2F5;
+        color: black;
+        max-width: 640px;
+        margin: 0 auto 80px;
+        padding-bottom: 5px;
+    }
+
+    .battle-log .inner {
+        padding: 4px 8px 0px 8px;
+    }
+
+    .battle-log .inner-preempt {
+        padding: 0 8px 4px 8px;
+    }
+
+    .battle-log .inner-after {
+        margin-top: 0.5em;
+    }
+
+    .battle-log h2 {
+        margin: 0.5em -8px;
+        padding: 4px 8px;
+        border: 1px solid #AAAAAA;
+        background: #E0E7EA;
+        border-left: 0;
+        border-right: 0;
+        font-family: Verdana, sans-serif;
+        font-size: 13pt;
+    }
+
+    .backprop {
+        top: 0;
+    }
+
+    .battle-log .chat {
+        vertical-align: middle;
+        padding: 3px 0 3px 0;
+        font-size: 8pt;
+    }
+
+    .battle-log .chat strong {
+        color: #40576A;
+    }
+
+    .battle-log .chat em {
+        padding: 1px 4px 1px 3px;
+        color: #000000;
+        font-style: normal;
+    }
+
+    .chat.mine {
+        background: rgba(0, 0, 0, 0.05);
+        margin-left: -8px;
+        margin-right: -8px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .spoiler {
+        color: #BBBBBB;
+        background: #BBBBBB;
+        padding: 0px 3px;
+    }
+
+    .spoiler:hover,
+    .spoiler:active,
+    .spoiler-shown {
+        color: #000000;
+        background: #E2E2E2;
+        padding: 0px 3px;
+    }
+
+    .spoiler a {
+        color: #BBBBBB;
+    }
+
+    .spoiler:hover a,
+    .spoiler:active a,
+    .spoiler-shown a {
+        color: #2288CC;
+    }
+
+    .chat code,
+    .chat .spoiler:hover code,
+    .chat .spoiler:active code,
+    .chat .spoiler-shown code {
+        border: 1px solid #C0C0C0;
+        background: #EEEEEE;
+        color: black;
+        padding: 0 2px;
+    }
+
+    .chat .spoiler code {
+        border: 1px solid #CCCCCC;
+        background: #CCCCCC;
+        color: #CCCCCC;
+    }
+
+    .battle-log .rated {
+        padding: 3px 4px;
+    }
+
+    .battle-log .rated strong {
+        color: white;
+        background: #89A;
+        padding: 1px 4px;
+        border-radius: 4px;
+    }
+
+    .spacer {
+        margin-top: 0.5em;
+    }
+
+    .message-announce {
+        background: #6688AA;
+        color: white;
+        padding: 1px 4px 2px;
+    }
+
+    .message-announce a,
+    .broadcast-green a,
+    .broadcast-blue a,
+    .broadcast-red a {
+        color: #DDEEFF;
+    }
+
+    .broadcast-green {
+        background-color: #559955;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .broadcast-blue {
+        background-color: #6688AA;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .infobox {
+        border: 1px solid #6688AA;
+        padding: 2px 4px;
+    }
+
+    .infobox-limited {
+        max-height: 200px;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
+    .broadcast-red {
+        background-color: #AA5544;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .message-learn-canlearn {
+        font-weight: bold;
+        color: #228822;
+        text-decoration: underline;
+    }
+
+    .message-learn-cannotlearn {
+        font-weight: bold;
+        color: #CC2222;
+        text-decoration: underline;
+    }
+
+    .message-effect-weak {
+        font-weight: bold;
+        color: #CC2222;
+    }
+
+    .message-effect-resist {
+        font-weight: bold;
+        color: #6688AA;
+    }
+
+    .message-effect-immune {
+        font-weight: bold;
+        color: #666666;
+    }
+
+    .message-learn-list {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .message-throttle-notice,
+    .message-error {
+        color: #992222;
+    }
+
+    .message-overflow,
+    .chat small.message-overflow {
+        font-size: 0pt;
+    }
+
+    .message-overflow::before {
+        font-size: 9pt;
+        content: '...';
+    }
+
+    .subtle {
+        color: #3A4A66;
+    }
+</style>
+<div class="wrapper replay-wrapper" style="max-width:1180px;margin:0 auto">
+    <input type="hidden" name="replayid" value="unregisteredserver-gen8randombattle-320064" />
+    <div class="battle"></div>
+    <div class="battle-log"></div>
+    <div class="replay-controls"></div>
+    <div class="replay-controls-2"></div>
+    <h1 style="font-weight:normal;text-align:center"><strong>poke-env battle replay</strong><br />battle-gen6ou-564<br /><a
+            href="http://pokemonshowdown.com/users/randomplayer1" class="subtle" target="_blank">Gen6Player 1</a>
+        vs. <a href="http://pokemonshowdown.com/users/randomplayer2" class="subtle"
+            target="_blank">Gen6Player 2</a></h1>
+    <script type="text/plain" class="battle-log-data">
+    >battle-gen6ou-564|init|battle
+|title|Gen6Player 1 vs. Gen6Player 2
+|j|☆Gen6Player 1
+|j|☆Gen6Player 2
+|gametype|singles
+|player|p1|Gen6Player 1|2|
+|player|p2|Gen6Player 2|101|
+|teamsize|p1|6
+|teamsize|p2|6
+|gen|6
+|tier|[Gen 6] OU
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|Species Clause: Limit one of each Pokémon
+|rule|OHKO Clause: OHKO moves are banned
+|rule|Moody Clause: Moody is banned
+|rule|Evasion Items Clause: Evasion items are banned
+|rule|Evasion Moves Clause: Evasion moves are banned
+|rule|Endless Battle Clause: Forcing endless battles is banned
+|rule|HP Percentage Mod: HP is shown in percentages
+|rule|Swagger Clause: Swagger is banned
+|clearpoke
+|poke|p1|Landorus-Therian, M|item
+|poke|p1|Heatran, F|item
+|poke|p1|Excadrill, M|item
+|poke|p1|Rotom-Wash|item
+|poke|p1|Dragonite, M|item
+|poke|p1|Clefable, F|item
+|poke|p2|Shuckle, M|item
+|poke|p2|Scizor, M|item
+|poke|p2|Azumarill, M|item
+|poke|p2|Hoopa|item
+|poke|p2|Thundurus, M|item
+|poke|p2|Bisharp, M|item
+|teampreview
+|start
+|switch|p1a: Rotom|Rotom-Wash|303/303
+|switch|p2a: chess reference|Bisharp, M, shiny|100/100
+|turn|1
+|switch|p2a: ThatShuckle|Shuckle, M, shiny|100/100
+|switch|p1a: Dragonite|Dragonite, M|323/323
+|upkeep
+|turn|2
+|switch|p1a: Rotom|Rotom-Wash|303/303
+|move|p2a: ThatShuckle|Sticky Web|p1a: Rotom
+|-sidestart|p1: Gen6Player 1|move: Sticky Web
+|upkeep
+|turn|3
+|switch|p2a: chess reference|Bisharp, M, shiny|100/100
+|move|p1a: Rotom|Pain Split|p2a: chess reference
+|-sethp|p2a: chess reference|100/100|[from] move: Pain Split|[silent]
+|-sethp|p1a: Rotom|287/303|[from] move: Pain Split
+|-heal|p1a: Rotom|303/303|[from] item: Leftovers
+|upkeep
+|turn|4
+|switch|p2a: Skibidizor|Scizor, M|100/100
+|move|p1a: Rotom|Hydro Pump|p2a: Skibidizor
+|-damage|p2a: Skibidizor|39/100
+|-enditem|p2a: Skibidizor|Sitrus Berry|[eat]
+|-heal|p2a: Skibidizor|64/100|[from] item: Sitrus Berry
+|upkeep
+|turn|5
+|switch|p2a: Azumogus|Azumarill, M|100/100
+|switch|p1a: Heatran|Heatran, F|386/386
+|-activate|p1a: Heatran|move: Sticky Web
+|-unboost|p1a: Heatran|spe|1
+|upkeep
+|turn|6
+|switch|p1a: Landorus|Landorus-Therian, M|319/319
+|-ability|p1a: Landorus|Intimidate|boost
+|-unboost|p2a: Azumogus|atk|1
+|move|p2a: Azumogus|Play Rough|p1a: Landorus
+|-damage|p1a: Landorus|174/319
+|-damage|p2a: Azumogus|84/100|[from] item: Rocky Helmet|[of] p1a: Landorus
+|upkeep
+|turn|7
+|switch|p1a: Clefable|Clefable, F|394/394
+|-activate|p1a: Clefable|move: Sticky Web
+|-unboost|p1a: Clefable|spe|1
+|switch|p2a: ThatShuckle|Shuckle, M, shiny|100/100
+|upkeep
+|turn|8
+|move|p1a: Clefable|Thunder Wave|p2a: ThatShuckle
+|-status|p2a: ThatShuckle|par
+|move|p2a: ThatShuckle|Body Slam|p1a: Clefable
+|-damage|p1a: Clefable|379/394
+|-status|p1a: Clefable|par
+|-heal|p1a: Clefable|394/394 par|[from] item: Leftovers
+|upkeep
+|turn|9
+|cant|p1a: Clefable|par
+|move|p2a: ThatShuckle|Infestation|p1a: Clefable
+|-resisted|p1a: Clefable
+|-damage|p1a: Clefable|391/394 par
+|-activate|p1a: Clefable|move: Infestation|[of] p2a: ThatShuckle
+|-heal|p1a: Clefable|394/394 par|[from] item: Leftovers
+|upkeep
+|turn|10
+|switch|p2a: Hoopa|Hoopa|100/100
+|move|p1a: Clefable|Calm Mind|p1a: Clefable
+|-boost|p1a: Clefable|spa|1
+|-boost|p1a: Clefable|spd|1
+|-end|p1a: Clefable|Infestation|[partiallytrapped]|[silent]
+|upkeep
+|turn|11
+|switch|p2a: melbourne weather|Thundurus, M|100/100
+|cant|p1a: Clefable|par
+|upkeep
+|turn|12
+|switch|p1a: Dragonite|Dragonite, M|323/323
+|move|p2a: melbourne weather|Focus Blast|p1a: Dragonite|[miss]
+|-miss|p2a: melbourne weather|p1a: Dragonite
+|upkeep
+|turn|13
+|switch|p2a: Skibidizor|Scizor, M|64/100
+|move|p1a: Dragonite|Outrage|p2a: Skibidizor
+|-resisted|p2a: Skibidizor
+|-damage|p2a: Skibidizor|18/100
+|upkeep
+|turn|14
+|move|p1a: Dragonite|Outrage|p2a: Skibidizor|[from]lockedmove
+|-resisted|p2a: Skibidizor
+|-damage|p2a: Skibidizor|0 fnt
+|faint|p2a: Skibidizor
+|-start|p1a: Dragonite|confusion|[fatigue]
+|-enditem|p1a: Dragonite|Lum Berry|[eat]
+|-end|p1a: Dragonite|confusion
+|upkeep
+|switch|p2a: Azumogus|Azumarill, M|84/100
+|turn|15
+|move|p1a: Dragonite|Extreme Speed|p2a: Azumogus
+|-damage|p2a: Azumogus|50/100
+|-enditem|p2a: Azumogus|Sitrus Berry|[eat]
+|-heal|p2a: Azumogus|75/100|[from] item: Sitrus Berry
+|move|p2a: Azumogus|Knock Off|p1a: Dragonite
+|-damage|p1a: Dragonite|276/323
+|upkeep
+|turn|16
+|switch|p1a: Excadrill|Excadrill, M|362/362
+|-activate|p1a: Excadrill|move: Sticky Web
+|-unboost|p1a: Excadrill|spe|1
+|-ability|p1a: Excadrill|Mold Breaker
+|switch|p2a: chess reference|Bisharp, M, shiny|100/100
+|upkeep
+|turn|17
+|switch|p1a: Rotom|Rotom-Wash|303/303
+|move|p2a: chess reference|Stone Edge|p1a: Rotom
+|-damage|p1a: Rotom|217/303
+|-heal|p1a: Rotom|235/303|[from] item: Leftovers
+|upkeep
+|turn|18
+|move|p2a: chess reference|Focus Blast|p1a: Rotom
+|-damage|p1a: Rotom|185/303
+|move|p1a: Rotom|Will-O-Wisp|p2a: chess reference
+|-status|p2a: chess reference|brn
+|-heal|p1a: Rotom|203/303|[from] item: Leftovers
+|-damage|p2a: chess reference|88/100 brn|[from] brn
+|upkeep
+|turn|19
+|switch|p1a: Excadrill|Excadrill, M|362/362
+|-activate|p1a: Excadrill|move: Sticky Web
+|-unboost|p1a: Excadrill|spe|1
+|-ability|p1a: Excadrill|Mold Breaker
+|move|p2a: chess reference|Knock Off|p1a: Excadrill
+|-damage|p1a: Excadrill|180/362
+|-enditem|p1a: Excadrill|Leftovers|[from] move: Knock Off|[of] p2a: chess reference
+|-damage|p2a: chess reference|76/100 brn|[from] brn
+|upkeep
+|turn|20
+|switch|p1a: Clefable|Clefable, F|394/394 par
+|-activate|p1a: Clefable|move: Sticky Web
+|-unboost|p1a: Clefable|spe|1
+|move|p2a: chess reference|Focus Blast|p1a: Clefable
+|-resisted|p1a: Clefable
+|-damage|p1a: Clefable|371/394 par
+|-unboost|p1a: Clefable|spd|1
+|-heal|p1a: Clefable|394/394 par|[from] item: Leftovers
+|-damage|p2a: chess reference|64/100 brn|[from] brn
+|upkeep
+|turn|21
+|switch|p1a: Heatran|Heatran, F|386/386
+|-activate|p1a: Heatran|move: Sticky Web
+|-unboost|p1a: Heatran|spe|1
+|move|p2a: chess reference|Focus Blast|p1a: Heatran
+|-supereffective|p1a: Heatran
+|-damage|p1a: Heatran|314/386
+|-heal|p1a: Heatran|338/386|[from] item: Leftovers
+|-damage|p2a: chess reference|52/100 brn|[from] brn
+|upkeep
+|turn|22
+|move|p2a: chess reference|Stone Edge|p1a: Heatran
+|-damage|p1a: Heatran|282/386
+|move|p1a: Heatran|Earth Power|p2a: chess reference
+|-supereffective|p2a: chess reference
+|-damage|p2a: chess reference|0 fnt
+|faint|p2a: chess reference
+|-heal|p1a: Heatran|306/386|[from] item: Leftovers
+|upkeep
+|switch|p2a: ThatShuckle|Shuckle, M, shiny|100/100 par
+|turn|23
+|switch|p2a: melbourne weather|Thundurus, M|100/100
+|move|p1a: Heatran|Stealth Rock|p2a: melbourne weather
+|-sidestart|p2: Gen6Player 2|move: Stealth Rock
+|-heal|p1a: Heatran|330/386|[from] item: Leftovers
+|upkeep
+|turn|24
+|move|p2a: melbourne weather|Hidden Power|p1a: Heatran
+|-resisted|p1a: Heatran
+|-crit|p1a: Heatran
+|-damage|p1a: Heatran|312/386
+|move|p1a: Heatran|Toxic|p2a: melbourne weather
+|-status|p2a: melbourne weather|tox
+|-heal|p1a: Heatran|336/386|[from] item: Leftovers
+|-damage|p2a: melbourne weather|94/100 tox|[from] psn
+|upkeep
+|turn|25
+|switch|p2a: Hoopa|Hoopa|100/100
+|-damage|p2a: Hoopa|88/100|[from] Stealth Rock
+|switch|p1a: Rotom|Rotom-Wash|203/303
+|-heal|p1a: Rotom|221/303|[from] item: Leftovers
+|upkeep
+|turn|26
+|move|p2a: Hoopa|Focus Blast|p1a: Rotom
+|-damage|p1a: Rotom|79/303
+|move|p1a: Rotom|Pain Split|p2a: Hoopa
+|-sethp|p2a: Hoopa|57/100|[from] move: Pain Split|[silent]
+|-sethp|p1a: Rotom|171/303|[from] move: Pain Split
+|-heal|p1a: Rotom|189/303|[from] item: Leftovers
+|upkeep
+|turn|27
+|switch|p2a: Azumogus|Azumarill, M|75/100
+|-damage|p2a: Azumogus|62/100|[from] Stealth Rock
+|switch|p1a: Clefable|Clefable, F|394/394 par
+|-activate|p1a: Clefable|move: Sticky Web
+|-unboost|p1a: Clefable|spe|1
+|upkeep
+|turn|28
+|switch|p2a: ThatShuckle|Shuckle, M, shiny|100/100 par
+|-damage|p2a: ThatShuckle|75/100 par|[from] Stealth Rock
+|switch|p1a: Dragonite|Dragonite, M|276/323
+|upkeep
+|turn|29
+|move|p1a: Dragonite|Fire Punch|p2a: ThatShuckle
+|-crit|p2a: ThatShuckle
+|-damage|p2a: ThatShuckle|51/100 par
+|move|p2a: ThatShuckle|Sticky Web||[still]
+|-fail|p2a: ThatShuckle
+|upkeep
+|turn|30
+|switch|p1a: Landorus|Landorus-Therian, M|174/319
+|-ability|p1a: Landorus|Intimidate|boost
+|-unboost|p2a: ThatShuckle|atk|1
+|move|p2a: ThatShuckle|Sticky Web||[still]
+|-fail|p2a: ThatShuckle
+|upkeep
+|turn|31
+|switch|p1a: Rotom|Rotom-Wash|189/303
+|move|p2a: ThatShuckle|Stealth Rock|p1a: Rotom
+|-sidestart|p1: Gen6Player 1|move: Stealth Rock
+|-heal|p1a: Rotom|207/303|[from] item: Leftovers
+|upkeep
+|turn|32
+|switch|p1a: Excadrill|Excadrill, M|180/362
+|-activate|p1a: Excadrill|move: Sticky Web
+|-unboost|p1a: Excadrill|spe|1
+|-damage|p1a: Excadrill|169/362|[from] Stealth Rock
+|-ability|p1a: Excadrill|Mold Breaker
+|move|p2a: ThatShuckle|Stealth Rock||[still]
+|-fail|p2a: ThatShuckle
+|upkeep
+|turn|33
+|switch|p1a: Clefable|Clefable, F|394/394 par
+|-activate|p1a: Clefable|move: Sticky Web
+|-unboost|p1a: Clefable|spe|1
+|move|p2a: ThatShuckle|Stealth Rock||[still]
+|-fail|p2a: ThatShuckle
+|upkeep
+|turn|34
+|switch|p1a: Excadrill|Excadrill, M|169/362
+|-activate|p1a: Excadrill|move: Sticky Web
+|-unboost|p1a: Excadrill|spe|1
+|-damage|p1a: Excadrill|158/362|[from] Stealth Rock
+|-ability|p1a: Excadrill|Mold Breaker
+|switch|p2a: melbourne weather|Thundurus, M|94/100 tox
+|-damage|p2a: melbourne weather|70/100 tox|[from] Stealth Rock
+|-heal|p2a: melbourne weather|76/100 tox|[from] item: Leftovers
+|-damage|p2a: melbourne weather|70/100 tox|[from] psn
+|upkeep
+|turn|35
+|switch|p1a: Dragonite|Dragonite, M|276/323
+|-damage|p1a: Dragonite|196/323|[from] Stealth Rock
+|move|p2a: melbourne weather|Thunder|p1a: Dragonite|[miss]
+|-miss|p2a: melbourne weather|p1a: Dragonite
+|-heal|p2a: melbourne weather|76/100 tox|[from] item: Leftovers
+|-damage|p2a: melbourne weather|64/100 tox|[from] psn
+|upkeep
+|turn|36
+|switch|p2a: Azumogus|Azumarill, M|62/100
+|-damage|p2a: Azumogus|50/100|[from] Stealth Rock
+|switch|p1a: Clefable|Clefable, F|394/394 par
+|-activate|p1a: Clefable|move: Sticky Web
+|-unboost|p1a: Clefable|spe|1
+|upkeep
+|turn|37
+|switch|p1a: Heatran|Heatran, F|336/386
+|-activate|p1a: Heatran|move: Sticky Web
+|-unboost|p1a: Heatran|spe|1
+|-damage|p1a: Heatran|288/386|[from] Stealth Rock
+|move|p2a: Azumogus|Focus Blast|p1a: Heatran|[miss]
+|-miss|p2a: Azumogus|p1a: Heatran
+|-heal|p1a: Heatran|312/386|[from] item: Leftovers
+|upkeep
+|turn|38
+|switch|p2a: melbourne weather|Thundurus, M|64/100 tox
+|-damage|p2a: melbourne weather|39/100 tox|[from] Stealth Rock
+|move|p1a: Heatran|Earth Power|p2a: melbourne weather
+|-immune|p2a: melbourne weather
+|-heal|p2a: melbourne weather|45/100 tox|[from] item: Leftovers
+|-heal|p1a: Heatran|336/386|[from] item: Leftovers
+|-damage|p2a: melbourne weather|39/100 tox|[from] psn
+|upkeep
+|turn|39
+|move|p2a: melbourne weather|Focus Blast|p1a: Heatran|[miss]
+|-miss|p2a: melbourne weather|p1a: Heatran
+|move|p1a: Heatran|Lava Plume|p2a: melbourne weather
+|-damage|p2a: melbourne weather|0 fnt
+|faint|p2a: melbourne weather
+|-heal|p1a: Heatran|360/386|[from] item: Leftovers
+|upkeep
+|switch|p2a: ThatShuckle|Shuckle, M, shiny|51/100 par
+|-damage|p2a: ThatShuckle|26/100 par|[from] Stealth Rock
+|turn|40
+|switch|p1a: Dragonite|Dragonite, M|196/323
+|-damage|p1a: Dragonite|116/323|[from] Stealth Rock
+|move|p2a: ThatShuckle|Sticky Web||[still]
+|-fail|p2a: ThatShuckle
+|upkeep
+|turn|41
+|switch|p1a: Landorus|Landorus-Therian, M|174/319
+|-damage|p1a: Landorus|135/319|[from] Stealth Rock
+|-ability|p1a: Landorus|Intimidate|boost
+|-unboost|p2a: ThatShuckle|atk|1
+|cant|p2a: ThatShuckle|par
+|upkeep
+|turn|42
+|switch|p1a: Heatran|Heatran, F|360/386
+|-activate|p1a: Heatran|move: Sticky Web
+|-unboost|p1a: Heatran|spe|1
+|-damage|p1a: Heatran|312/386|[from] Stealth Rock
+|move|p2a: ThatShuckle|Body Slam|p1a: Heatran
+|-resisted|p1a: Heatran
+|-damage|p1a: Heatran|307/386
+|-heal|p1a: Heatran|331/386|[from] item: Leftovers
+|upkeep
+|turn|43
+|switch|p1a: Landorus|Landorus-Therian, M|135/319
+|-damage|p1a: Landorus|96/319|[from] Stealth Rock
+|-ability|p1a: Landorus|Intimidate|boost
+|-unboost|p2a: ThatShuckle|atk|1
+|switch|p2a: Hoopa|Hoopa|57/100
+|-damage|p2a: Hoopa|45/100|[from] Stealth Rock
+|-enditem|p2a: Hoopa|Sitrus Berry|[eat]
+|-heal|p2a: Hoopa|70/100|[from] item: Sitrus Berry
+|upkeep
+|turn|44
+|switch|p2a: Azumogus|Azumarill, M|50/100
+|-damage|p2a: Azumogus|37/100|[from] Stealth Rock
+|move|p1a: Landorus|Earthquake|p2a: Azumogus
+|-damage|p2a: Azumogus|0 fnt
+|faint|p2a: Azumogus
+|upkeep
+|switch|p2a: Hoopa|Hoopa|70/100
+|-damage|p2a: Hoopa|58/100|[from] Stealth Rock
+|turn|45
+|move|p1a: Landorus|Stealth Rock||[still]
+|-fail|p1a: Landorus
+|move|p2a: Hoopa|Gunk Shot|p1a: Landorus
+|-resisted|p1a: Landorus
+|-damage|p1a: Landorus|46/319
+|-item|p2a: Hoopa|Rocky Helmet|[from] ability: Magician|[of] p1a: Landorus
+|upkeep
+|turn|46
+|move|p1a: Landorus|Earthquake|p2a: Hoopa
+|-damage|p2a: Hoopa|0 fnt
+|faint|p2a: Hoopa
+|upkeep
+|switch|p2a: ThatShuckle|Shuckle, M, shiny|26/100 par
+|-damage|p2a: ThatShuckle|1/100 par|[from] Stealth Rock
+|turn|47
+|switch|p1a: Clefable|Clefable, F|394/394 par
+|-activate|p1a: Clefable|move: Sticky Web
+|-unboost|p1a: Clefable|spe|1
+|move|p2a: ThatShuckle|Sticky Web||[still]
+|-fail|p2a: ThatShuckle
+|upkeep
+|turn|48
+|move|p1a: Clefable|Calm Mind|p1a: Clefable
+|-boost|p1a: Clefable|spa|1
+|-boost|p1a: Clefable|spd|1
+|cant|p2a: ThatShuckle|par
+|upkeep
+|turn|49
+|move|p1a: Clefable|Soft-Boiled||[still]
+|-fail|p1a: Clefable|heal
+|move|p2a: ThatShuckle|Stealth Rock||[still]
+|-fail|p2a: ThatShuckle
+|upkeep
+|turn|50
+|cant|p1a: Clefable|par
+|move|p2a: ThatShuckle|Infestation|p1a: Clefable
+|-resisted|p1a: Clefable
+|-damage|p1a: Clefable|392/394 par
+|-activate|p1a: Clefable|move: Infestation|[of] p2a: ThatShuckle
+|-heal|p1a: Clefable|394/394 par|[from] item: Leftovers
+|upkeep
+|turn|51
+|move|p1a: Clefable|Calm Mind|p1a: Clefable
+|-boost|p1a: Clefable|spa|1
+|-boost|p1a: Clefable|spd|1
+|move|p2a: ThatShuckle|Sticky Web||[still]
+|-fail|p2a: ThatShuckle
+|upkeep
+|turn|52
+|move|p1a: Clefable|Soft-Boiled||[still]
+|-fail|p1a: Clefable|heal
+|move|p2a: ThatShuckle|Infestation|p1a: Clefable
+|-resisted|p1a: Clefable
+|-damage|p1a: Clefable|393/394 par
+|-heal|p1a: Clefable|394/394 par|[from] item: Leftovers
+|upkeep
+|turn|53
+|move|p1a: Clefable|Thunder Wave|p2a: ThatShuckle
+|-fail|p2a: ThatShuckle|par
+|move|p2a: ThatShuckle|Body Slam|p1a: Clefable
+|-damage|p1a: Clefable|377/394 par
+|-heal|p1a: Clefable|394/394 par|[from] item: Leftovers
+|upkeep
+|turn|54
+|move|p1a: Clefable|Calm Mind|p1a: Clefable
+|-boost|p1a: Clefable|spa|1
+|-boost|p1a: Clefable|spd|1
+|move|p2a: ThatShuckle|Stealth Rock||[still]
+|-fail|p2a: ThatShuckle
+|upkeep
+|turn|55
+|move|p1a: Clefable|Calm Mind|p1a: Clefable
+|-boost|p1a: Clefable|spa|1
+|-boost|p1a: Clefable|spd|1
+|move|p2a: ThatShuckle|Stealth Rock||[still]
+|-fail|p2a: ThatShuckle
+|-end|p1a: Clefable|Infestation|[partiallytrapped]
+|upkeep
+|turn|56
+|switch|p1a: Landorus|Landorus-Therian, M|46/319
+|-damage|p1a: Landorus|7/319|[from] Stealth Rock
+|-ability|p1a: Landorus|Intimidate|boost
+|-unboost|p2a: ThatShuckle|atk|1
+|move|p2a: ThatShuckle|Infestation|p1a: Landorus
+|-resisted|p1a: Landorus
+|-damage|p1a: Landorus|4/319
+|-activate|p1a: Landorus|move: Infestation|[of] p2a: ThatShuckle
+|-damage|p1a: Landorus|0 fnt|[from] move: Infestation|[partiallytrapped]
+|faint|p1a: Landorus
+|upkeep
+|switch|p1a: Excadrill|Excadrill, M|158/362
+|-activate|p1a: Excadrill|move: Sticky Web
+|-unboost|p1a: Excadrill|spe|1
+|-damage|p1a: Excadrill|147/362|[from] Stealth Rock
+|-ability|p1a: Excadrill|Mold Breaker
+|turn|57
+|move|p1a: Excadrill|Rapid Spin|p2a: ThatShuckle
+|-resisted|p2a: ThatShuckle
+|-damage|p2a: ThatShuckle|0 fnt
+|-sideend|p1: Gen6Player 1|Stealth Rock|[from] move: Rapid Spin|[of] p1a: Excadrill
+|-sideend|p1: Gen6Player 1|Sticky Web|[from] move: Rapid Spin|[of] p1a: Excadrill
+|faint|p2a: ThatShuckle
+    </script>
+</div>
+
+<div class="battle-log battle-log-inline" style="display:none"></div>
+
+<script>
+    let daily = Math.floor(Date.now() / 1000 / 60 / 60 / 24); document.write('<script src="https://play.pokemonshowdown.com/js/replay-embed.js?version' + daily + '"></' + 'script>');
+</script>
+
+<p style="text-align:center"> Replay created by <a href="https://github.com/hsahovic/poke-env">poke-env</a>, with code from <a
+        href="https://github.com/smogon/pokemon-showdown"> pokemon-showdown</a>. If something goes wrong, don't hesitate
+    to open an <a href="https://github.com/hsahovic/poke-env/issues">issue!</a></p>

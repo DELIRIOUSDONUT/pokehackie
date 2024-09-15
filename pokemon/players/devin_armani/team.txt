@@ -1,0 +1,48 @@
+Garchomp @ Rocky Helmet  
+Ability: Rough Skin  
+EVs: 240 HP / 176 Def / 92 Spe  
+Impish Nature  
+- Earthquake  
+- Crunch  
+- Brick Break  
+- Stealth Rock  
+
+Cloyster @ King's Rock  
+Ability: Skill Link  
+EVs: 128 HP / 172 Atk / 208 Spe  
+Jolly Nature  
+- Icicle Spear  
+- Rock Blast  
+- Shell Smash  
+
+Azumarill @ Sitrus Berry  
+Ability: Huge Power  
+EVs: 228 HP / 252 Atk / 12 Def / 12 SpD / 4 Spe  
+Adamant Nature  
+- Play Rough  
+- Waterfall  
+- Belly Drum  
+
+Talonflame @ Choice Band  
+Ability: Gale Wings  
+EVs: 44 HP / 244 Atk / 220 Spe  
+Adamant Nature  
+- Brave Bird  
+- Flare Blitz  
+- U-turn  
+- Tailwind  
+
+Serperior @ Leftovers  
+Ability: Contrary  
+EVs: 252 SpA / 4 SpD / 252 Spe  
+Timid Nature  
+IVs: 0 Atk  
+- Leaf Storm  
+- Dragon Pulse  
+
+Jirachi @ Choice Scarf  
+Ability: Serene Grace  
+EVs: 252 Atk / 4 SpD / 252 Spe  
+Jolly Nature  
+- Iron Head  
+- Heart Stamp 

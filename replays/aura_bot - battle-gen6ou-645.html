@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<!-- version 1 -->
+<title>battle-gen6ou-645</title>
+<style>
+    html,
+    body {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        padding: 12px 0;
+    }
+
+    .battle-log {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+    }
+
+    .battle-log-inline {
+        border: 1px solid #AAAAAA;
+        background: #EEF2F5;
+        color: black;
+        max-width: 640px;
+        margin: 0 auto 80px;
+        padding-bottom: 5px;
+    }
+
+    .battle-log .inner {
+        padding: 4px 8px 0px 8px;
+    }
+
+    .battle-log .inner-preempt {
+        padding: 0 8px 4px 8px;
+    }
+
+    .battle-log .inner-after {
+        margin-top: 0.5em;
+    }
+
+    .battle-log h2 {
+        margin: 0.5em -8px;
+        padding: 4px 8px;
+        border: 1px solid #AAAAAA;
+        background: #E0E7EA;
+        border-left: 0;
+        border-right: 0;
+        font-family: Verdana, sans-serif;
+        font-size: 13pt;
+    }
+
+    .backprop {
+        top: 0;
+    }
+
+    .battle-log .chat {
+        vertical-align: middle;
+        padding: 3px 0 3px 0;
+        font-size: 8pt;
+    }
+
+    .battle-log .chat strong {
+        color: #40576A;
+    }
+
+    .battle-log .chat em {
+        padding: 1px 4px 1px 3px;
+        color: #000000;
+        font-style: normal;
+    }
+
+    .chat.mine {
+        background: rgba(0, 0, 0, 0.05);
+        margin-left: -8px;
+        margin-right: -8px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .spoiler {
+        color: #BBBBBB;
+        background: #BBBBBB;
+        padding: 0px 3px;
+    }
+
+    .spoiler:hover,
+    .spoiler:active,
+    .spoiler-shown {
+        color: #000000;
+        background: #E2E2E2;
+        padding: 0px 3px;
+    }
+
+    .spoiler a {
+        color: #BBBBBB;
+    }
+
+    .spoiler:hover a,
+    .spoiler:active a,
+    .spoiler-shown a {
+        color: #2288CC;
+    }
+
+    .chat code,
+    .chat .spoiler:hover code,
+    .chat .spoiler:active code,
+    .chat .spoiler-shown code {
+        border: 1px solid #C0C0C0;
+        background: #EEEEEE;
+        color: black;
+        padding: 0 2px;
+    }
+
+    .chat .spoiler code {
+        border: 1px solid #CCCCCC;
+        background: #CCCCCC;
+        color: #CCCCCC;
+    }
+
+    .battle-log .rated {
+        padding: 3px 4px;
+    }
+
+    .battle-log .rated strong {
+        color: white;
+        background: #89A;
+        padding: 1px 4px;
+        border-radius: 4px;
+    }
+
+    .spacer {
+        margin-top: 0.5em;
+    }
+
+    .message-announce {
+        background: #6688AA;
+        color: white;
+        padding: 1px 4px 2px;
+    }
+
+    .message-announce a,
+    .broadcast-green a,
+    .broadcast-blue a,
+    .broadcast-red a {
+        color: #DDEEFF;
+    }
+
+    .broadcast-green {
+        background-color: #559955;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .broadcast-blue {
+        background-color: #6688AA;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .infobox {
+        border: 1px solid #6688AA;
+        padding: 2px 4px;
+    }
+
+    .infobox-limited {
+        max-height: 200px;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
+    .broadcast-red {
+        background-color: #AA5544;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .message-learn-canlearn {
+        font-weight: bold;
+        color: #228822;
+        text-decoration: underline;
+    }
+
+    .message-learn-cannotlearn {
+        font-weight: bold;
+        color: #CC2222;
+        text-decoration: underline;
+    }
+
+    .message-effect-weak {
+        font-weight: bold;
+        color: #CC2222;
+    }
+
+    .message-effect-resist {
+        font-weight: bold;
+        color: #6688AA;
+    }
+
+    .message-effect-immune {
+        font-weight: bold;
+        color: #666666;
+    }
+
+    .message-learn-list {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .message-throttle-notice,
+    .message-error {
+        color: #992222;
+    }
+
+    .message-overflow,
+    .chat small.message-overflow {
+        font-size: 0pt;
+    }
+
+    .message-overflow::before {
+        font-size: 9pt;
+        content: '...';
+    }
+
+    .subtle {
+        color: #3A4A66;
+    }
+</style>
+<div class="wrapper replay-wrapper" style="max-width:1180px;margin:0 auto">
+    <input type="hidden" name="replayid" value="unregisteredserver-gen8randombattle-320064" />
+    <div class="battle"></div>
+    <div class="battle-log"></div>
+    <div class="replay-controls"></div>
+    <div class="replay-controls-2"></div>
+    <h1 style="font-weight:normal;text-align:center"><strong>poke-env battle replay</strong><br />battle-gen6ou-645<br /><a
+            href="http://pokemonshowdown.com/users/randomplayer1" class="subtle" target="_blank">aura_bot</a>
+        vs. <a href="http://pokemonshowdown.com/users/randomplayer2" class="subtle"
+            target="_blank">meow</a></h1>
+    <script type="text/plain" class="battle-log-data">
+    >battle-gen6ou-645|init|battle
+|title|aura_bot vs. meow
+|j|☆aura_bot
+|j|☆meow
+|gametype|singles
+|player|p1|aura_bot|1|
+|player|p2|meow|265|
+|teamsize|p1|6
+|teamsize|p2|6
+|gen|6
+|tier|[Gen 6] OU
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|Species Clause: Limit one of each Pokémon
+|rule|OHKO Clause: OHKO moves are banned
+|rule|Moody Clause: Moody is banned
+|rule|Evasion Items Clause: Evasion items are banned
+|rule|Evasion Moves Clause: Evasion moves are banned
+|rule|Endless Battle Clause: Forcing endless battles is banned
+|rule|HP Percentage Mod: HP is shown in percentages
+|rule|Swagger Clause: Swagger is banned
+|clearpoke
+|poke|p1|Landorus-Therian, M|item
+|poke|p1|Heatran, F|item
+|poke|p1|Excadrill, M|item
+|poke|p1|Rotom-Wash|item
+|poke|p1|Dragonite, M|item
+|poke|p1|Clefable, F|item
+|poke|p2|Keldeo|item
+|poke|p2|Excadrill, M|item
+|poke|p2|Thundurus, M|item
+|poke|p2|Bisharp, M|item
+|poke|p2|Garchomp, F|item
+|poke|p2|Latias, F|item
+|teampreview
+|start
+|switch|p1a: Excadrill|Excadrill, M|362/362
+|switch|p2a: Keldeo|Keldeo|100/100
+|-ability|p1a: Excadrill|Mold Breaker
+|turn|1
+|switch|p2a: Garchomp|Garchomp, F|100/100
+|switch|p1a: Rotom|Rotom-Wash|303/303
+|upkeep
+|turn|2
+|switch|p2a: Keldeo|Keldeo|100/100
+|switch|p1a: Heatran|Heatran, F|386/386
+|upkeep
+|turn|3
+|move|p2a: Keldeo|Hydro Pump|p1a: Heatran
+|-supereffective|p1a: Heatran
+|-damage|p1a: Heatran|0 fnt
+|faint|p1a: Heatran
+|upkeep
+|switch|p1a: Clefable|Clefable, F|394/394
+|turn|4
+|switch|p2a: Bisharp|Bisharp, M|100/100
+|move|p1a: Clefable|Thunder Wave|p2a: Bisharp
+|-status|p2a: Bisharp|par
+|upkeep
+|turn|5
+|switch|p1a: Landorus|Landorus-Therian, M|319/319
+|-ability|p1a: Landorus|Intimidate|boost
+|-unboost|p2a: Bisharp|atk|1
+|-ability|p2a: Bisharp|Defiant|boost
+|-boost|p2a: Bisharp|atk|2
+|switch|p2a: Latias|Latias, F|100/100
+|upkeep
+|turn|6
+|switch|p2a: Garchomp|Garchomp, F|100/100
+|switch|p1a: Dragonite|Dragonite, M|323/323
+|upkeep
+|turn|7
+|switch|p2a: Excadrill|Excadrill, M|100/100
+|-ability|p2a: Excadrill|Mold Breaker
+|-item|p2a: Excadrill|Air Balloon
+|switch|p1a: Landorus|Landorus-Therian, M|319/319
+|-ability|p1a: Landorus|Intimidate|boost
+|-unboost|p2a: Excadrill|atk|1
+|upkeep
+|turn|8
+|switch|p2a: Keldeo|Keldeo|100/100
+|move|p1a: Landorus|Stone Edge|p2a: Keldeo
+|-resisted|p2a: Keldeo
+|-damage|p2a: Keldeo|77/100
+|upkeep
+|turn|9
+|switch|p2a: Garchomp|Garchomp, F|100/100
+|move|p1a: Landorus|Stealth Rock|p2a: Garchomp
+|-sidestart|p2: meow|move: Stealth Rock
+|upkeep
+|turn|10
+|switch|p1a: Clefable|Clefable, F|394/394
+|switch|p2a: Latias|Latias, F|100/100
+|-damage|p2a: Latias|88/100|[from] Stealth Rock
+|-heal|p2a: Latias|94/100|[from] item: Leftovers
+|upkeep
+|turn|11
+|switch|p2a: Garchomp|Garchomp, F|100/100
+|-damage|p2a: Garchomp|94/100|[from] Stealth Rock
+|switch|p1a: Rotom|Rotom-Wash|303/303
+|upkeep
+|turn|12
+|move|p2a: Garchomp|Fire Blast|p1a: Rotom|[miss]
+|-miss|p2a: Garchomp|p1a: Rotom
+|move|p1a: Rotom|Pain Split|p2a: Garchomp
+|-sethp|p2a: Garchomp|83/100|[from] move: Pain Split|[silent]
+|-sethp|p1a: Rotom|303/303|[from] move: Pain Split
+|upkeep
+|turn|13
+|switch|p2a: Thundurus|Thundurus, M|100/100
+|-damage|p2a: Thundurus|76/100|[from] Stealth Rock
+|move|p1a: Rotom|Hydro Pump|p2a: Thundurus
+|-damage|p2a: Thundurus|23/100
+|upkeep
+|turn|14
+|switch|p2a: Garchomp|Garchomp, F|83/100
+|-damage|p2a: Garchomp|77/100|[from] Stealth Rock
+|move|p1a: Rotom|Will-O-Wisp|p2a: Garchomp
+|-status|p2a: Garchomp|brn
+|-damage|p2a: Garchomp|65/100 brn|[from] brn
+|upkeep
+|turn|15
+|switch|p2a: Latias|Latias, F|94/100
+|-damage|p2a: Latias|82/100|[from] Stealth Rock
+|switch|p1a: Excadrill|Excadrill, M|362/362
+|-ability|p1a: Excadrill|Mold Breaker
+|-heal|p2a: Latias|88/100|[from] item: Leftovers
+|upkeep
+|turn|16
+|switch|p2a: Thundurus|Thundurus, M|23/100
+|-damage|p2a: Thundurus|0 fnt|[from] Stealth Rock
+|faint|p2a: Thundurus
+|switch|p1a: Rotom|Rotom-Wash|303/303
+|upkeep
+|switch|p2a: Garchomp|Garchomp, F|65/100 brn
+|-damage|p2a: Garchomp|59/100 brn|[from] Stealth Rock
+|turn|17
+|switch|p1a: Clefable|Clefable, F|394/394
+|move|p2a: Garchomp|Dragon Tail|p1a: Clefable
+|-immune|p1a: Clefable
+|-damage|p2a: Garchomp|46/100 brn|[from] brn
+|upkeep
+|turn|18
+|switch|p2a: Bisharp|Bisharp, M|100/100 par
+|-damage|p2a: Bisharp|94/100 par|[from] Stealth Rock
+|switch|p1a: Rotom|Rotom-Wash|303/303
+|upkeep
+|turn|19
+|move|p1a: Rotom|Pain Split|p2a: Bisharp
+|-sethp|p2a: Bisharp|100/100 par|[from] move: Pain Split|[silent]
+|-sethp|p1a: Rotom|279/303|[from] move: Pain Split
+|cant|p2a: Bisharp|par
+|-heal|p1a: Rotom|297/303|[from] item: Leftovers
+|upkeep
+|turn|20
+|switch|p1a: Dragonite|Dragonite, M|323/323
+|move|p2a: Bisharp|Iron Head|p1a: Dragonite
+|-damage|p1a: Dragonite|246/323
+|upkeep
+|turn|21
+|switch|p1a: Rotom|Rotom-Wash|297/303
+|switch|p2a: Excadrill|Excadrill, M|100/100
+|-damage|p2a: Excadrill|97/100|[from] Stealth Rock
+|-ability|p2a: Excadrill|Mold Breaker
+|-item|p2a: Excadrill|Air Balloon
+|-heal|p1a: Rotom|303/303|[from] item: Leftovers
+|upkeep
+|turn|22
+|switch|p1a: Excadrill|Excadrill, M|362/362
+|-ability|p1a: Excadrill|Mold Breaker
+|move|p2a: Excadrill|Earthquake|p1a: Excadrill
+|-supereffective|p1a: Excadrill
+|-crit|p1a: Excadrill
+|-damage|p1a: Excadrill|0 fnt
+|faint|p1a: Excadrill
+|upkeep
+|switch|p1a: Clefable|Clefable, F|394/394
+|turn|23
+|switch|p2a: Latias|Latias, F|88/100
+|-damage|p2a: Latias|75/100|[from] Stealth Rock
+|switch|p1a: Dragonite|Dragonite, M|246/323
+|-heal|p2a: Latias|82/100|[from] item: Leftovers
+|upkeep
+|turn|24
+|switch|p1a: Rotom|Rotom-Wash|303/303
+|move|p2a: Latias|Defog|p1a: Rotom
+|-unboost|p1a: Rotom|evasion|1
+|-sideend|p2: meow|Stealth Rock|[from] move: Defog|[of] p2a: Latias
+|-heal|p2a: Latias|88/100|[from] item: Leftovers
+|upkeep
+|turn|25
+|switch|p2a: Garchomp|Garchomp, F|46/100 brn
+|move|p1a: Rotom|Volt Switch|p2a: Garchomp
+|-immune|p2a: Garchomp
+|-damage|p2a: Garchomp|34/100 brn|[from] brn
+|upkeep
+|turn|26
+|move|p2a: Garchomp|Fire Blast|p1a: Rotom
+|-resisted|p1a: Rotom
+|-damage|p1a: Rotom|272/303
+|move|p1a: Rotom|Hydro Pump|p2a: Garchomp
+|-damage|p2a: Garchomp|0 fnt
+|faint|p2a: Garchomp
+|-heal|p1a: Rotom|290/303|[from] item: Leftovers
+|upkeep
+|switch|p2a: Latias|Latias, F|88/100
+|turn|27
+|switch|p2a: Bisharp|Bisharp, M|100/100 par
+|move|p1a: Rotom|Hydro Pump|p2a: Bisharp|[miss]
+|-miss|p1a: Rotom|p2a: Bisharp
+|-heal|p1a: Rotom|303/303|[from] item: Leftovers
+|upkeep
+|turn|28
+|switch|p1a: Clefable|Clefable, F|394/394
+|cant|p2a: Bisharp|par
+|upkeep
+|turn|29
+|move|p1a: Clefable|Thunder Wave|p2a: Bisharp
+|-fail|p2a: Bisharp|par
+|move|p2a: Bisharp|Iron Head|p1a: Clefable
+|-supereffective|p1a: Clefable
+|-damage|p1a: Clefable|98/394
+|-heal|p1a: Clefable|122/394|[from] item: Leftovers
+|upkeep
+|turn|30
+|switch|p2a: Excadrill|Excadrill, M|97/100
+|-ability|p2a: Excadrill|Mold Breaker
+|-item|p2a: Excadrill|Air Balloon
+|move|p1a: Clefable|Calm Mind|p1a: Clefable
+|-boost|p1a: Clefable|spa|1
+|-boost|p1a: Clefable|spd|1
+|-heal|p1a: Clefable|146/394|[from] item: Leftovers
+|upkeep
+|turn|31
+|switch|p2a: Keldeo|Keldeo|77/100
+|move|p1a: Clefable|Soft-Boiled|p1a: Clefable
+|-heal|p1a: Clefable|343/394
+|-heal|p1a: Clefable|367/394|[from] item: Leftovers
+|upkeep
+|turn|32
+|move|p2a: Keldeo|Secret Sword|p1a: Clefable
+|-resisted|p1a: Clefable
+|-damage|p1a: Clefable|253/394
+|move|p1a: Clefable|Calm Mind|p1a: Clefable
+|-boost|p1a: Clefable|spa|1
+|-boost|p1a: Clefable|spd|1
+|-heal|p1a: Clefable|277/394|[from] item: Leftovers
+|upkeep
+|turn|33
+|switch|p2a: Latias|Latias, F|88/100
+|move|p1a: Clefable|Soft-Boiled|p1a: Clefable
+|-heal|p1a: Clefable|394/394
+|-heal|p2a: Latias|94/100|[from] item: Leftovers
+|upkeep
+|turn|34
+|move|p2a: Latias|Psyshock|p1a: Clefable
+|-damage|p1a: Clefable|288/394
+|move|p1a: Clefable|Thunder Wave|p2a: Latias
+|-status|p2a: Latias|par
+|-heal|p1a: Clefable|312/394|[from] item: Leftovers
+|-heal|p2a: Latias|99/100 par|[from] item: Leftovers
+|upkeep
+|turn|35
+|move|p1a: Clefable|Soft-Boiled|p1a: Clefable
+|-heal|p1a: Clefable|394/394
+|move|p2a: Latias|Roost|p2a: Latias
+|-heal|p2a: Latias|100/100 par
+|-singleturn|p2a: Latias|move: Roost
+|upkeep
+|turn|36
+|switch|p2a: Keldeo|Keldeo|77/100
+|move|p1a: Clefable|Moonblast|p2a: Keldeo
+|-supereffective|p2a: Keldeo
+|-damage|p2a: Keldeo|0 fnt
+|faint|p2a: Keldeo
+|upkeep
+|switch|p2a: Latias|Latias, F|100/100 par
+|turn|37
+|move|p1a: Clefable|Thunder Wave|p2a: Latias
+|-fail|p2a: Latias|par
+|move|p2a: Latias|Psyshock|p1a: Clefable
+|-damage|p1a: Clefable|277/394
+|-heal|p1a: Clefable|301/394|[from] item: Leftovers
+|upkeep
+|turn|38
+|switch|p1a: Dragonite|Dragonite, M|246/323
+|move|p2a: Latias|Draco Meteor|p1a: Dragonite
+|-supereffective|p1a: Dragonite
+|-damage|p1a: Dragonite|0 fnt
+|-unboost|p2a: Latias|spa|2
+|faint|p1a: Dragonite
+|upkeep
+|switch|p1a: Landorus|Landorus-Therian, M|319/319
+|-ability|p1a: Landorus|Intimidate|boost
+|-unboost|p2a: Latias|atk|1
+|turn|39
+|switch|p2a: Bisharp|Bisharp, M|100/100 par
+|move|p1a: Landorus|Stone Edge|p2a: Bisharp
+|-resisted|p2a: Bisharp
+|-damage|p2a: Bisharp|78/100 par
+|upkeep
+|turn|40
+|switch|p1a: Clefable|Clefable, F|301/394
+|switch|p2a: Latias|Latias, F|100/100 par
+|-heal|p1a: Clefable|325/394|[from] item: Leftovers
+|upkeep
+|turn|41
+|switch|p1a: Rotom|Rotom-Wash|303/303
+|move|p2a: Latias|Defog|p1a: Rotom
+|-unboost|p1a: Rotom|evasion|1
+|upkeep
+|turn|42
+|switch|p1a: Landorus|Landorus-Therian, M|319/319
+|-ability|p1a: Landorus|Intimidate|boost
+|-unboost|p2a: Latias|atk|1
+|cant|p2a: Latias|par
+|upkeep
+|turn|43
+|switch|p1a: Clefable|Clefable, F|325/394
+|switch|p2a: Bisharp|Bisharp, M|78/100 par
+|-heal|p1a: Clefable|349/394|[from] item: Leftovers
+|upkeep
+|turn|44
+|switch|p1a: Rotom|Rotom-Wash|303/303
+|move|p2a: Bisharp|Sucker Punch||[still]
+|-fail|p2a: Bisharp
+|upkeep
+|turn|45
+|switch|p1a: Landorus|Landorus-Therian, M|319/319
+|-ability|p1a: Landorus|Intimidate|boost
+|-unboost|p2a: Bisharp|atk|1
+|-ability|p2a: Bisharp|Defiant|boost
+|-boost|p2a: Bisharp|atk|2
+|switch|p2a: Excadrill|Excadrill, M|97/100
+|-ability|p2a: Excadrill|Mold Breaker
+|-item|p2a: Excadrill|Air Balloon
+|upkeep
+|turn|46
+|move|p1a: Landorus|Stealth Rock|p2a: Excadrill
+|-sidestart|p2: meow|move: Stealth Rock
+|move|p2a: Excadrill|Earthquake|p1a: Landorus
+|-immune|p1a: Landorus
+|upkeep
+|turn|47
+|switch|p1a: Rotom|Rotom-Wash|303/303
+|move|p2a: Excadrill|Iron Head|p1a: Rotom
+|-resisted|p1a: Rotom
+|-damage|p1a: Rotom|276/303
+|-heal|p1a: Rotom|294/303|[from] item: Leftovers
+|upkeep
+|turn|48
+|switch|p2a: Latias|Latias, F|100/100 par
+|-damage|p2a: Latias|88/100 par|[from] Stealth Rock
+|move|p1a: Rotom|Volt Switch|p2a: Latias
+|-resisted|p2a: Latias
+|-damage|p2a: Latias|79/100 par
+|switch|p1a: Clefable|Clefable, F|349/394|[from] Volt Switch
+|-heal|p1a: Clefable|373/394|[from] item: Leftovers
+|-heal|p2a: Latias|85/100 par|[from] item: Leftovers
+|upkeep
+|turn|49
+|switch|p1a: Rotom|Rotom-Wash|294/303
+|move|p2a: Latias|Roost|p2a: Latias
+|-heal|p2a: Latias|100/100 par
+|-singleturn|p2a: Latias|move: Roost
+|-heal|p1a: Rotom|303/303|[from] item: Leftovers
+|upkeep
+|turn|50
+|switch|p2a: Excadrill|Excadrill, M|97/100
+|-damage|p2a: Excadrill|94/100|[from] Stealth Rock
+|-ability|p2a: Excadrill|Mold Breaker
+|-item|p2a: Excadrill|Air Balloon
+|move|p1a: Rotom|Pain Split|p2a: Excadrill
+|-sethp|p2a: Excadrill|89/100|[from] move: Pain Split|[silent]
+|-sethp|p1a: Rotom|303/303|[from] move: Pain Split
+|upkeep
+|turn|51
+|switch|p1a: Clefable|Clefable, F|373/394
+|move|p2a: Excadrill|Rapid Spin|p1a: Clefable
+|-damage|p1a: Clefable|347/394
+|-sideend|p2: meow|Stealth Rock|[from] move: Rapid Spin|[of] p2a: Excadrill
+|-heal|p1a: Clefable|371/394|[from] item: Leftovers
+|upkeep
+|turn|52
+|switch|p2a: Bisharp|Bisharp, M|78/100 par
+|switch|p1a: Rotom|Rotom-Wash|303/303
+|upkeep
+|turn|53
+|move|p2a: Bisharp|Sucker Punch||[still]
+|-fail|p2a: Bisharp
+|move|p1a: Rotom|Pain Split|p2a: Bisharp
+|-sethp|p2a: Bisharp|95/100 par|[from] move: Pain Split|[silent]
+|-sethp|p1a: Rotom|257/303|[from] move: Pain Split
+|-heal|p1a: Rotom|275/303|[from] item: Leftovers
+|upkeep
+|turn|54
+|switch|p2a: Latias|Latias, F|100/100 par
+|move|p1a: Rotom|Pain Split|p2a: Latias
+|-sethp|p2a: Latias|88/100 par|[from] move: Pain Split|[silent]
+|-sethp|p1a: Rotom|303/303|[from] move: Pain Split
+|-heal|p2a: Latias|94/100 par|[from] item: Leftovers
+|upkeep
+|turn|55
+|switch|p2a: Bisharp|Bisharp, M|95/100 par
+|move|p1a: Rotom|Volt Switch|p2a: Bisharp
+|-damage|p2a: Bisharp|49/100 par
+|switch|p1a: Landorus|Landorus-Therian, M|319/319|[from] Volt Switch
+|-ability|p1a: Landorus|Intimidate|boost
+|-unboost|p2a: Bisharp|atk|1
+|-ability|p2a: Bisharp|Defiant|boost
+|-boost|p2a: Bisharp|atk|2
+|upkeep
+|turn|56
+|switch|p2a: Latias|Latias, F|94/100 par
+|move|p1a: Landorus|Stone Edge|p2a: Latias
+|-damage|p2a: Latias|54/100 par
+|-heal|p2a: Latias|60/100 par|[from] item: Leftovers
+|upkeep
+|turn|57
+|move|p1a: Landorus|Stealth Rock|p2a: Latias
+|-sidestart|p2: meow|move: Stealth Rock
+|cant|p2a: Latias|par
+|-heal|p2a: Latias|66/100 par|[from] item: Leftovers
+|upkeep
+|turn|58
+|switch|p1a: Clefable|Clefable, F|371/394
+|move|p2a: Latias|Draco Meteor|p1a: Clefable
+|-immune|p1a: Clefable
+|-heal|p1a: Clefable|394/394|[from] item: Leftovers
+|-heal|p2a: Latias|72/100 par|[from] item: Leftovers
+|upkeep
+|turn|59
+|switch|p1a: Landorus|Landorus-Therian, M|319/319
+|-ability|p1a: Landorus|Intimidate|boost
+|-unboost|p2a: Latias|atk|1
+|switch|p2a: Excadrill|Excadrill, M|89/100
+|-damage|p2a: Excadrill|86/100|[from] Stealth Rock
+|-ability|p2a: Excadrill|Mold Breaker
+|-item|p2a: Excadrill|Air Balloon
+|upkeep
+|turn|60
+|switch|p2a: Bisharp|Bisharp, M|49/100 par
+|-damage|p2a: Bisharp|43/100 par|[from] Stealth Rock
+|move|p1a: Landorus|Stone Edge|p2a: Bisharp
+|-resisted|p2a: Bisharp
+|-damage|p2a: Bisharp|20/100 par
+|upkeep
+|turn|61
+|move|p1a: Landorus|Earthquake|p2a: Bisharp
+|-supereffective|p2a: Bisharp
+|-damage|p2a: Bisharp|0 fnt
+|faint|p2a: Bisharp
+|upkeep
+|switch|p2a: Latias|Latias, F|72/100 par
+|-damage|p2a: Latias|60/100 par|[from] Stealth Rock
+|turn|62
+|switch|p1a: Rotom|Rotom-Wash|303/303
+|cant|p2a: Latias|par
+|-heal|p2a: Latias|66/100 par|[from] item: Leftovers
+|upkeep
+|turn|63
+|move|p1a: Rotom|Hydro Pump|p2a: Latias
+|-resisted|p2a: Latias
+|-damage|p2a: Latias|51/100 par
+|cant|p2a: Latias|par
+|-heal|p2a: Latias|57/100 par|[from] item: Leftovers
+|upkeep
+|turn|64
+|move|p1a: Rotom|Hydro Pump|p2a: Latias
+|-resisted|p2a: Latias
+|-damage|p2a: Latias|43/100 par
+|cant|p2a: Latias|par
+|-heal|p2a: Latias|49/100 par|[from] item: Leftovers
+|upkeep
+|turn|65
+|switch|p1a: Landorus|Landorus-Therian, M|319/319
+|-ability|p1a: Landorus|Intimidate|boost
+|-unboost|p2a: Latias|atk|1
+|move|p2a: Latias|Roost|p2a: Latias
+|-heal|p2a: Latias|99/100 par
+|-singleturn|p2a: Latias|move: Roost
+|-heal|p2a: Latias|100/100 par|[from] item: Leftovers
+|upkeep
+|turn|66
+|move|p1a: Landorus|U-turn|p2a: Latias
+|-supereffective|p2a: Latias
+|-crit|p2a: Latias
+|-damage|p2a: Latias|21/100 par
+|switch|p1a: Rotom|Rotom-Wash|303/303|[from] U-turn
+|move|p2a: Latias|Roost|p2a: Latias
+|-heal|p2a: Latias|71/100 par
+|-singleturn|p2a: Latias|move: Roost
+|-heal|p2a: Latias|77/100 par|[from] item: Leftovers
+|upkeep
+|turn|67
+|switch|p2a: Excadrill|Excadrill, M|86/100
+|-damage|p2a: Excadrill|83/100|[from] Stealth Rock
+|-ability|p2a: Excadrill|Mold Breaker
+|-item|p2a: Excadrill|Air Balloon
+|move|p1a: Rotom|Hydro Pump|p2a: Excadrill
+|-supereffective|p2a: Excadrill
+|-damage|p2a: Excadrill|0 fnt
+|-enditem|p2a: Excadrill|Air Balloon
+|faint|p2a: Excadrill
+|upkeep
+|switch|p2a: Latias|Latias, F|77/100 par
+|-damage|p2a: Latias|65/100 par|[from] Stealth Rock
+|turn|68
+|move|p1a: Rotom|Pain Split|p2a: Latias
+|-sethp|p2a: Latias|74/100 par|[from] move: Pain Split|[silent]
+|-sethp|p1a: Rotom|268/303|[from] move: Pain Split
+|cant|p2a: Latias|par
+|-heal|p1a: Rotom|286/303|[from] item: Leftovers
+|-heal|p2a: Latias|80/100 par|[from] item: Leftovers
+|upkeep
+|turn|69
+|move|p1a: Rotom|Hydro Pump|p2a: Latias|[miss]
+|-miss|p1a: Rotom|p2a: Latias
+|move|p2a: Latias|Roost|p2a: Latias
+|-heal|p2a: Latias|100/100 par
+|-singleturn|p2a: Latias|move: Roost
+|-heal|p1a: Rotom|303/303|[from] item: Leftovers
+|upkeep
+|turn|70
+|move|p1a: Rotom|Will-O-Wisp||[still]
+|-fail|p1a: Rotom
+|move|p2a: Latias|Draco Meteor|p1a: Rotom|[miss]
+|-miss|p2a: Latias|p1a: Rotom
+|upkeep
+|turn|71
+|move|p1a: Rotom|Hydro Pump|p2a: Latias
+|-resisted|p2a: Latias
+|-damage|p2a: Latias|87/100 par
+|move|p2a: Latias|Draco Meteor|p1a: Rotom
+|-damage|p1a: Rotom|140/303
+|-unboost|p2a: Latias|spa|2
+|-heal|p1a: Rotom|158/303|[from] item: Leftovers
+|-heal|p2a: Latias|93/100 par|[from] item: Leftovers
+|upkeep
+|turn|72
+|move|p1a: Rotom|Will-O-Wisp||[still]
+|-fail|p1a: Rotom
+|move|p2a: Latias|Draco Meteor|p1a: Rotom
+|-damage|p1a: Rotom|83/303
+|-unboost|p2a: Latias|spa|2
+|-heal|p1a: Rotom|101/303|[from] item: Leftovers
+|-heal|p2a: Latias|99/100 par|[from] item: Leftovers
+|upkeep
+|turn|73
+|move|p1a: Rotom|Volt Switch|p2a: Latias
+|-resisted|p2a: Latias
+|-damage|p2a: Latias|89/100 par
+|switch|p1a: Landorus|Landorus-Therian, M|319/319|[from] Volt Switch
+|-ability|p1a: Landorus|Intimidate|boost
+|-unboost|p2a: Latias|atk|1
+|cant|p2a: Latias|par
+|-heal|p2a: Latias|95/100 par|[from] item: Leftovers
+|upkeep
+|turn|74
+|move|p1a: Landorus|Earthquake|p2a: Latias
+|-immune|p2a: Latias|[from] ability: Levitate
+|cant|p2a: Latias|par
+|-heal|p2a: Latias|100/100 par|[from] item: Leftovers
+|upkeep
+|turn|75
+|move|p1a: Landorus|Stone Edge|p2a: Latias
+|-damage|p2a: Latias|63/100 par
+|move|p2a: Latias|Defog|p1a: Landorus
+|-unboost|p1a: Landorus|evasion|1
+|-sideend|p2: meow|Stealth Rock|[from] move: Defog|[of] p2a: Latias
+|-heal|p2a: Latias|69/100 par|[from] item: Leftovers
+|upkeep
+|turn|76
+|switch|p1a: Rotom|Rotom-Wash|101/303
+|cant|p2a: Latias|par
+|-heal|p1a: Rotom|119/303|[from] item: Leftovers
+|-heal|p2a: Latias|75/100 par|[from] item: Leftovers
+|upkeep
+|turn|77
+|switch|p1a: Landorus|Landorus-Therian, M|319/319
+|-ability|p1a: Landorus|Intimidate|boost
+|-unboost|p2a: Latias|atk|1
+|move|p2a: Latias|Roost|p2a: Latias
+|-heal|p2a: Latias|100/100 par
+|-singleturn|p2a: Latias|move: Roost
+|upkeep
+|turn|78
+|switch|p1a: Rotom|Rotom-Wash|119/303
+|cant|p2a: Latias|par
+|-heal|p1a: Rotom|137/303|[from] item: Leftovers
+|upkeep
+|turn|79
+|move|p1a: Rotom|Will-O-Wisp||[still]
+|-fail|p1a: Rotom
+|cant|p2a: Latias|par
+|-heal|p1a: Rotom|155/303|[from] item: Leftovers
+|upkeep
+|turn|80
+|move|p1a: Rotom|Will-O-Wisp||[still]
+|-fail|p1a: Rotom
+|move|p2a: Latias|Draco Meteor|p1a: Rotom
+|-damage|p1a: Rotom|106/303
+|-unboost|p2a: Latias|spa|2
+|-heal|p1a: Rotom|124/303|[from] item: Leftovers
+|upkeep
+|turn|81
+|move|p1a: Rotom|Pain Split|p2a: Latias
+|-sethp|p2a: Latias|68/100 par|[from] move: Pain Split|[silent]
+|-sethp|p1a: Rotom|244/303|[from] move: Pain Split
+|move|p2a: Latias|Psyshock|p1a: Rotom
+|-damage|p1a: Rotom|223/303
+|-heal|p1a: Rotom|241/303|[from] item: Leftovers
+|-heal|p2a: Latias|74/100 par|[from] item: Leftovers
+|upkeep
+|turn|82
+|switch|p1a: Clefable|Clefable, F|394/394
+|move|p2a: Latias|Defog|p1a: Clefable
+|-unboost|p1a: Clefable|evasion|1
+|-heal|p2a: Latias|80/100 par|[from] item: Leftovers
+|upkeep
+|turn|83
+|move|p1a: Clefable|Moonblast|p2a: Latias
+|-supereffective|p2a: Latias
+|-damage|p2a: Latias|33/100 par
+|move|p2a: Latias|Roost|p2a: Latias
+|-heal|p2a: Latias|83/100 par
+|-singleturn|p2a: Latias|move: Roost
+|-heal|p2a: Latias|90/100 par|[from] item: Leftovers
+|upkeep
+|turn|84
+|switch|p1a: Rotom|Rotom-Wash|241/303
+|move|p2a: Latias|Draco Meteor|p1a: Rotom
+|-damage|p1a: Rotom|202/303
+|-heal|p1a: Rotom|220/303|[from] item: Leftovers
+|-heal|p2a: Latias|96/100 par|[from] item: Leftovers
+|upkeep
+|turn|85
+|switch|p1a: Clefable|Clefable, F|394/394
+|cant|p2a: Latias|par
+|-heal|p2a: Latias|100/100 par|[from] item: Leftovers
+|upkeep
+|turn|86
+|move|p1a: Clefable|Calm Mind|p1a: Clefable
+|-boost|p1a: Clefable|spa|1
+|-boost|p1a: Clefable|spd|1
+|move|p2a: Latias|Draco Meteor|p1a: Clefable
+|-immune|p1a: Clefable
+|upkeep
+|turn|87
+|switch|p1a: Landorus|Landorus-Therian, M|319/319
+|-ability|p1a: Landorus|Intimidate|boost
+|-unboost|p2a: Latias|atk|1
+|move|p2a: Latias|Roost||[still]
+|-fail|p2a: Latias|heal
+|upkeep
+|turn|88
+|switch|p1a: Clefable|Clefable, F|394/394
+|move|p2a: Latias|Defog|p1a: Clefable
+|-unboost|p1a: Clefable|evasion|1
+|upkeep
+|turn|89
+|move|p1a: Clefable|Thunder Wave|p2a: Latias
+|-fail|p2a: Latias|par
+|cant|p2a: Latias|par
+|upkeep
+|turn|90
+|switch|p1a: Rotom|Rotom-Wash|220/303
+|move|p2a: Latias|Psyshock|p1a: Rotom
+|-damage|p1a: Rotom|204/303
+|-heal|p1a: Rotom|222/303|[from] item: Leftovers
+|upkeep
+|turn|91
+|switch|p1a: Landorus|Landorus-Therian, M|319/319
+|-ability|p1a: Landorus|Intimidate|boost
+|-unboost|p2a: Latias|atk|1
+|move|p2a: Latias|Psyshock|p1a: Landorus
+|-damage|p1a: Landorus|292/319
+|upkeep
+|turn|92
+|move|p1a: Landorus|U-turn|p2a: Latias
+|-supereffective|p2a: Latias
+|-damage|p2a: Latias|47/100 par
+|switch|p1a: Rotom|Rotom-Wash|222/303|[from] U-turn
+|move|p2a: Latias|Roost|p2a: Latias
+|-heal|p2a: Latias|97/100 par
+|-singleturn|p2a: Latias|move: Roost
+|-heal|p1a: Rotom|240/303|[from] item: Leftovers
+|-heal|p2a: Latias|100/100 par|[from] item: Leftovers
+|upkeep
+|turn|93
+|move|p1a: Rotom|Pain Split|p2a: Latias
+|-sethp|p2a: Latias|83/100 par|[from] move: Pain Split|[silent]
+|-sethp|p1a: Rotom|302/303|[from] move: Pain Split
+|move|p2a: Latias|Psyshock|p1a: Rotom
+|-damage|p1a: Rotom|283/303
+|-heal|p1a: Rotom|301/303|[from] item: Leftovers
+|-heal|p2a: Latias|90/100 par|[from] item: Leftovers
+|upkeep
+|turn|94
+|move|p1a: Rotom|Volt Switch|p2a: Latias
+|-resisted|p2a: Latias
+|-damage|p2a: Latias|80/100 par
+|switch|p1a: Landorus|Landorus-Therian, M|292/319|[from] Volt Switch
+|-ability|p1a: Landorus|Intimidate|boost
+|-unboost|p2a: Latias|atk|1
+|move|p2a: Latias|Roost|p2a: Latias
+|-heal|p2a: Latias|100/100 par
+|-singleturn|p2a: Latias|move: Roost
+|upkeep
+|turn|95
+|switch|p1a: Clefable|Clefable, F|394/394
+|move|p2a: Latias|Psyshock|p1a: Clefable
+|-damage|p1a: Clefable|366/394
+|-heal|p1a: Clefable|390/394|[from] item: Leftovers
+|upkeep
+|turn|96
+|move|p1a: Clefable|Thunder Wave|p2a: Latias
+|-fail|p2a: Latias|par
+|move|p2a: Latias|Defog|p1a: Clefable
+|-unboost|p1a: Clefable|evasion|1
+|-heal|p1a: Clefable|394/394|[from] item: Leftovers
+|upkeep
+|turn|97
+|move|p1a: Clefable|Soft-Boiled||[still]
+|-fail|p1a: Clefable|heal
+|move|p2a: Latias|Roost||[still]
+|-fail|p2a: Latias|heal
+|upkeep
+|turn|98
+|move|p1a: Clefable|Thunder Wave|p2a: Latias
+|-fail|p2a: Latias|par
+|move|p2a: Latias|Defog|p1a: Clefable
+|-unboost|p1a: Clefable|evasion|1
+|upkeep
+|turn|99
+|move|p1a: Clefable|Soft-Boiled||[still]
+|-fail|p1a: Clefable|heal
+|move|p2a: Latias|Psyshock|p1a: Clefable
+|-damage|p1a: Clefable|367/394
+|-heal|p1a: Clefable|391/394|[from] item: Leftovers
+|upkeep
+|turn|100
+|move|p1a: Clefable|Thunder Wave|p2a: Latias
+|-fail|p2a: Latias|par
+|move|p2a: Latias|Psyshock|p1a: Clefable
+|-damage|p1a: Clefable|364/394
+|-heal|p1a: Clefable|388/394|[from] item: Leftovers
+|upkeep
+|turn|101
+|switch|p1a: Rotom|Rotom-Wash|301/303
+|move|p2a: Latias|Defog|p1a: Rotom
+|-unboost|p1a: Rotom|evasion|1
+|-heal|p1a: Rotom|303/303|[from] item: Leftovers
+|upkeep
+|turn|102
+|move|p1a: Rotom|Will-O-Wisp|p2a: Latias|[miss]
+|-miss|p1a: Rotom|p2a: Latias
+|cant|p2a: Latias|par
+|upkeep
+|turn|103
+|move|p1a: Rotom|Pain Split|p2a: Latias
+|-sethp|p2a: Latias|92/100 par|[from] move: Pain Split|[silent]
+|-sethp|p1a: Rotom|303/303|[from] move: Pain Split
+|cant|p2a: Latias|par
+|-heal|p2a: Latias|98/100 par|[from] item: Leftovers
+|upkeep
+|turn|104
+|move|p1a: Rotom|Volt Switch|p2a: Latias
+|-resisted|p2a: Latias
+|-damage|p2a: Latias|89/100 par
+|switch|p1a: Landorus|Landorus-Therian, M|292/319|[from] Volt Switch
+|-ability|p1a: Landorus|Intimidate|boost
+|-unboost|p2a: Latias|atk|1
+|move|p2a: Latias|Psyshock|p1a: Landorus
+|-damage|p1a: Landorus|262/319
+|-heal|p2a: Latias|95/100 par|[from] item: Leftovers
+|upkeep
+|turn|105
+|switch|p1a: Clefable|Clefable, F|388/394
+|move|p2a: Latias|Psyshock|p1a: Clefable
+|-damage|p1a: Clefable|360/394
+|-heal|p1a: Clefable|384/394|[from] item: Leftovers
+|-heal|p2a: Latias|100/100 par|[from] item: Leftovers
+|upkeep
+|turn|106
+|switch|p1a: Rotom|Rotom-Wash|303/303
+|move|p2a: Latias|Roost||[still]
+|-fail|p2a: Latias|heal
+|upkeep
+|turn|107
+|move|p1a: Rotom|Will-O-Wisp|p2a: Latias|[miss]
+|-miss|p1a: Rotom|p2a: Latias
+|move|p2a: Latias|Psyshock|p1a: Rotom
+|-damage|p1a: Rotom|287/303
+|-heal|p1a: Rotom|303/303|[from] item: Leftovers
+|upkeep
+|turn|108
+|move|p1a: Rotom|Will-O-Wisp||[still]
+|-fail|p1a: Rotom
+|cant|p2a: Latias|par
+|upkeep
+|turn|109
+|move|p1a: Rotom|Will-O-Wisp||[still]
+|-fail|p1a: Rotom
+|move|p2a: Latias|Roost||[still]
+|-fail|p2a: Latias|heal
+|upkeep
+|turn|110
+|move|p1a: Rotom|Pain Split|p2a: Latias
+|-sethp|p2a: Latias|92/100 par|[from] move: Pain Split|[silent]
+|-sethp|p1a: Rotom|303/303|[from] move: Pain Split
+|move|p2a: Latias|Roost|p2a: Latias
+|-heal|p2a: Latias|100/100 par
+|-singleturn|p2a: Latias|move: Roost
+|upkeep
+|turn|111
+|switch|p1a: Clefable|Clefable, F|384/394
+|move|p2a: Latias|Defog|p1a: Clefable
+|-unboost|p1a: Clefable|evasion|1
+|-heal|p1a: Clefable|394/394|[from] item: Leftovers
+|upkeep
+|turn|112
+|move|p1a: Clefable|Calm Mind|p1a: Clefable
+|-boost|p1a: Clefable|spa|1
+|-boost|p1a: Clefable|spd|1
+|move|p2a: Latias|Defog|p1a: Clefable
+|-unboost|p1a: Clefable|evasion|1
+|upkeep
+|turn|113
+|move|p1a: Clefable|Calm Mind|p1a: Clefable
+|-boost|p1a: Clefable|spa|1
+|-boost|p1a: Clefable|spd|1
+|cant|p2a: Latias|par
+|upkeep
+|turn|114
+|move|p1a: Clefable|Thunder Wave|p2a: Latias
+|-fail|p2a: Latias|par
+|move|p2a: Latias|Roost||[still]
+|-fail|p2a: Latias|heal
+|upkeep
+|turn|115
+|move|p1a: Clefable|Thunder Wave|p2a: Latias
+|-fail|p2a: Latias|par
+|cant|p2a: Latias|par
+|upkeep
+|turn|116
+|switch|p1a: Landorus|Landorus-Therian, M|262/319
+|-ability|p1a: Landorus|Intimidate|boost
+|-unboost|p2a: Latias|atk|0
+|cant|p2a: Latias|par
+|upkeep
+|turn|117
+|switch|p1a: Clefable|Clefable, F|394/394
+|move|p2a: Latias|Roost||[still]
+|-fail|p2a: Latias|heal
+|upkeep
+|turn|118
+|move|p1a: Clefable|Moonblast|p2a: Latias
+|-supereffective|p2a: Latias
+|-damage|p2a: Latias|55/100 par
+|move|p2a: Latias|Psyshock|p1a: Clefable
+|-damage|p1a: Clefable|367/394
+|-heal|p1a: Clefable|391/394|[from] item: Leftovers
+|-heal|p2a: Latias|61/100 par|[from] item: Leftovers
+|upkeep
+|turn|119
+|move|p1a: Clefable|Soft-Boiled|p1a: Clefable
+|-heal|p1a: Clefable|394/394
+|cant|p2a: Latias|par
+|-heal|p2a: Latias|68/100 par|[from] item: Leftovers
+|upkeep
+|turn|120
+|move|p1a: Clefable|Calm Mind|p1a: Clefable
+|-boost|p1a: Clefable|spa|1
+|-boost|p1a: Clefable|spd|1
+|move|p2a: Latias|Psyshock|p1a: Clefable
+|-damage|p1a: Clefable|366/394
+|-heal|p1a: Clefable|390/394|[from] item: Leftovers
+|-heal|p2a: Latias|74/100 par|[from] item: Leftovers
+|upkeep
+|turn|121
+|switch|p1a: Rotom|Rotom-Wash|303/303
+|move|p2a: Latias|Defog|p1a: Rotom
+|-unboost|p1a: Rotom|evasion|1
+|-heal|p2a: Latias|80/100 par|[from] item: Leftovers
+|upkeep
+|turn|122
+|move|p1a: Rotom|Pain Split|p2a: Latias
+|-sethp|p2a: Latias|82/100 par|[from] move: Pain Split|[silent]
+|-sethp|p1a: Rotom|295/303|[from] move: Pain Split
+|cant|p2a: Latias|par
+|-heal|p1a: Rotom|303/303|[from] item: Leftovers
+|-heal|p2a: Latias|88/100 par|[from] item: Leftovers
+|upkeep
+|turn|123
+|switch|p1a: Clefable|Clefable, F|390/394
+|cant|p2a: Latias|par
+|-heal|p1a: Clefable|394/394|[from] item: Leftovers
+|-heal|p2a: Latias|94/100 par|[from] item: Leftovers
+|upkeep
+|turn|124
+|switch|p1a: Rotom|Rotom-Wash|303/303
+|move|p2a: Latias|Defog|p1a: Rotom
+|-unboost|p1a: Rotom|evasion|1
+|-heal|p2a: Latias|99/100 par|[from] item: Leftovers
+|upkeep
+|turn|125
+|move|p1a: Rotom|Pain Split|p2a: Latias
+|-sethp|p2a: Latias|92/100 par|[from] move: Pain Split|[silent]
+|-sethp|p1a: Rotom|303/303|[from] move: Pain Split
+|move|p2a: Latias|Psyshock|p1a: Rotom
+|-damage|p1a: Rotom|284/303
+|-heal|p1a: Rotom|302/303|[from] item: Leftovers
+|-heal|p2a: Latias|98/100 par|[from] item: Leftovers
+|upkeep
+|turn|126
+|switch|p1a: Landorus|Landorus-Therian, M|262/319
+|-ability|p1a: Landorus|Intimidate|boost
+|-unboost|p2a: Latias|atk|0
+|move|p2a: Latias|Psyshock|p1a: Landorus
+|-damage|p1a: Landorus|232/319
+|-heal|p2a: Latias|100/100 par|[from] item: Leftovers
+|upkeep
+|turn|127
+|move|p1a: Landorus|U-turn|p2a: Latias
+|-supereffective|p2a: Latias
+|-damage|p2a: Latias|45/100 par
+|switch|p1a: Clefable|Clefable, F|394/394|[from] U-turn
+|cant|p2a: Latias|par
+|-heal|p2a: Latias|51/100 par|[from] item: Leftovers
+|upkeep
+|turn|128
+|move|p1a: Clefable|Calm Mind|p1a: Clefable
+|-boost|p1a: Clefable|spa|1
+|-boost|p1a: Clefable|spd|1
+|move|p2a: Latias|Defog|p1a: Clefable
+|-unboost|p1a: Clefable|evasion|1
+|-heal|p2a: Latias|57/100 par|[from] item: Leftovers
+|upkeep
+|turn|129
+|switch|p1a: Landorus|Landorus-Therian, M|232/319
+|-ability|p1a: Landorus|Intimidate|boost
+|-unboost|p2a: Latias|atk|0
+|move|p2a: Latias|Defog|p1a: Landorus
+|-unboost|p1a: Landorus|evasion|1
+|-heal|p2a: Latias|63/100 par|[from] item: Leftovers
+|upkeep
+|turn|130
+|switch|p1a: Clefable|Clefable, F|394/394
+|move|p2a: Latias|Defog|p1a: Clefable
+|-unboost|p1a: Clefable|evasion|1
+|-heal|p2a: Latias|69/100 par|[from] item: Leftovers
+|upkeep
+|turn|131
+|move|p1a: Clefable|Thunder Wave|p2a: Latias
+|-fail|p2a: Latias|par
+|move|p2a: Latias|Defog|p1a: Clefable
+|-unboost|p1a: Clefable|evasion|1
+|-heal|p2a: Latias|75/100 par|[from] item: Leftovers
+|upkeep
+|turn|132
+|move|p1a: Clefable|Moonblast|p2a: Latias
+|-supereffective|p2a: Latias
+|-damage|p2a: Latias|26/100 par
+|cant|p2a: Latias|par
+|-heal|p2a: Latias|32/100 par|[from] item: Leftovers
+|upkeep
+|turn|133
+|move|p1a: Clefable|Soft-Boiled||[still]
+|-fail|p1a: Clefable|heal
+|move|p2a: Latias|Defog|p1a: Clefable
+|-unboost|p1a: Clefable|evasion|1
+|-heal|p2a: Latias|38/100 par|[from] item: Leftovers
+|upkeep
+|turn|134
+|move|p1a: Clefable|Soft-Boiled||[still]
+|-fail|p1a: Clefable|heal
+|move|p2a: Latias|Defog|p1a: Clefable
+|-unboost|p1a: Clefable|evasion|1
+|-heal|p2a: Latias|44/100 par|[from] item: Leftovers
+|upkeep
+|turn|135
+|move|p1a: Clefable|Moonblast|p2a: Latias
+|-supereffective|p2a: Latias
+|-damage|p2a: Latias|0 fnt
+|faint|p2a: Latias
+    </script>
+</div>
+
+<div class="battle-log battle-log-inline" style="display:none"></div>
+
+<script>
+    let daily = Math.floor(Date.now() / 1000 / 60 / 60 / 24); document.write('<script src="https://play.pokemonshowdown.com/js/replay-embed.js?version' + daily + '"></' + 'script>');
+</script>
+
+<p style="text-align:center"> Replay created by <a href="https://github.com/hsahovic/poke-env">poke-env</a>, with code from <a
+        href="https://github.com/smogon/pokemon-showdown"> pokemon-showdown</a>. If something goes wrong, don't hesitate
+    to open an <a href="https://github.com/hsahovic/poke-env/issues">issue!</a></p>

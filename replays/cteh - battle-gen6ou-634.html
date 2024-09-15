@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<!-- version 1 -->
+<title>battle-gen6ou-634</title>
+<style>
+    html,
+    body {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        padding: 12px 0;
+    }
+
+    .battle-log {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+    }
+
+    .battle-log-inline {
+        border: 1px solid #AAAAAA;
+        background: #EEF2F5;
+        color: black;
+        max-width: 640px;
+        margin: 0 auto 80px;
+        padding-bottom: 5px;
+    }
+
+    .battle-log .inner {
+        padding: 4px 8px 0px 8px;
+    }
+
+    .battle-log .inner-preempt {
+        padding: 0 8px 4px 8px;
+    }
+
+    .battle-log .inner-after {
+        margin-top: 0.5em;
+    }
+
+    .battle-log h2 {
+        margin: 0.5em -8px;
+        padding: 4px 8px;
+        border: 1px solid #AAAAAA;
+        background: #E0E7EA;
+        border-left: 0;
+        border-right: 0;
+        font-family: Verdana, sans-serif;
+        font-size: 13pt;
+    }
+
+    .backprop {
+        top: 0;
+    }
+
+    .battle-log .chat {
+        vertical-align: middle;
+        padding: 3px 0 3px 0;
+        font-size: 8pt;
+    }
+
+    .battle-log .chat strong {
+        color: #40576A;
+    }
+
+    .battle-log .chat em {
+        padding: 1px 4px 1px 3px;
+        color: #000000;
+        font-style: normal;
+    }
+
+    .chat.mine {
+        background: rgba(0, 0, 0, 0.05);
+        margin-left: -8px;
+        margin-right: -8px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .spoiler {
+        color: #BBBBBB;
+        background: #BBBBBB;
+        padding: 0px 3px;
+    }
+
+    .spoiler:hover,
+    .spoiler:active,
+    .spoiler-shown {
+        color: #000000;
+        background: #E2E2E2;
+        padding: 0px 3px;
+    }
+
+    .spoiler a {
+        color: #BBBBBB;
+    }
+
+    .spoiler:hover a,
+    .spoiler:active a,
+    .spoiler-shown a {
+        color: #2288CC;
+    }
+
+    .chat code,
+    .chat .spoiler:hover code,
+    .chat .spoiler:active code,
+    .chat .spoiler-shown code {
+        border: 1px solid #C0C0C0;
+        background: #EEEEEE;
+        color: black;
+        padding: 0 2px;
+    }
+
+    .chat .spoiler code {
+        border: 1px solid #CCCCCC;
+        background: #CCCCCC;
+        color: #CCCCCC;
+    }
+
+    .battle-log .rated {
+        padding: 3px 4px;
+    }
+
+    .battle-log .rated strong {
+        color: white;
+        background: #89A;
+        padding: 1px 4px;
+        border-radius: 4px;
+    }
+
+    .spacer {
+        margin-top: 0.5em;
+    }
+
+    .message-announce {
+        background: #6688AA;
+        color: white;
+        padding: 1px 4px 2px;
+    }
+
+    .message-announce a,
+    .broadcast-green a,
+    .broadcast-blue a,
+    .broadcast-red a {
+        color: #DDEEFF;
+    }
+
+    .broadcast-green {
+        background-color: #559955;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .broadcast-blue {
+        background-color: #6688AA;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .infobox {
+        border: 1px solid #6688AA;
+        padding: 2px 4px;
+    }
+
+    .infobox-limited {
+        max-height: 200px;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
+    .broadcast-red {
+        background-color: #AA5544;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .message-learn-canlearn {
+        font-weight: bold;
+        color: #228822;
+        text-decoration: underline;
+    }
+
+    .message-learn-cannotlearn {
+        font-weight: bold;
+        color: #CC2222;
+        text-decoration: underline;
+    }
+
+    .message-effect-weak {
+        font-weight: bold;
+        color: #CC2222;
+    }
+
+    .message-effect-resist {
+        font-weight: bold;
+        color: #6688AA;
+    }
+
+    .message-effect-immune {
+        font-weight: bold;
+        color: #666666;
+    }
+
+    .message-learn-list {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .message-throttle-notice,
+    .message-error {
+        color: #992222;
+    }
+
+    .message-overflow,
+    .chat small.message-overflow {
+        font-size: 0pt;
+    }
+
+    .message-overflow::before {
+        font-size: 9pt;
+        content: '...';
+    }
+
+    .subtle {
+        color: #3A4A66;
+    }
+</style>
+<div class="wrapper replay-wrapper" style="max-width:1180px;margin:0 auto">
+    <input type="hidden" name="replayid" value="unregisteredserver-gen8randombattle-320064" />
+    <div class="battle"></div>
+    <div class="battle-log"></div>
+    <div class="replay-controls"></div>
+    <div class="replay-controls-2"></div>
+    <h1 style="font-weight:normal;text-align:center"><strong>poke-env battle replay</strong><br />battle-gen6ou-634<br /><a
+            href="http://pokemonshowdown.com/users/randomplayer1" class="subtle" target="_blank">cteh</a>
+        vs. <a href="http://pokemonshowdown.com/users/randomplayer2" class="subtle"
+            target="_blank">hotaru</a></h1>
+    <script type="text/plain" class="battle-log-data">
+    >battle-gen6ou-634|init|battle
+|title|cteh vs. hotaru
+|j|☆cteh
+|j|☆hotaru
+|gametype|singles
+|player|p1|cteh|101|
+|player|p2|hotaru|2|
+|teamsize|p1|6
+|teamsize|p2|6
+|gen|6
+|tier|[Gen 6] OU
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|Species Clause: Limit one of each Pokémon
+|rule|OHKO Clause: OHKO moves are banned
+|rule|Moody Clause: Moody is banned
+|rule|Evasion Items Clause: Evasion items are banned
+|rule|Evasion Moves Clause: Evasion moves are banned
+|rule|Endless Battle Clause: Forcing endless battles is banned
+|rule|HP Percentage Mod: HP is shown in percentages
+|rule|Swagger Clause: Swagger is banned
+|clearpoke
+|poke|p1|Tyranitar, M|item
+|poke|p1|Excadrill, M|item
+|poke|p1|Volcanion|item
+|poke|p1|Azumarill, F|item
+|poke|p1|Latios, M|item
+|poke|p1|Serperior, M|item
+|poke|p2|Cloyster, F|item
+|poke|p2|Aerodactyl, M|item
+|poke|p2|Scizor, F|item
+|poke|p2|Weavile, M|item
+|poke|p2|Volcarona, M|item
+|poke|p2|Thundurus-Therian, M|item
+|teampreview
+|start
+|switch|p1a: Latios|Latios, M|301/301
+|switch|p2a: Aerodactyl|Aerodactyl, M|100/100
+|-ability|p2a: Aerodactyl|Pressure
+|turn|1
+|switch|p2a: Scizor|Scizor, F|100/100
+|move|p1a: Latios|Ice Beam|p2a: Scizor
+|-resisted|p2a: Scizor
+|-damage|p2a: Scizor|72/100
+|-damage|p1a: Latios|271/301|[from] item: Life Orb
+|upkeep
+|turn|2
+|switch|p1a: Volcanion|Volcanion|302/302
+|detailschange|p2a: Scizor|Scizor-Mega, F
+|-mega|p2a: Scizor|Scizor|Scizorite
+|move|p2a: Scizor|Swords Dance|p2a: Scizor
+|-boost|p2a: Scizor|atk|2
+|upkeep
+|turn|3
+|move|p2a: Scizor|Bullet Punch|p1a: Volcanion
+|-resisted|p1a: Volcanion
+|-damage|p1a: Volcanion|250/302
+|move|p1a: Volcanion|Flamethrower|p2a: Scizor
+|-supereffective|p2a: Scizor
+|-damage|p2a: Scizor|0 fnt
+|faint|p2a: Scizor
+|upkeep
+|switch|p2a: Cloyster|Cloyster, F|100/100
+|turn|4
+|switch|p2a: Thundurus|Thundurus-Therian, M|100/100
+|switch|p1a: Azumarill|Azumarill, F|404/404
+|upkeep
+|turn|5
+|switch|p2a: Weavile|Weavile, M|100/100
+|move|p1a: Azumarill|Aqua Jet|p2a: Weavile
+|-damage|p2a: Weavile|59/100
+|upkeep
+|turn|6
+|switch|p2a: Volcarona|Volcarona, M|100/100
+|switch|p1a: Volcanion|Volcanion|250/302
+|upkeep
+|turn|7
+|switch|p2a: Weavile|Weavile, M|59/100
+|switch|p1a: Tyranitar|Tyranitar, M|372/372
+|-weather|Sandstorm|[from] ability: Sand Stream|[of] p1a: Tyranitar
+|-weather|Sandstorm|[upkeep]
+|-damage|p2a: Weavile|52/100|[from] Sandstorm
+|upkeep
+|turn|8
+|switch|p1a: Excadrill|Excadrill, M|361/361
+|-item|p1a: Excadrill|Air Balloon
+|move|p2a: Weavile|Swords Dance|p2a: Weavile
+|-boost|p2a: Weavile|atk|2
+|-weather|Sandstorm|[upkeep]
+|-damage|p2a: Weavile|46/100|[from] Sandstorm
+|upkeep
+|turn|9
+|switch|p2a: Cloyster|Cloyster, F|100/100
+|move|p1a: Excadrill|Earthquake|p2a: Cloyster
+|-damage|p2a: Cloyster|53/100
+|-weather|Sandstorm|[upkeep]
+|-damage|p2a: Cloyster|47/100|[from] Sandstorm
+|upkeep
+|turn|10
+|switch|p1a: Volcanion|Volcanion|250/302
+|move|p2a: Cloyster|Explosion|p1a: Volcanion
+|-damage|p1a: Volcanion|22/302
+|faint|p2a: Cloyster
+|-weather|Sandstorm|[upkeep]
+|-damage|p1a: Volcanion|4/302|[from] Sandstorm
+|upkeep
+|switch|p2a: Volcarona|Volcarona, M|100/100
+|turn|11
+|switch|p2a: Thundurus|Thundurus-Therian, M|100/100
+|move|p1a: Volcanion|Hidden Power|p2a: Thundurus
+|-resisted|p2a: Thundurus
+|-damage|p2a: Thundurus|76/100
+|-weather|Sandstorm|[upkeep]
+|-damage|p2a: Thundurus|70/100|[from] Sandstorm
+|-damage|p1a: Volcanion|0 fnt|[from] Sandstorm
+|faint|p1a: Volcanion
+|upkeep
+|switch|p1a: Latios|Latios, M|271/301
+|turn|12
+|move|p1a: Latios|Thunderbolt|p2a: Thundurus
+|-heal|p2a: Thundurus|95/100|[from] ability: Volt Absorb|[of] p1a: Latios
+|move|p2a: Thundurus|Nasty Plot|p2a: Thundurus
+|-boost|p2a: Thundurus|spa|2
+|-weather|Sandstorm|[upkeep]
+|-damage|p1a: Latios|253/301|[from] Sandstorm
+|-damage|p2a: Thundurus|89/100|[from] Sandstorm
+|upkeep
+|turn|13
+|move|p1a: Latios|Psychic|p2a: Thundurus
+|-damage|p2a: Thundurus|1/100
+|-enditem|p2a: Thundurus|Sitrus Berry|[eat]
+|-heal|p2a: Thundurus|26/100|[from] item: Sitrus Berry
+|-damage|p1a: Latios|223/301|[from] item: Life Orb
+|move|p2a: Thundurus|Thunderbolt|p1a: Latios
+|-resisted|p1a: Latios
+|-damage|p1a: Latios|51/301
+|-weather|Sandstorm|[upkeep]
+|-damage|p1a: Latios|33/301|[from] Sandstorm
+|-damage|p2a: Thundurus|20/100|[from] Sandstorm
+|upkeep
+|turn|14
+|switch|p2a: Weavile|Weavile, M|46/100
+|move|p1a: Latios|Psychic|p2a: Weavile
+|-immune|p2a: Weavile
+|-weather|none
+|upkeep
+|turn|15
+|move|p2a: Weavile|Icicle Crash|p1a: Latios
+|-supereffective|p1a: Latios
+|-damage|p1a: Latios|0 fnt
+|faint|p1a: Latios
+|upkeep
+|switch|p1a: Excadrill|Excadrill, M|361/361
+|-item|p1a: Excadrill|Air Balloon
+|turn|16
+|move|p2a: Weavile|Icicle Crash|p1a: Excadrill
+|-crit|p1a: Excadrill
+|-damage|p1a: Excadrill|13/361
+|-enditem|p1a: Excadrill|Air Balloon
+|move|p1a: Excadrill|Rock Slide|p2a: Weavile
+|-supereffective|p2a: Weavile
+|-damage|p2a: Weavile|0 fnt
+|faint|p2a: Weavile
+|upkeep
+|switch|p2a: Aerodactyl|Aerodactyl, M|100/100
+|-ability|p2a: Aerodactyl|Pressure
+|turn|17
+|move|p2a: Aerodactyl|Stealth Rock|p1a: Excadrill
+|-sidestart|p1: cteh|move: Stealth Rock
+|move|p1a: Excadrill|Earthquake|p2a: Aerodactyl
+|-immune|p2a: Aerodactyl
+|upkeep
+|turn|18
+|move|p2a: Aerodactyl|Taunt|p1a: Excadrill
+|-start|p1a: Excadrill|move: Taunt
+|move|p1a: Excadrill|Iron Head|p2a: Aerodactyl
+|-supereffective|p2a: Aerodactyl
+|-damage|p2a: Aerodactyl|0 fnt
+|-damage|p1a: Excadrill|0 fnt|[from] item: Rocky Helmet|[of] p2a: Aerodactyl
+|faint|p1a: Excadrill
+|faint|p2a: Aerodactyl
+|upkeep
+|switch|p2a: Volcarona|Volcarona, M|100/100
+|switch|p1a: Serperior|Serperior, M|291/291
+|-damage|p1a: Serperior|255/291|[from] Stealth Rock
+|turn|19
+|switch|p1a: Tyranitar|Tyranitar, M|372/372
+|-damage|p1a: Tyranitar|326/372|[from] Stealth Rock
+|-weather|Sandstorm|[from] ability: Sand Stream|[of] p1a: Tyranitar
+|switch|p2a: Thundurus|Thundurus-Therian, M|20/100
+|-weather|Sandstorm|[upkeep]
+|-damage|p2a: Thundurus|14/100|[from] Sandstorm
+|upkeep
+|turn|20
+|switch|p2a: Volcarona|Volcarona, M|100/100
+|move|p1a: Tyranitar|Stealth Rock|p2a: Volcarona
+|-sidestart|p2: hotaru|move: Stealth Rock
+|-weather|Sandstorm|[upkeep]
+|-damage|p2a: Volcarona|94/100|[from] Sandstorm
+|upkeep
+|turn|21
+|switch|p1a: Azumarill|Azumarill, F|404/404
+|-damage|p1a: Azumarill|354/404|[from] Stealth Rock
+|move|p2a: Volcarona|Quiver Dance|p2a: Volcarona
+|-boost|p2a: Volcarona|spa|1
+|-boost|p2a: Volcarona|spd|1
+|-boost|p2a: Volcarona|spe|1
+|-weather|Sandstorm|[upkeep]
+|-damage|p2a: Volcarona|88/100|[from] Sandstorm
+|-damage|p1a: Azumarill|329/404|[from] Sandstorm
+|upkeep
+|turn|22
+|switch|p1a: Tyranitar|Tyranitar, M|326/372
+|-damage|p1a: Tyranitar|280/372|[from] Stealth Rock
+|move|p2a: Volcarona|Quiver Dance|p2a: Volcarona
+|-boost|p2a: Volcarona|spa|1
+|-boost|p2a: Volcarona|spd|1
+|-boost|p2a: Volcarona|spe|1
+|-weather|Sandstorm|[upkeep]
+|-damage|p2a: Volcarona|82/100|[from] Sandstorm
+|upkeep
+|turn|23
+|switch|p1a: Azumarill|Azumarill, F|329/404
+|-damage|p1a: Azumarill|279/404|[from] Stealth Rock
+|move|p2a: Volcarona|Hidden Power|p1a: Azumarill
+|-damage|p1a: Azumarill|96/404
+|-enditem|p1a: Azumarill|Sitrus Berry|[eat]
+|-heal|p1a: Azumarill|197/404|[from] item: Sitrus Berry
+|-weather|Sandstorm|[upkeep]
+|-damage|p2a: Volcarona|76/100|[from] Sandstorm
+|-damage|p1a: Azumarill|172/404|[from] Sandstorm
+|upkeep
+|turn|24
+|switch|p2a: Thundurus|Thundurus-Therian, M|14/100
+|-damage|p2a: Thundurus|0 fnt|[from] Stealth Rock
+|faint|p2a: Thundurus
+|switch|p1a: Serperior|Serperior, M|255/291
+|-damage|p1a: Serperior|219/291|[from] Stealth Rock
+|-weather|Sandstorm|[upkeep]
+|-damage|p1a: Serperior|201/291|[from] Sandstorm
+|upkeep
+|switch|p2a: Volcarona|Volcarona, M|76/100
+|-damage|p2a: Volcarona|26/100|[from] Stealth Rock
+|turn|25
+|move|p1a: Serperior|Leaf Storm|p2a: Volcarona
+|-resisted|p2a: Volcarona
+|-damage|p2a: Volcarona|13/100
+|-boost|p1a: Serperior|spa|2
+|move|p2a: Volcarona|Giga Drain|p1a: Serperior
+|-resisted|p1a: Serperior
+|-damage|p1a: Serperior|151/291
+|-heal|p2a: Volcarona|20/100|[from] drain|[of] p1a: Serperior
+|-weather|Sandstorm|[upkeep]
+|-damage|p1a: Serperior|133/291|[from] Sandstorm
+|-damage|p2a: Volcarona|14/100|[from] Sandstorm
+|upkeep
+|turn|26
+|switch|p1a: Azumarill|Azumarill, F|172/404
+|-damage|p1a: Azumarill|122/404|[from] Stealth Rock
+|move|p2a: Volcarona|Quiver Dance|p2a: Volcarona
+|-boost|p2a: Volcarona|spa|1
+|-boost|p2a: Volcarona|spd|1
+|-boost|p2a: Volcarona|spe|1
+|-weather|none
+|upkeep
+|turn|27
+|switch|p1a: Tyranitar|Tyranitar, M|280/372
+|-damage|p1a: Tyranitar|234/372|[from] Stealth Rock
+|-weather|Sandstorm|[from] ability: Sand Stream|[of] p1a: Tyranitar
+|move|p2a: Volcarona|Quiver Dance|p2a: Volcarona
+|-boost|p2a: Volcarona|spa|1
+|-boost|p2a: Volcarona|spd|1
+|-boost|p2a: Volcarona|spe|1
+|-weather|Sandstorm|[upkeep]
+|-damage|p2a: Volcarona|8/100|[from] Sandstorm
+|upkeep
+|turn|28
+|move|p2a: Volcarona|Quiver Dance|p2a: Volcarona
+|-boost|p2a: Volcarona|spa|1
+|-boost|p2a: Volcarona|spd|1
+|-boost|p2a: Volcarona|spe|1
+|move|p1a: Tyranitar|Stealth Rock||[still]
+|-fail|p1a: Tyranitar
+|-weather|Sandstorm|[upkeep]
+|-damage|p2a: Volcarona|2/100|[from] Sandstorm
+|upkeep
+|turn|29
+|move|p2a: Volcarona|Quiver Dance|p2a: Volcarona
+|-boost|p2a: Volcarona|spa|1
+|-boost|p2a: Volcarona|spd|1
+|-boost|p2a: Volcarona|spe|1
+|move|p1a: Tyranitar|Crunch|p2a: Volcarona
+|-damage|p2a: Volcarona|0 fnt
+|faint|p2a: Volcarona
+    </script>
+</div>
+
+<div class="battle-log battle-log-inline" style="display:none"></div>
+
+<script>
+    let daily = Math.floor(Date.now() / 1000 / 60 / 60 / 24); document.write('<script src="https://play.pokemonshowdown.com/js/replay-embed.js?version' + daily + '"></' + 'script>');
+</script>
+
+<p style="text-align:center"> Replay created by <a href="https://github.com/hsahovic/poke-env">poke-env</a>, with code from <a
+        href="https://github.com/smogon/pokemon-showdown"> pokemon-showdown</a>. If something goes wrong, don't hesitate
+    to open an <a href="https://github.com/hsahovic/poke-env/issues">issue!</a></p>

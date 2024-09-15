@@ -1,0 +1,53 @@
+Keldeo @ Choice Specs
+Ability: Justified
+EVs: 4 Def / 252 SpA / 252 Spe
+Timid Nature
+- Hydro Pump
+- Secret Sword
+- Scald
+- Icy Wind
+
+Excadrill @ Air Balloon
+Ability: Mold Breaker
+EVs: 252 Atk / 4 Def / 252 Spe
+Jolly Nature
+- Earthquake
+- Iron Head
+- Rapid Spin
+- Rock Slide
+
+Thundurus @ Life Orb
+Ability: Prankster
+EVs: 4 Def / 252 SpA / 252 Spe
+Timid Nature
+- Thunderbolt
+- Hidden Power Ice
+- Focus Blast
+- Thunder Wave
+
+Bisharp @ Black Glasses
+Ability: Defiant
+EVs: 4 HP / 252 Atk / 252 Spe
+Adamant Nature
+- Knock Off
+- Iron Head
+- Sucker Punch
+- Swords Dance
+
+Garchomp @ Rocky Helmet
+Ability: Rough Skin
+EVs: 252 HP / 164 Def / 92 Spe
+Impish Nature
+- Earthquake
+- Dragon Tail
+- Fire Blast
+- Stealth Rock
+
+Latias @ Leftovers
+Ability: Levitate
+EVs: 252 HP / 4 SpA / 252 Spe
+Timid Nature
+- Draco Meteor
+- Psyshock
+- Roost
+- Defog

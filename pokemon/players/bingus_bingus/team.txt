@@ -1,0 +1,56 @@
+ThatShuckle (Shuckle) (M) @ Mental Herb  
+Ability: Sturdy  
+Shiny: Yes  
+EVs: 252 HP / 252 Def / 4 SpD  
+Bold Nature  
+- Stealth Rock  
+- Sticky Web  
+- Infestation  
+- Body Slam  
+
+Skibidizor (Scizor) @ Sitrus Berry  
+Ability: Technician  
+EVs: 252 Atk / 4 Def / 252 Spe  
+Adamant Nature  
+- Iron Head  
+- Double-Edge  
+- Bug Bite  
+- Superpower  
+
+Azumogus (Azumarill) @ Sitrus Berry  
+Ability: Huge Power  
+EVs: 80 HP / 252 Atk / 176 Spe  
+Adamant Nature  
+- Focus Blast  
+- Aqua Jet  
+- Play Rough  
+- Knock Off  
+
+Hoopa @ Sitrus Berry  
+Ability: Magician  
+EVs: 4 Def / 252 SpA / 252 Spe  
+Timid Nature  
+- Hyperspace Hole  
+- Shadow Ball  
+- Focus Blast  
+- Gunk Shot  
+
+melbourne weather (Thundurus) @ Leftovers  
+Ability: Defiant  
+EVs: 4 Def / 252 SpA / 252 Spe  
+Timid Nature  
+- Focus Blast  
+- Hidden Power [Ice]  
+- Thunder  
+- Iron Tail  
+
+chess reference (Bisharp) @ Black Glasses  
+Ability: Defiant  
+Shiny: Yes  
+EVs: 252 Atk / 4 Def / 252 Spe  
+Adamant Nature  
+- Iron Head  
+- Knock Off  
+- Stone Edge  
+- Focus Blast  
+

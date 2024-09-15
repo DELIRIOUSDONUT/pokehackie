@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<!-- version 1 -->
+<title>battle-gen6ou-713</title>
+<style>
+    html,
+    body {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        padding: 12px 0;
+    }
+
+    .battle-log {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+    }
+
+    .battle-log-inline {
+        border: 1px solid #AAAAAA;
+        background: #EEF2F5;
+        color: black;
+        max-width: 640px;
+        margin: 0 auto 80px;
+        padding-bottom: 5px;
+    }
+
+    .battle-log .inner {
+        padding: 4px 8px 0px 8px;
+    }
+
+    .battle-log .inner-preempt {
+        padding: 0 8px 4px 8px;
+    }
+
+    .battle-log .inner-after {
+        margin-top: 0.5em;
+    }
+
+    .battle-log h2 {
+        margin: 0.5em -8px;
+        padding: 4px 8px;
+        border: 1px solid #AAAAAA;
+        background: #E0E7EA;
+        border-left: 0;
+        border-right: 0;
+        font-family: Verdana, sans-serif;
+        font-size: 13pt;
+    }
+
+    .backprop {
+        top: 0;
+    }
+
+    .battle-log .chat {
+        vertical-align: middle;
+        padding: 3px 0 3px 0;
+        font-size: 8pt;
+    }
+
+    .battle-log .chat strong {
+        color: #40576A;
+    }
+
+    .battle-log .chat em {
+        padding: 1px 4px 1px 3px;
+        color: #000000;
+        font-style: normal;
+    }
+
+    .chat.mine {
+        background: rgba(0, 0, 0, 0.05);
+        margin-left: -8px;
+        margin-right: -8px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .spoiler {
+        color: #BBBBBB;
+        background: #BBBBBB;
+        padding: 0px 3px;
+    }
+
+    .spoiler:hover,
+    .spoiler:active,
+    .spoiler-shown {
+        color: #000000;
+        background: #E2E2E2;
+        padding: 0px 3px;
+    }
+
+    .spoiler a {
+        color: #BBBBBB;
+    }
+
+    .spoiler:hover a,
+    .spoiler:active a,
+    .spoiler-shown a {
+        color: #2288CC;
+    }
+
+    .chat code,
+    .chat .spoiler:hover code,
+    .chat .spoiler:active code,
+    .chat .spoiler-shown code {
+        border: 1px solid #C0C0C0;
+        background: #EEEEEE;
+        color: black;
+        padding: 0 2px;
+    }
+
+    .chat .spoiler code {
+        border: 1px solid #CCCCCC;
+        background: #CCCCCC;
+        color: #CCCCCC;
+    }
+
+    .battle-log .rated {
+        padding: 3px 4px;
+    }
+
+    .battle-log .rated strong {
+        color: white;
+        background: #89A;
+        padding: 1px 4px;
+        border-radius: 4px;
+    }
+
+    .spacer {
+        margin-top: 0.5em;
+    }
+
+    .message-announce {
+        background: #6688AA;
+        color: white;
+        padding: 1px 4px 2px;
+    }
+
+    .message-announce a,
+    .broadcast-green a,
+    .broadcast-blue a,
+    .broadcast-red a {
+        color: #DDEEFF;
+    }
+
+    .broadcast-green {
+        background-color: #559955;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .broadcast-blue {
+        background-color: #6688AA;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .infobox {
+        border: 1px solid #6688AA;
+        padding: 2px 4px;
+    }
+
+    .infobox-limited {
+        max-height: 200px;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
+    .broadcast-red {
+        background-color: #AA5544;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .message-learn-canlearn {
+        font-weight: bold;
+        color: #228822;
+        text-decoration: underline;
+    }
+
+    .message-learn-cannotlearn {
+        font-weight: bold;
+        color: #CC2222;
+        text-decoration: underline;
+    }
+
+    .message-effect-weak {
+        font-weight: bold;
+        color: #CC2222;
+    }
+
+    .message-effect-resist {
+        font-weight: bold;
+        color: #6688AA;
+    }
+
+    .message-effect-immune {
+        font-weight: bold;
+        color: #666666;
+    }
+
+    .message-learn-list {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .message-throttle-notice,
+    .message-error {
+        color: #992222;
+    }
+
+    .message-overflow,
+    .chat small.message-overflow {
+        font-size: 0pt;
+    }
+
+    .message-overflow::before {
+        font-size: 9pt;
+        content: '...';
+    }
+
+    .subtle {
+        color: #3A4A66;
+    }
+</style>
+<div class="wrapper replay-wrapper" style="max-width:1180px;margin:0 auto">
+    <input type="hidden" name="replayid" value="unregisteredserver-gen8randombattle-320064" />
+    <div class="battle"></div>
+    <div class="battle-log"></div>
+    <div class="replay-controls"></div>
+    <div class="replay-controls-2"></div>
+    <h1 style="font-weight:normal;text-align:center"><strong>poke-env battle replay</strong><br />battle-gen6ou-713<br /><a
+            href="http://pokemonshowdown.com/users/randomplayer1" class="subtle" target="_blank">aura_bot</a>
+        vs. <a href="http://pokemonshowdown.com/users/randomplayer2" class="subtle"
+            target="_blank">cteh</a></h1>
+    <script type="text/plain" class="battle-log-data">
+    >battle-gen6ou-713|init|battle
+|title|aura_bot vs. cteh
+|j|☆aura_bot
+|j|☆cteh
+|gametype|singles
+|player|p1|aura_bot|1|
+|player|p2|cteh|101|
+|teamsize|p1|6
+|teamsize|p2|6
+|gen|6
+|tier|[Gen 6] OU
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|Species Clause: Limit one of each Pokémon
+|rule|OHKO Clause: OHKO moves are banned
+|rule|Moody Clause: Moody is banned
+|rule|Evasion Items Clause: Evasion items are banned
+|rule|Evasion Moves Clause: Evasion moves are banned
+|rule|Endless Battle Clause: Forcing endless battles is banned
+|rule|HP Percentage Mod: HP is shown in percentages
+|rule|Swagger Clause: Swagger is banned
+|clearpoke
+|poke|p1|Landorus-Therian, M|item
+|poke|p1|Heatran, M|item
+|poke|p1|Excadrill, M|item
+|poke|p1|Rotom-Wash|item
+|poke|p1|Dragonite, M|item
+|poke|p1|Clefable, M|item
+|poke|p2|Tyranitar, M|item
+|poke|p2|Excadrill, F|item
+|poke|p2|Volcanion|item
+|poke|p2|Azumarill, M|item
+|poke|p2|Latios, M|item
+|poke|p2|Serperior, F|item
+|teampreview
+|start
+|switch|p1a: Dragonite|Dragonite, M|323/323
+|switch|p2a: Tyranitar|Tyranitar, M|100/100
+|-weather|Sandstorm|[from] ability: Sand Stream|[of] p2a: Tyranitar
+|turn|1
+|switch|p2a: Azumarill|Azumarill, M|100/100
+|move|p1a: Dragonite|Fire Punch|p2a: Azumarill
+|-resisted|p2a: Azumarill
+|-damage|p2a: Azumarill|86/100
+|-weather|Sandstorm|[upkeep]
+|-damage|p1a: Dragonite|303/323|[from] Sandstorm
+|-damage|p2a: Azumarill|80/100|[from] Sandstorm
+|upkeep
+|turn|2
+|switch|p1a: Landorus|Landorus-Therian, M|319/319
+|-ability|p1a: Landorus|Intimidate|boost
+|-unboost|p2a: Azumarill|atk|1
+|switch|p2a: Volcanion|Volcanion|100/100
+|-weather|Sandstorm|[upkeep]
+|-damage|p2a: Volcanion|95/100|[from] Sandstorm
+|upkeep
+|turn|3
+|switch|p2a: Latios|Latios, M|100/100
+|move|p1a: Landorus|Stealth Rock|p2a: Latios
+|-sidestart|p2: cteh|move: Stealth Rock
+|-weather|Sandstorm|[upkeep]
+|-damage|p2a: Latios|95/100|[from] Sandstorm
+|upkeep
+|turn|4
+|switch|p2a: Azumarill|Azumarill, M|80/100
+|-damage|p2a: Azumarill|68/100|[from] Stealth Rock
+|switch|p1a: Rotom|Rotom-Wash|303/303
+|-weather|Sandstorm|[upkeep]
+|-damage|p1a: Rotom|285/303|[from] Sandstorm
+|-damage|p2a: Azumarill|61/100|[from] Sandstorm
+|-heal|p1a: Rotom|303/303|[from] item: Leftovers
+|upkeep
+|turn|5
+|switch|p2a: Serperior|Serperior, F|100/100
+|-damage|p2a: Serperior|88/100|[from] Stealth Rock
+|move|p1a: Rotom|Volt Switch|p2a: Serperior
+|-resisted|p2a: Serperior
+|-damage|p2a: Serperior|74/100
+|switch|p1a: Heatran|Heatran, M|386/386|[from] Volt Switch
+|-weather|Sandstorm|[upkeep]
+|-damage|p2a: Serperior|68/100|[from] Sandstorm
+|upkeep
+|turn|6
+|switch|p2a: Volcanion|Volcanion|95/100
+|-damage|p2a: Volcanion|70/100|[from] Stealth Rock
+|move|p1a: Heatran|Toxic|p2a: Volcanion
+|-status|p2a: Volcanion|tox
+|-weather|Sandstorm|[upkeep]
+|-damage|p2a: Volcanion|64/100 tox|[from] Sandstorm
+|-damage|p2a: Volcanion|58/100 tox|[from] psn
+|upkeep
+|turn|7
+|move|p2a: Volcanion|Sludge Bomb|p1a: Heatran
+|-immune|p1a: Heatran
+|move|p1a: Heatran|Lava Plume|p2a: Volcanion
+|-resisted|p2a: Volcanion
+|-damage|p2a: Volcanion|47/100 tox
+|-weather|Sandstorm|[upkeep]
+|-damage|p2a: Volcanion|41/100 tox|[from] Sandstorm
+|-damage|p2a: Volcanion|29/100 tox|[from] psn
+|upkeep
+|turn|8
+|switch|p2a: Tyranitar|Tyranitar, M|100/100
+|-damage|p2a: Tyranitar|88/100|[from] Stealth Rock
+|move|p1a: Heatran|Lava Plume|p2a: Tyranitar
+|-resisted|p2a: Tyranitar
+|-damage|p2a: Tyranitar|77/100
+|-status|p2a: Tyranitar|brn
+|-weather|none
+|-damage|p2a: Tyranitar|65/100 brn|[from] brn
+|upkeep
+|turn|9
+|switch|p2a: Serperior|Serperior, F|68/100
+|-damage|p2a: Serperior|55/100|[from] Stealth Rock
+|move|p1a: Heatran|Earth Power|p2a: Serperior
+|-resisted|p2a: Serperior
+|-damage|p2a: Serperior|39/100
+|-boost|p2a: Serperior|spd|1
+|upkeep
+|turn|10
+|switch|p2a: Volcanion|Volcanion|29/100 tox
+|-damage|p2a: Volcanion|4/100 tox|[from] Stealth Rock
+|switch|p1a: Landorus|Landorus-Therian, M|319/319
+|-ability|p1a: Landorus|Intimidate|boost
+|-unboost|p2a: Volcanion|atk|1
+|-damage|p2a: Volcanion|0 fnt|[from] psn
+|faint|p2a: Volcanion
+|upkeep
+|switch|p2a: Serperior|Serperior, F|39/100
+|-damage|p2a: Serperior|26/100|[from] Stealth Rock
+|turn|11
+|switch|p2a: Tyranitar|Tyranitar, M|65/100 brn
+|-damage|p2a: Tyranitar|53/100 brn|[from] Stealth Rock
+|-weather|Sandstorm|[from] ability: Sand Stream|[of] p2a: Tyranitar
+|switch|p1a: Excadrill|Excadrill, M|362/362
+|-ability|p1a: Excadrill|Mold Breaker
+|-weather|Sandstorm|[upkeep]
+|-damage|p2a: Tyranitar|40/100 brn|[from] brn
+|upkeep
+|turn|12
+|switch|p1a: Landorus|Landorus-Therian, M|319/319
+|-ability|p1a: Landorus|Intimidate|boost
+|-unboost|p2a: Tyranitar|atk|1
+|move|p2a: Tyranitar|Earthquake|p1a: Landorus
+|-immune|p1a: Landorus
+|-weather|Sandstorm|[upkeep]
+|-damage|p2a: Tyranitar|28/100 brn|[from] brn
+|upkeep
+|turn|13
+|switch|p1a: Clefable|Clefable, M|394/394
+|switch|p2a: Latios|Latios, M|95/100
+|-damage|p2a: Latios|82/100|[from] Stealth Rock
+|-weather|Sandstorm|[upkeep]
+|-damage|p2a: Latios|76/100|[from] Sandstorm
+|upkeep
+|turn|14
+|switch|p1a: Dragonite|Dragonite, M|303/323
+|move|p2a: Latios|Thunderbolt|p1a: Dragonite
+|-damage|p1a: Dragonite|167/323
+|-damage|p2a: Latios|66/100|[from] item: Life Orb
+|-weather|Sandstorm|[upkeep]
+|-damage|p2a: Latios|60/100|[from] Sandstorm
+|-damage|p1a: Dragonite|147/323|[from] Sandstorm
+|upkeep
+|turn|15
+|switch|p2a: Tyranitar|Tyranitar, M|28/100 brn
+|-damage|p2a: Tyranitar|16/100 brn|[from] Stealth Rock
+|switch|p1a: Rotom|Rotom-Wash|303/303
+|-weather|Sandstorm|[upkeep]
+|-damage|p1a: Rotom|285/303|[from] Sandstorm
+|-heal|p1a: Rotom|303/303|[from] item: Leftovers
+|-damage|p2a: Tyranitar|3/100 brn|[from] brn
+|upkeep
+|turn|16
+|move|p1a: Rotom|Pain Split|p2a: Tyranitar
+|-sethp|p2a: Tyranitar|42/100 brn|[from] move: Pain Split|[silent]
+|-sethp|p1a: Rotom|156/303|[from] move: Pain Split
+|move|p2a: Tyranitar|Stone Edge|p1a: Rotom|[miss]
+|-miss|p2a: Tyranitar|p1a: Rotom
+|-weather|Sandstorm|[upkeep]
+|-damage|p1a: Rotom|138/303|[from] Sandstorm
+|-heal|p1a: Rotom|156/303|[from] item: Leftovers
+|-damage|p2a: Tyranitar|30/100 brn|[from] brn
+|upkeep
+|turn|17
+|switch|p2a: Serperior|Serperior, F|26/100
+|-damage|p2a: Serperior|14/100|[from] Stealth Rock
+|move|p1a: Rotom|Pain Split|p2a: Serperior
+|-sethp|p2a: Serperior|34/100|[from] move: Pain Split|[silent]
+|-sethp|p1a: Rotom|97/303|[from] move: Pain Split
+|-weather|Sandstorm|[upkeep]
+|-damage|p2a: Serperior|28/100|[from] Sandstorm
+|-damage|p1a: Rotom|79/303|[from] Sandstorm
+|-heal|p1a: Rotom|97/303|[from] item: Leftovers
+|upkeep
+|turn|18
+|switch|p1a: Dragonite|Dragonite, M|147/323
+|move|p2a: Serperior|Energy Ball|p1a: Dragonite
+|-resisted|p1a: Dragonite
+|-damage|p1a: Dragonite|118/323
+|-unboost|p1a: Dragonite|spd|1
+|-weather|none
+|upkeep
+|turn|19
+|switch|p2a: Latios|Latios, M|60/100
+|-damage|p2a: Latios|48/100|[from] Stealth Rock
+|switch|p1a: Clefable|Clefable, M|394/394
+|upkeep
+|turn|20
+|switch|p2a: Serperior|Serperior, F|28/100
+|-damage|p2a: Serperior|15/100|[from] Stealth Rock
+|move|p1a: Clefable|Thunder Wave|p2a: Serperior
+|-status|p2a: Serperior|par
+|upkeep
+|turn|21
+|move|p1a: Clefable|Moonblast|p2a: Serperior
+|-damage|p2a: Serperior|0 fnt
+|faint|p2a: Serperior
+|upkeep
+|switch|p2a: Azumarill|Azumarill, M|61/100
+|-damage|p2a: Azumarill|49/100|[from] Stealth Rock
+|-enditem|p2a: Azumarill|Sitrus Berry|[eat]
+|-heal|p2a: Azumarill|74/100|[from] item: Sitrus Berry
+|turn|22
+|switch|p1a: Excadrill|Excadrill, M|362/362
+|-ability|p1a: Excadrill|Mold Breaker
+|move|p2a: Azumarill|Aqua Jet|p1a: Excadrill
+|-supereffective|p1a: Excadrill
+|-damage|p1a: Excadrill|110/362
+|-heal|p1a: Excadrill|132/362|[from] item: Leftovers
+|upkeep
+|turn|23
+|switch|p1a: Landorus|Landorus-Therian, M|319/319
+|-ability|p1a: Landorus|Intimidate|boost
+|-unboost|p2a: Azumarill|atk|1
+|move|p2a: Azumarill|Belly Drum|p2a: Azumarill
+|-damage|p2a: Azumarill|24/100
+|-setboost|p2a: Azumarill|atk|6|[from] move: Belly Drum
+|upkeep
+|turn|24
+|switch|p1a: Dragonite|Dragonite, M|118/323
+|move|p2a: Azumarill|Belly Drum||[still]
+|-fail|p2a: Azumarill
+|upkeep
+|turn|25
+|switch|p2a: Tyranitar|Tyranitar, M|30/100 brn
+|-damage|p2a: Tyranitar|18/100 brn|[from] Stealth Rock
+|-weather|Sandstorm|[from] ability: Sand Stream|[of] p2a: Tyranitar
+|move|p1a: Dragonite|Extreme Speed|p2a: Tyranitar
+|-resisted|p2a: Tyranitar
+|-damage|p2a: Tyranitar|4/100 brn
+|-weather|Sandstorm|[upkeep]
+|-damage|p1a: Dragonite|98/323|[from] Sandstorm
+|-damage|p2a: Tyranitar|0 fnt|[from] brn
+|faint|p2a: Tyranitar
+|upkeep
+|switch|p2a: Latios|Latios, M|48/100
+|-damage|p2a: Latios|36/100|[from] Stealth Rock
+|turn|26
+|switch|p1a: Landorus|Landorus-Therian, M|319/319
+|-ability|p1a: Landorus|Intimidate|boost
+|-unboost|p2a: Latios|atk|1
+|move|p2a: Latios|Psychic|p1a: Landorus
+|-damage|p1a: Landorus|46/319
+|-damage|p2a: Latios|26/100|[from] item: Life Orb
+|-weather|Sandstorm|[upkeep]
+|-damage|p2a: Latios|20/100|[from] Sandstorm
+|upkeep
+|turn|27
+|switch|p2a: Azumarill|Azumarill, M|24/100
+|-damage|p2a: Azumarill|12/100|[from] Stealth Rock
+|move|p1a: Landorus|Stealth Rock||[still]
+|-fail|p1a: Landorus
+|-weather|Sandstorm|[upkeep]
+|-damage|p2a: Azumarill|5/100|[from] Sandstorm
+|upkeep
+|turn|28
+|move|p2a: Azumarill|Aqua Jet|p1a: Landorus
+|-supereffective|p1a: Landorus
+|-damage|p1a: Landorus|0 fnt
+|-damage|p2a: Azumarill|0 fnt|[from] item: Rocky Helmet|[of] p1a: Landorus
+|faint|p2a: Azumarill
+|faint|p1a: Landorus
+|-weather|Sandstorm|[upkeep]
+|upkeep
+|switch|p1a: Rotom|Rotom-Wash|97/303
+|switch|p2a: Latios|Latios, M|20/100
+|-damage|p2a: Latios|7/100|[from] Stealth Rock
+|turn|29
+|switch|p2a: Excadrill|Excadrill, F|100/100
+|-damage|p2a: Excadrill|97/100|[from] Stealth Rock
+|-item|p2a: Excadrill|Air Balloon
+|switch|p1a: Clefable|Clefable, M|394/394
+|-weather|Sandstorm|[upkeep]
+|upkeep
+|turn|30
+|move|p2a: Excadrill|Rock Slide|p1a: Clefable
+|-damage|p1a: Clefable|283/394
+|move|p1a: Clefable|Calm Mind|p1a: Clefable
+|-boost|p1a: Clefable|spa|1
+|-boost|p1a: Clefable|spd|1
+|-weather|Sandstorm|[upkeep]
+|-heal|p1a: Clefable|307/394|[from] item: Leftovers
+|upkeep
+|turn|31
+|switch|p1a: Rotom|Rotom-Wash|97/303
+|move|p2a: Excadrill|Swords Dance|p2a: Excadrill
+|-boost|p2a: Excadrill|atk|2
+|-weather|Sandstorm|[upkeep]
+|-damage|p1a: Rotom|79/303|[from] Sandstorm
+|-heal|p1a: Rotom|97/303|[from] item: Leftovers
+|upkeep
+|turn|32
+|move|p2a: Excadrill|Swords Dance|p2a: Excadrill
+|-boost|p2a: Excadrill|atk|2
+|move|p1a: Rotom|Hydro Pump|p2a: Excadrill|[miss]
+|-miss|p1a: Rotom|p2a: Excadrill
+|-weather|none
+|-heal|p1a: Rotom|115/303|[from] item: Leftovers
+|upkeep
+|turn|33
+|move|p2a: Excadrill|Iron Head|p1a: Rotom
+|-resisted|p1a: Rotom
+|-damage|p1a: Rotom|34/303
+|move|p1a: Rotom|Pain Split|p2a: Excadrill
+|-sethp|p2a: Excadrill|54/100|[from] move: Pain Split|[silent]
+|-sethp|p1a: Rotom|192/303|[from] move: Pain Split
+|-heal|p1a: Rotom|210/303|[from] item: Leftovers
+|upkeep
+|turn|34
+|switch|p2a: Latios|Latios, M|7/100
+|-damage|p2a: Latios|0 fnt|[from] Stealth Rock
+|faint|p2a: Latios
+|move|p1a: Rotom|Hydro Pump|p2: Latios|[notarget]
+|-fail|p1a: Rotom
+|-heal|p1a: Rotom|228/303|[from] item: Leftovers
+|upkeep
+|switch|p2a: Excadrill|Excadrill, F|54/100
+|-damage|p2a: Excadrill|51/100|[from] Stealth Rock
+|-item|p2a: Excadrill|Air Balloon
+|turn|35
+|move|p2a: Excadrill|Earthquake|p1a: Rotom
+|-immune|p1a: Rotom|[from] ability: Levitate
+|move|p1a: Rotom|Will-O-Wisp|p2a: Excadrill
+|-status|p2a: Excadrill|brn
+|-heal|p1a: Rotom|246/303|[from] item: Leftovers
+|-damage|p2a: Excadrill|38/100 brn|[from] brn
+|upkeep
+|turn|36
+|switch|p1a: Clefable|Clefable, M|307/394
+|move|p2a: Excadrill|Iron Head|p1a: Clefable
+|-supereffective|p1a: Clefable
+|-damage|p1a: Clefable|141/394
+|-heal|p1a: Clefable|165/394|[from] item: Leftovers
+|-damage|p2a: Excadrill|26/100 brn|[from] brn
+|upkeep
+|turn|37
+|switch|p1a: Heatran|Heatran, M|386/386
+|move|p2a: Excadrill|Earthquake|p1a: Heatran
+|-supereffective|p1a: Heatran
+|-damage|p1a: Heatran|18/386
+|-heal|p1a: Heatran|42/386|[from] item: Leftovers
+|-damage|p2a: Excadrill|13/100 brn|[from] brn
+|upkeep
+|turn|38
+|move|p2a: Excadrill|Swords Dance|p2a: Excadrill
+|-boost|p2a: Excadrill|atk|2
+|move|p1a: Heatran|Lava Plume|p2a: Excadrill
+|-supereffective|p2a: Excadrill
+|-damage|p2a: Excadrill|0 fnt
+|-enditem|p2a: Excadrill|Air Balloon
+|faint|p2a: Excadrill
+    </script>
+</div>
+
+<div class="battle-log battle-log-inline" style="display:none"></div>
+
+<script>
+    let daily = Math.floor(Date.now() / 1000 / 60 / 60 / 24); document.write('<script src="https://play.pokemonshowdown.com/js/replay-embed.js?version' + daily + '"></' + 'script>');
+</script>
+
+<p style="text-align:center"> Replay created by <a href="https://github.com/hsahovic/poke-env">poke-env</a>, with code from <a
+        href="https://github.com/smogon/pokemon-showdown"> pokemon-showdown</a>. If something goes wrong, don't hesitate
+    to open an <a href="https://github.com/hsahovic/poke-env/issues">issue!</a></p>

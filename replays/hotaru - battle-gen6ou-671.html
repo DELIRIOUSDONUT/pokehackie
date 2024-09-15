@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<!-- version 1 -->
+<title>battle-gen6ou-671</title>
+<style>
+    html,
+    body {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        padding: 12px 0;
+    }
+
+    .battle-log {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+    }
+
+    .battle-log-inline {
+        border: 1px solid #AAAAAA;
+        background: #EEF2F5;
+        color: black;
+        max-width: 640px;
+        margin: 0 auto 80px;
+        padding-bottom: 5px;
+    }
+
+    .battle-log .inner {
+        padding: 4px 8px 0px 8px;
+    }
+
+    .battle-log .inner-preempt {
+        padding: 0 8px 4px 8px;
+    }
+
+    .battle-log .inner-after {
+        margin-top: 0.5em;
+    }
+
+    .battle-log h2 {
+        margin: 0.5em -8px;
+        padding: 4px 8px;
+        border: 1px solid #AAAAAA;
+        background: #E0E7EA;
+        border-left: 0;
+        border-right: 0;
+        font-family: Verdana, sans-serif;
+        font-size: 13pt;
+    }
+
+    .backprop {
+        top: 0;
+    }
+
+    .battle-log .chat {
+        vertical-align: middle;
+        padding: 3px 0 3px 0;
+        font-size: 8pt;
+    }
+
+    .battle-log .chat strong {
+        color: #40576A;
+    }
+
+    .battle-log .chat em {
+        padding: 1px 4px 1px 3px;
+        color: #000000;
+        font-style: normal;
+    }
+
+    .chat.mine {
+        background: rgba(0, 0, 0, 0.05);
+        margin-left: -8px;
+        margin-right: -8px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .spoiler {
+        color: #BBBBBB;
+        background: #BBBBBB;
+        padding: 0px 3px;
+    }
+
+    .spoiler:hover,
+    .spoiler:active,
+    .spoiler-shown {
+        color: #000000;
+        background: #E2E2E2;
+        padding: 0px 3px;
+    }
+
+    .spoiler a {
+        color: #BBBBBB;
+    }
+
+    .spoiler:hover a,
+    .spoiler:active a,
+    .spoiler-shown a {
+        color: #2288CC;
+    }
+
+    .chat code,
+    .chat .spoiler:hover code,
+    .chat .spoiler:active code,
+    .chat .spoiler-shown code {
+        border: 1px solid #C0C0C0;
+        background: #EEEEEE;
+        color: black;
+        padding: 0 2px;
+    }
+
+    .chat .spoiler code {
+        border: 1px solid #CCCCCC;
+        background: #CCCCCC;
+        color: #CCCCCC;
+    }
+
+    .battle-log .rated {
+        padding: 3px 4px;
+    }
+
+    .battle-log .rated strong {
+        color: white;
+        background: #89A;
+        padding: 1px 4px;
+        border-radius: 4px;
+    }
+
+    .spacer {
+        margin-top: 0.5em;
+    }
+
+    .message-announce {
+        background: #6688AA;
+        color: white;
+        padding: 1px 4px 2px;
+    }
+
+    .message-announce a,
+    .broadcast-green a,
+    .broadcast-blue a,
+    .broadcast-red a {
+        color: #DDEEFF;
+    }
+
+    .broadcast-green {
+        background-color: #559955;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .broadcast-blue {
+        background-color: #6688AA;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .infobox {
+        border: 1px solid #6688AA;
+        padding: 2px 4px;
+    }
+
+    .infobox-limited {
+        max-height: 200px;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
+    .broadcast-red {
+        background-color: #AA5544;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .message-learn-canlearn {
+        font-weight: bold;
+        color: #228822;
+        text-decoration: underline;
+    }
+
+    .message-learn-cannotlearn {
+        font-weight: bold;
+        color: #CC2222;
+        text-decoration: underline;
+    }
+
+    .message-effect-weak {
+        font-weight: bold;
+        color: #CC2222;
+    }
+
+    .message-effect-resist {
+        font-weight: bold;
+        color: #6688AA;
+    }
+
+    .message-effect-immune {
+        font-weight: bold;
+        color: #666666;
+    }
+
+    .message-learn-list {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .message-throttle-notice,
+    .message-error {
+        color: #992222;
+    }
+
+    .message-overflow,
+    .chat small.message-overflow {
+        font-size: 0pt;
+    }
+
+    .message-overflow::before {
+        font-size: 9pt;
+        content: '...';
+    }
+
+    .subtle {
+        color: #3A4A66;
+    }
+</style>
+<div class="wrapper replay-wrapper" style="max-width:1180px;margin:0 auto">
+    <input type="hidden" name="replayid" value="unregisteredserver-gen8randombattle-320064" />
+    <div class="battle"></div>
+    <div class="battle-log"></div>
+    <div class="replay-controls"></div>
+    <div class="replay-controls-2"></div>
+    <h1 style="font-weight:normal;text-align:center"><strong>poke-env battle replay</strong><br />battle-gen6ou-671<br /><a
+            href="http://pokemonshowdown.com/users/randomplayer1" class="subtle" target="_blank">hotaru</a>
+        vs. <a href="http://pokemonshowdown.com/users/randomplayer2" class="subtle"
+            target="_blank">max_ivanovic</a></h1>
+    <script type="text/plain" class="battle-log-data">
+    >battle-gen6ou-671|init|battle
+|title|hotaru vs. max_ivanovic
+|j|☆hotaru
+|j|☆max_ivanovic
+|gametype|singles
+|player|p1|hotaru|2|
+|player|p2|max_ivanovic|170|
+|teamsize|p1|6
+|teamsize|p2|6
+|gen|6
+|tier|[Gen 6] OU
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|Species Clause: Limit one of each Pokémon
+|rule|OHKO Clause: OHKO moves are banned
+|rule|Moody Clause: Moody is banned
+|rule|Evasion Items Clause: Evasion items are banned
+|rule|Evasion Moves Clause: Evasion moves are banned
+|rule|Endless Battle Clause: Forcing endless battles is banned
+|rule|HP Percentage Mod: HP is shown in percentages
+|rule|Swagger Clause: Swagger is banned
+|clearpoke
+|poke|p1|Cloyster, M|item
+|poke|p1|Aerodactyl, F|item
+|poke|p1|Scizor, M|item
+|poke|p1|Weavile, M|item
+|poke|p1|Volcarona, M|item
+|poke|p1|Thundurus-Therian, M|item
+|poke|p2|Sableye, F|item
+|poke|p2|Shuckle, M|item
+|poke|p2|Whimsicott, F|item
+|poke|p2|Dugtrio, M|item
+|poke|p2|Shedinja|item
+|poke|p2|Togekiss, F|item
+|teampreview
+|start
+|switch|p1a: Cloyster|Cloyster, M|242/242
+|switch|p2a: Sableye|Sableye, F|100/100
+|turn|1
+|switch|p1a: Scizor|Scizor, M|289/289
+|switch|p2a: Shedinja|Shedinja|100/100
+|upkeep
+|turn|2
+|switch|p2a: Whimsicott|Whimsicott, F|100/100
+|move|p1a: Scizor|Bullet Punch|p2a: Whimsicott
+|-supereffective|p2a: Whimsicott
+|-damage|p2a: Whimsicott|25/100
+|-heal|p2a: Whimsicott|31/100|[from] item: Leftovers
+|upkeep
+|turn|3
+|detailschange|p1a: Scizor|Scizor-Mega, M
+|-mega|p1a: Scizor|Scizor|Scizorite
+|move|p2a: Whimsicott|Leech Seed|p1a: Scizor
+|-start|p1a: Scizor|move: Leech Seed
+|move|p1a: Scizor|Bug Bite|p2a: Whimsicott
+|-damage|p2a: Whimsicott|0 fnt
+|faint|p2a: Whimsicott
+|upkeep
+|switch|p2a: Shuckle|Shuckle, M|100/100
+|turn|4
+|switch|p1a: Thundurus|Thundurus-Therian, M|300/300
+|move|p2a: Shuckle|Sand Tomb|p1a: Thundurus
+|-immune|p1a: Thundurus
+|upkeep
+|turn|5
+|switch|p1a: Cloyster|Cloyster, M|242/242
+|move|p2a: Shuckle|Protect||[still]
+|-fail|p2a: Shuckle
+|upkeep
+|turn|6
+|switch|p2a: Shedinja|Shedinja|100/100
+|move|p1a: Cloyster|Explosion|p2a: Shedinja
+|-immune|p2a: Shedinja
+|faint|p1a: Cloyster
+|upkeep
+|switch|p1a: Weavile|Weavile, M|281/281
+|turn|7
+|switch|p1a: Volcarona|Volcarona, M|332/332
+|move|p2a: Shedinja|Shadow Sneak|p1a: Volcarona
+|-damage|p1a: Volcarona|244/332
+|-status|p2a: Shedinja|brn|[from] ability: Flame Body|[of] p1a: Volcarona
+|-damage|p2a: Shedinja|0 fnt|[from] brn
+|faint|p2a: Shedinja
+|upkeep
+|switch|p2a: Dugtrio|Dugtrio, M|100/100
+|turn|8
+|switch|p1a: Aerodactyl|Aerodactyl, F|319/319
+|-ability|p1a: Aerodactyl|Pressure
+|move|p2a: Dugtrio|Reversal|p1a: Aerodactyl
+|-damage|p1a: Aerodactyl|299/319
+|-damage|p2a: Dugtrio|84/100|[from] item: Rocky Helmet|[of] p1a: Aerodactyl
+|upkeep
+|turn|9
+|switch|p1a: Volcarona|Volcarona, M|244/332
+|switch|p2a: Shuckle|Shuckle, M|100/100
+|upkeep
+|turn|10
+|switch|p1a: Thundurus|Thundurus-Therian, M|300/300
+|move|p2a: Shuckle|Sand Tomb|p1a: Thundurus
+|-immune|p1a: Thundurus
+|upkeep
+|turn|11
+|switch|p2a: Dugtrio|Dugtrio, M|84/100
+|move|p1a: Thundurus|Focus Blast|p2a: Dugtrio|[miss]
+|-miss|p1a: Thundurus|p2a: Dugtrio
+|upkeep
+|turn|12
+|move|p2a: Dugtrio|Sucker Punch|p1a: Thundurus
+|-crit|p1a: Thundurus
+|-damage|p1a: Thundurus|153/300
+|move|p1a: Thundurus|Focus Blast|p2a: Dugtrio
+|-damage|p2a: Dugtrio|0 fnt
+|faint|p2a: Dugtrio
+|upkeep
+|switch|p2a: Togekiss|Togekiss, F|100/100
+|turn|13
+|move|p1a: Thundurus|Focus Blast|p2a: Togekiss|[miss]
+|-miss|p1a: Thundurus|p2a: Togekiss
+|move|p2a: Togekiss|Flamethrower|p1a: Thundurus
+|-damage|p1a: Thundurus|54/300
+|-enditem|p1a: Thundurus|Sitrus Berry|[eat]
+|-heal|p1a: Thundurus|129/300|[from] item: Sitrus Berry
+|upkeep
+|turn|14
+|switch|p1a: Volcarona|Volcarona, M|244/332
+|move|p2a: Togekiss|Roost||[still]
+|-fail|p2a: Togekiss|heal
+|upkeep
+|turn|15
+|switch|p1a: Weavile|Weavile, M|281/281
+|move|p2a: Togekiss|Flamethrower|p1a: Weavile
+|-supereffective|p1a: Weavile
+|-damage|p1a: Weavile|79/281
+|upkeep
+|turn|16
+|switch|p1a: Aerodactyl|Aerodactyl, F|299/319
+|-ability|p1a: Aerodactyl|Pressure
+|move|p2a: Togekiss|Thunder Wave|p1a: Aerodactyl
+|-status|p1a: Aerodactyl|par
+|upkeep
+|turn|17
+|switch|p2a: Shuckle|Shuckle, M|100/100
+|switch|p1a: Scizor|Scizor-Mega, M|289/289
+|upkeep
+|turn|18
+|switch|p1a: Thundurus|Thundurus-Therian, M|129/300
+|move|p2a: Shuckle|Protect||[still]
+|-fail|p2a: Shuckle
+|upkeep
+|turn|19
+|switch|p1a: Scizor|Scizor-Mega, M|289/289
+|move|p2a: Shuckle|Toxic|p1a: Scizor
+|-immune|p1a: Scizor
+|upkeep
+|turn|20
+|switch|p2a: Togekiss|Togekiss, F|100/100
+|move|p1a: Scizor|Bug Bite|p2a: Togekiss
+|-resisted|p2a: Togekiss
+|-damage|p2a: Togekiss|87/100
+|upkeep
+|turn|21
+|move|p2a: Togekiss|Flamethrower|p1a: Scizor
+|-supereffective|p1a: Scizor
+|-damage|p1a: Scizor|0 fnt
+|faint|p1a: Scizor
+|upkeep
+|switch|p1a: Volcarona|Volcarona, M|244/332
+|turn|22
+|switch|p2a: Shuckle|Shuckle, M|100/100
+|move|p1a: Volcarona|Flamethrower|p2a: Shuckle
+|-damage|p2a: Shuckle|64/100
+|-heal|p2a: Shuckle|70/100|[from] item: Leftovers
+|upkeep
+|turn|23
+|move|p1a: Volcarona|Quiver Dance|p1a: Volcarona
+|-boost|p1a: Volcarona|spa|1
+|-boost|p1a: Volcarona|spd|1
+|-boost|p1a: Volcarona|spe|1
+|move|p2a: Shuckle|Power Split|p1a: Volcarona
+|-activate|p2a: Shuckle|move: Power Split|[of] p1a: Volcarona
+|-heal|p2a: Shuckle|76/100|[from] item: Leftovers
+|upkeep
+|turn|24
+|move|p1a: Volcarona|Flamethrower|p2a: Shuckle
+|-damage|p2a: Shuckle|48/100
+|move|p2a: Shuckle|Toxic|p1a: Volcarona
+|-status|p1a: Volcarona|tox
+|-enditem|p1a: Volcarona|Lum Berry|[eat]
+|-curestatus|p1a: Volcarona|tox|[msg]
+|-heal|p2a: Shuckle|54/100|[from] item: Leftovers
+|upkeep
+|turn|25
+|switch|p1a: Weavile|Weavile, M|79/281
+|switch|p2a: Togekiss|Togekiss, F|87/100
+|upkeep
+|turn|26
+|move|p1a: Weavile|Low Kick|p2a: Togekiss
+|-resisted|p2a: Togekiss
+|-damage|p2a: Togekiss|82/100
+|move|p2a: Togekiss|Roost|p2a: Togekiss
+|-heal|p2a: Togekiss|100/100
+|-singleturn|p2a: Togekiss|move: Roost
+|upkeep
+|turn|27
+|switch|p1a: Volcarona|Volcarona, M|244/332
+|move|p2a: Togekiss|Roost||[still]
+|-fail|p2a: Togekiss|heal
+|upkeep
+|turn|28
+|switch|p1a: Aerodactyl|Aerodactyl, F|299/319 par
+|-ability|p1a: Aerodactyl|Pressure
+|move|p2a: Togekiss|Thunder Wave|p1a: Aerodactyl
+|-fail|p1a: Aerodactyl|par
+|upkeep
+|turn|29
+|switch|p1a: Volcarona|Volcarona, M|244/332
+|move|p2a: Togekiss|Roost||[still]
+|-fail|p2a: Togekiss|heal
+|upkeep
+|turn|30
+|move|p2a: Togekiss|Roost||[still]
+|-fail|p2a: Togekiss|heal
+|move|p1a: Volcarona|Giga Drain|p2a: Togekiss
+|-resisted|p2a: Togekiss
+|-crit|p2a: Togekiss
+|-damage|p2a: Togekiss|82/100
+|-heal|p1a: Volcarona|280/332|[from] drain|[of] p2a: Togekiss
+|upkeep
+|turn|31
+|move|p2a: Togekiss|Flamethrower|p1a: Volcarona
+|-damage|p1a: Volcarona|207/332
+|move|p1a: Volcarona|Hidden Power|p2a: Togekiss
+|-immune|p2a: Togekiss
+|upkeep
+|turn|32
+|switch|p2a: Sableye|Sableye, F|100/100
+|move|p1a: Volcarona|Hidden Power|p2a: Sableye
+|-damage|p2a: Sableye|73/100
+|-heal|p2a: Sableye|79/100|[from] item: Leftovers
+|upkeep
+|turn|33
+|move|p2a: Sableye|Recover|p2a: Sableye
+|-heal|p2a: Sableye|100/100
+|move|p1a: Volcarona|Giga Drain|p2a: Sableye
+|-crit|p2a: Sableye
+|-damage|p2a: Sableye|50/100
+|-heal|p1a: Volcarona|284/332|[from] drain|[of] p2a: Sableye
+|-heal|p2a: Sableye|56/100|[from] item: Leftovers
+|upkeep
+|turn|34
+|switch|p1a: Weavile|Weavile, M|79/281
+|switch|p2a: Togekiss|Togekiss, F|82/100
+|upkeep
+|turn|35
+|switch|p2a: Shuckle|Shuckle, M|54/100
+|move|p1a: Weavile|Swords Dance|p1a: Weavile
+|-boost|p1a: Weavile|atk|2
+|-heal|p2a: Shuckle|60/100|[from] item: Leftovers
+|upkeep
+|turn|36
+|switch|p1a: Aerodactyl|Aerodactyl, F|299/319 par
+|-ability|p1a: Aerodactyl|Pressure
+|move|p2a: Shuckle|Toxic||[still]
+|-fail|p2a: Shuckle
+|-heal|p2a: Shuckle|66/100|[from] item: Leftovers
+|upkeep
+|turn|37
+|move|p1a: Aerodactyl|Taunt|p2a: Shuckle
+|-start|p2a: Shuckle|move: Taunt
+|cant|p2a: Shuckle|move: Taunt|Power Split
+|-heal|p2a: Shuckle|72/100|[from] item: Leftovers
+|upkeep
+|turn|38
+|switch|p1a: Weavile|Weavile, M|79/281
+|switch|p2a: Togekiss|Togekiss, F|82/100
+|upkeep
+|turn|39
+|switch|p1a: Aerodactyl|Aerodactyl, F|299/319 par
+|-ability|p1a: Aerodactyl|Pressure
+|move|p2a: Togekiss|Flamethrower|p1a: Aerodactyl
+|-resisted|p1a: Aerodactyl
+|-damage|p1a: Aerodactyl|245/319 par
+|upkeep
+|turn|40
+|move|p2a: Togekiss|Thunder Wave|p1a: Aerodactyl
+|-fail|p1a: Aerodactyl|par
+|move|p1a: Aerodactyl|Stealth Rock|p2a: Togekiss
+|-sidestart|p2: max_ivanovic|move: Stealth Rock
+|upkeep
+|turn|41
+|switch|p1a: Weavile|Weavile, M|79/281
+|move|p2a: Togekiss|Flamethrower|p1a: Weavile
+|-supereffective|p1a: Weavile
+|-damage|p1a: Weavile|0 fnt
+|faint|p1a: Weavile
+|upkeep
+|switch|p1a: Aerodactyl|Aerodactyl, F|245/319 par
+|-ability|p1a: Aerodactyl|Pressure
+|turn|42
+|move|p2a: Togekiss|Roost|p2a: Togekiss
+|-heal|p2a: Togekiss|100/100
+|-singleturn|p2a: Togekiss|move: Roost
+|move|p1a: Aerodactyl|Double-Edge|p2a: Togekiss
+|-damage|p2a: Togekiss|74/100
+|-damage|p1a: Aerodactyl|212/319 par|[from] Recoil
+|upkeep
+|turn|43
+|move|p2a: Togekiss|Roost|p2a: Togekiss
+|-heal|p2a: Togekiss|100/100
+|-singleturn|p2a: Togekiss|move: Roost
+|move|p1a: Aerodactyl|Double-Edge|p2a: Togekiss
+|-damage|p2a: Togekiss|73/100
+|-damage|p1a: Aerodactyl|179/319 par|[from] Recoil
+|upkeep
+|turn|44
+|switch|p1a: Volcarona|Volcarona, M|284/332
+|move|p2a: Togekiss|Thunder Wave|p1a: Volcarona
+|-status|p1a: Volcarona|par
+|upkeep
+|turn|45
+|switch|p2a: Shuckle|Shuckle, M|72/100
+|-damage|p2a: Shuckle|47/100|[from] Stealth Rock
+|move|p1a: Volcarona|Quiver Dance|p1a: Volcarona
+|-boost|p1a: Volcarona|spa|1
+|-boost|p1a: Volcarona|spd|1
+|-boost|p1a: Volcarona|spe|1
+|-heal|p2a: Shuckle|53/100|[from] item: Leftovers
+|upkeep
+|turn|46
+|move|p2a: Shuckle|Protect|p2a: Shuckle
+|-singleturn|p2a: Shuckle|Protect
+|move|p1a: Volcarona|Giga Drain|p2a: Shuckle
+|-activate|p2a: Shuckle|move: Protect
+|-heal|p2a: Shuckle|60/100|[from] item: Leftovers
+|upkeep
+|turn|47
+|move|p2a: Shuckle|Protect||[still]
+|-fail|p2a: Shuckle
+|move|p1a: Volcarona|Hidden Power|p2a: Shuckle
+|-damage|p2a: Shuckle|37/100
+|-heal|p2a: Shuckle|44/100|[from] item: Leftovers
+|upkeep
+|turn|48
+|move|p2a: Shuckle|Protect|p2a: Shuckle
+|-singleturn|p2a: Shuckle|Protect
+|move|p1a: Volcarona|Flamethrower|p2a: Shuckle
+|-activate|p2a: Shuckle|move: Protect
+|-heal|p2a: Shuckle|50/100|[from] item: Leftovers
+|upkeep
+|turn|49
+|switch|p1a: Thundurus|Thundurus-Therian, M|129/300
+|move|p2a: Shuckle|Power Split|p1a: Thundurus
+|-activate|p2a: Shuckle|move: Power Split|[of] p1a: Thundurus
+|-heal|p2a: Shuckle|56/100|[from] item: Leftovers
+|upkeep
+|turn|50
+|switch|p1a: Aerodactyl|Aerodactyl, F|179/319 par
+|-ability|p1a: Aerodactyl|Pressure
+|switch|p2a: Togekiss|Togekiss, F|73/100
+|-damage|p2a: Togekiss|49/100|[from] Stealth Rock
+|upkeep
+|turn|51
+|switch|p2a: Shuckle|Shuckle, M|56/100
+|-damage|p2a: Shuckle|31/100|[from] Stealth Rock
+|switch|p1a: Thundurus|Thundurus-Therian, M|129/300
+|-heal|p2a: Shuckle|37/100|[from] item: Leftovers
+|upkeep
+|turn|52
+|move|p1a: Thundurus|Hidden Power|p2a: Shuckle
+|-damage|p2a: Shuckle|21/100
+|move|p2a: Shuckle|Toxic|p1a: Thundurus
+|-status|p1a: Thundurus|tox
+|-heal|p2a: Shuckle|27/100|[from] item: Leftovers
+|-damage|p1a: Thundurus|111/300 tox|[from] psn
+|upkeep
+|turn|53
+|move|p1a: Thundurus|Nasty Plot|p1a: Thundurus
+|-boost|p1a: Thundurus|spa|2
+|move|p2a: Shuckle|Toxic|p1a: Thundurus
+|-fail|p1a: Thundurus|tox
+|-heal|p2a: Shuckle|33/100|[from] item: Leftovers
+|-damage|p1a: Thundurus|75/300 tox|[from] psn
+|upkeep
+|turn|54
+|switch|p1a: Aerodactyl|Aerodactyl, F|179/319 par
+|-ability|p1a: Aerodactyl|Pressure
+|move|p2a: Shuckle|Power Split|p1a: Aerodactyl
+|-activate|p2a: Shuckle|move: Power Split|[of] p1a: Aerodactyl
+|-heal|p2a: Shuckle|39/100|[from] item: Leftovers
+|upkeep
+|turn|55
+|switch|p1a: Volcarona|Volcarona, M|284/332 par
+|move|p2a: Shuckle|Protect||[still]
+|-fail|p2a: Shuckle
+|-heal|p2a: Shuckle|46/100|[from] item: Leftovers
+|upkeep
+|turn|56
+|switch|p1a: Aerodactyl|Aerodactyl, F|179/319 par
+|-ability|p1a: Aerodactyl|Pressure
+|switch|p2a: Togekiss|Togekiss, F|49/100
+|-damage|p2a: Togekiss|24/100|[from] Stealth Rock
+|upkeep
+|turn|57
+|move|p2a: Togekiss|Thunder Wave|p1a: Aerodactyl
+|-fail|p1a: Aerodactyl|par
+|move|p1a: Aerodactyl|Taunt|p2a: Togekiss
+|-start|p2a: Togekiss|move: Taunt
+|upkeep
+|turn|58
+|move|p2a: Togekiss|Flamethrower|p1a: Aerodactyl
+|-resisted|p1a: Aerodactyl
+|-damage|p1a: Aerodactyl|131/319 par
+|cant|p1a: Aerodactyl|flinch
+|upkeep
+|turn|59
+|switch|p2a: Shuckle|Shuckle, M|46/100
+|-damage|p2a: Shuckle|21/100|[from] Stealth Rock
+|cant|p1a: Aerodactyl|par
+|-heal|p2a: Shuckle|27/100|[from] item: Leftovers
+|upkeep
+|turn|60
+|move|p1a: Aerodactyl|Double-Edge|p2a: Shuckle
+|-resisted|p2a: Shuckle
+|-damage|p2a: Shuckle|19/100
+|-damage|p1a: Aerodactyl|124/319 par|[from] Recoil
+|move|p2a: Shuckle|Power Split|p1a: Aerodactyl
+|-activate|p2a: Shuckle|move: Power Split|[of] p1a: Aerodactyl
+|-heal|p2a: Shuckle|25/100|[from] item: Leftovers
+|upkeep
+|turn|61
+|switch|p2a: Sableye|Sableye, F|56/100
+|-damage|p2a: Sableye|44/100|[from] Stealth Rock
+|cant|p1a: Aerodactyl|par
+|-heal|p2a: Sableye|50/100|[from] item: Leftovers
+|upkeep
+|turn|62
+|move|p2a: Sableye|Foul Play|p1a: Aerodactyl
+|-damage|p1a: Aerodactyl|51/319 par
+|-damage|p2a: Sableye|34/100|[from] item: Rocky Helmet|[of] p1a: Aerodactyl
+|move|p1a: Aerodactyl|Earthquake|p2a: Sableye
+|-damage|p2a: Sableye|15/100
+|-heal|p2a: Sableye|21/100|[from] item: Leftovers
+|upkeep
+|turn|63
+|switch|p2a: Shuckle|Shuckle, M|25/100
+|-damage|p2a: Shuckle|0 fnt|[from] Stealth Rock
+|faint|p2a: Shuckle
+|move|p1a: Aerodactyl|Taunt|p2: Shuckle|[notarget]
+|-fail|p1a: Aerodactyl
+|upkeep
+|switch|p2a: Sableye|Sableye, F|21/100
+|-damage|p2a: Sableye|8/100|[from] Stealth Rock
+|turn|64
+|move|p2a: Sableye|Will-O-Wisp||[still]
+|-fail|p2a: Sableye
+|cant|p1a: Aerodactyl|par
+|-heal|p2a: Sableye|15/100|[from] item: Leftovers
+|upkeep
+|turn|65
+|switch|p2a: Togekiss|Togekiss, F|24/100
+|-damage|p2a: Togekiss|0 fnt|[from] Stealth Rock
+|faint|p2a: Togekiss
+|switch|p1a: Thundurus|Thundurus-Therian, M|75/300 tox
+|-damage|p1a: Thundurus|57/300 tox|[from] psn
+|upkeep
+|switch|p2a: Sableye|Sableye, F|15/100
+|-damage|p2a: Sableye|2/100|[from] Stealth Rock
+|turn|66
+|switch|p1a: Volcarona|Volcarona, M|284/332 par
+|move|p2a: Sableye|Foul Play|p1a: Volcarona
+|-damage|p1a: Volcarona|208/332 par
+|-heal|p2a: Sableye|8/100|[from] item: Leftovers
+|upkeep
+|turn|67
+|switch|p1a: Thundurus|Thundurus-Therian, M|57/300 tox
+|move|p2a: Sableye|Toxic|p1a: Thundurus
+|-fail|p1a: Thundurus|tox
+|-heal|p2a: Sableye|15/100|[from] item: Leftovers
+|-damage|p1a: Thundurus|39/300 tox|[from] psn
+|upkeep
+|turn|68
+|move|p2a: Sableye|Toxic|p1a: Thundurus
+|-fail|p1a: Thundurus|tox
+|move|p1a: Thundurus|Nasty Plot|p1a: Thundurus
+|-boost|p1a: Thundurus|spa|2
+|-heal|p2a: Sableye|21/100|[from] item: Leftovers
+|-damage|p1a: Thundurus|3/300 tox|[from] psn
+|upkeep
+|turn|69
+|move|p1a: Thundurus|Thunderbolt|p2a: Sableye
+|-damage|p2a: Sableye|0 fnt
+|faint|p2a: Sableye
+    </script>
+</div>
+
+<div class="battle-log battle-log-inline" style="display:none"></div>
+
+<script>
+    let daily = Math.floor(Date.now() / 1000 / 60 / 60 / 24); document.write('<script src="https://play.pokemonshowdown.com/js/replay-embed.js?version' + daily + '"></' + 'script>');
+</script>
+
+<p style="text-align:center"> Replay created by <a href="https://github.com/hsahovic/poke-env">poke-env</a>, with code from <a
+        href="https://github.com/smogon/pokemon-showdown"> pokemon-showdown</a>. If something goes wrong, don't hesitate
+    to open an <a href="https://github.com/hsahovic/poke-env/issues">issue!</a></p>

@@ -5,7 +5,7 @@ import time
 import asyncio
 from collections import defaultdict
 
-NUM_PLAYERS_AFTER_GROUPS = 4
+NUM_PLAYERS_AFTER_GROUPS = 1
 
 class Tournament:
     def __init__(self):

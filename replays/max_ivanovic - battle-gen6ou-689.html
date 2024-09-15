@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<!-- version 1 -->
+<title>battle-gen6ou-689</title>
+<style>
+    html,
+    body {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        padding: 12px 0;
+    }
+
+    .battle-log {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+    }
+
+    .battle-log-inline {
+        border: 1px solid #AAAAAA;
+        background: #EEF2F5;
+        color: black;
+        max-width: 640px;
+        margin: 0 auto 80px;
+        padding-bottom: 5px;
+    }
+
+    .battle-log .inner {
+        padding: 4px 8px 0px 8px;
+    }
+
+    .battle-log .inner-preempt {
+        padding: 0 8px 4px 8px;
+    }
+
+    .battle-log .inner-after {
+        margin-top: 0.5em;
+    }
+
+    .battle-log h2 {
+        margin: 0.5em -8px;
+        padding: 4px 8px;
+        border: 1px solid #AAAAAA;
+        background: #E0E7EA;
+        border-left: 0;
+        border-right: 0;
+        font-family: Verdana, sans-serif;
+        font-size: 13pt;
+    }
+
+    .backprop {
+        top: 0;
+    }
+
+    .battle-log .chat {
+        vertical-align: middle;
+        padding: 3px 0 3px 0;
+        font-size: 8pt;
+    }
+
+    .battle-log .chat strong {
+        color: #40576A;
+    }
+
+    .battle-log .chat em {
+        padding: 1px 4px 1px 3px;
+        color: #000000;
+        font-style: normal;
+    }
+
+    .chat.mine {
+        background: rgba(0, 0, 0, 0.05);
+        margin-left: -8px;
+        margin-right: -8px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .spoiler {
+        color: #BBBBBB;
+        background: #BBBBBB;
+        padding: 0px 3px;
+    }
+
+    .spoiler:hover,
+    .spoiler:active,
+    .spoiler-shown {
+        color: #000000;
+        background: #E2E2E2;
+        padding: 0px 3px;
+    }
+
+    .spoiler a {
+        color: #BBBBBB;
+    }
+
+    .spoiler:hover a,
+    .spoiler:active a,
+    .spoiler-shown a {
+        color: #2288CC;
+    }
+
+    .chat code,
+    .chat .spoiler:hover code,
+    .chat .spoiler:active code,
+    .chat .spoiler-shown code {
+        border: 1px solid #C0C0C0;
+        background: #EEEEEE;
+        color: black;
+        padding: 0 2px;
+    }
+
+    .chat .spoiler code {
+        border: 1px solid #CCCCCC;
+        background: #CCCCCC;
+        color: #CCCCCC;
+    }
+
+    .battle-log .rated {
+        padding: 3px 4px;
+    }
+
+    .battle-log .rated strong {
+        color: white;
+        background: #89A;
+        padding: 1px 4px;
+        border-radius: 4px;
+    }
+
+    .spacer {
+        margin-top: 0.5em;
+    }
+
+    .message-announce {
+        background: #6688AA;
+        color: white;
+        padding: 1px 4px 2px;
+    }
+
+    .message-announce a,
+    .broadcast-green a,
+    .broadcast-blue a,
+    .broadcast-red a {
+        color: #DDEEFF;
+    }
+
+    .broadcast-green {
+        background-color: #559955;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .broadcast-blue {
+        background-color: #6688AA;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .infobox {
+        border: 1px solid #6688AA;
+        padding: 2px 4px;
+    }
+
+    .infobox-limited {
+        max-height: 200px;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
+    .broadcast-red {
+        background-color: #AA5544;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .message-learn-canlearn {
+        font-weight: bold;
+        color: #228822;
+        text-decoration: underline;
+    }
+
+    .message-learn-cannotlearn {
+        font-weight: bold;
+        color: #CC2222;
+        text-decoration: underline;
+    }
+
+    .message-effect-weak {
+        font-weight: bold;
+        color: #CC2222;
+    }
+
+    .message-effect-resist {
+        font-weight: bold;
+        color: #6688AA;
+    }
+
+    .message-effect-immune {
+        font-weight: bold;
+        color: #666666;
+    }
+
+    .message-learn-list {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .message-throttle-notice,
+    .message-error {
+        color: #992222;
+    }
+
+    .message-overflow,
+    .chat small.message-overflow {
+        font-size: 0pt;
+    }
+
+    .message-overflow::before {
+        font-size: 9pt;
+        content: '...';
+    }
+
+    .subtle {
+        color: #3A4A66;
+    }
+</style>
+<div class="wrapper replay-wrapper" style="max-width:1180px;margin:0 auto">
+    <input type="hidden" name="replayid" value="unregisteredserver-gen8randombattle-320064" />
+    <div class="battle"></div>
+    <div class="battle-log"></div>
+    <div class="replay-controls"></div>
+    <div class="replay-controls-2"></div>
+    <h1 style="font-weight:normal;text-align:center"><strong>poke-env battle replay</strong><br />battle-gen6ou-689<br /><a
+            href="http://pokemonshowdown.com/users/randomplayer1" class="subtle" target="_blank">max_ivanovic</a>
+        vs. <a href="http://pokemonshowdown.com/users/randomplayer2" class="subtle"
+            target="_blank">meow</a></h1>
+    <script type="text/plain" class="battle-log-data">
+    >battle-gen6ou-689|init|battle
+|title|meow vs. max_ivanovic
+|j|☆meow
+|j|☆max_ivanovic
+|gametype|singles
+|player|p1|meow|265|
+|player|p2|max_ivanovic|170|
+|teamsize|p1|6
+|teamsize|p2|6
+|gen|6
+|tier|[Gen 6] OU
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|Species Clause: Limit one of each Pokémon
+|rule|OHKO Clause: OHKO moves are banned
+|rule|Moody Clause: Moody is banned
+|rule|Evasion Items Clause: Evasion items are banned
+|rule|Evasion Moves Clause: Evasion moves are banned
+|rule|Endless Battle Clause: Forcing endless battles is banned
+|rule|HP Percentage Mod: HP is shown in percentages
+|rule|Swagger Clause: Swagger is banned
+|clearpoke
+|poke|p1|Keldeo|item
+|poke|p1|Excadrill, M|item
+|poke|p1|Thundurus, M|item
+|poke|p1|Bisharp, M|item
+|poke|p1|Garchomp, F|item
+|poke|p1|Latias, F|item
+|poke|p2|Sableye, F|item
+|poke|p2|Shuckle, F|item
+|poke|p2|Whimsicott, F|item
+|poke|p2|Dugtrio, M|item
+|poke|p2|Shedinja|item
+|poke|p2|Togekiss, F|item
+|teampreview
+|start
+|switch|p1a: Thundurus|Thundurus, M|100/100
+|switch|p2a: Shedinja|Shedinja|1/1
+|turn|1
+|switch|p1a: Bisharp|Bisharp, M|100/100
+|move|p2a: Shedinja|Shadow Sneak|p1a: Bisharp
+|-resisted|p1a: Bisharp
+|-damage|p1a: Bisharp|89/100
+|upkeep
+|turn|2
+|switch|p1a: Keldeo|Keldeo|100/100
+|switch|p2a: Sableye|Sableye, F|304/304
+|upkeep
+|turn|3
+|switch|p2a: Dugtrio|Dugtrio, M|212/212
+|move|p1a: Keldeo|Icy Wind|p2a: Dugtrio
+|-supereffective|p2a: Dugtrio
+|-enditem|p2a: Dugtrio|Focus Sash
+|-damage|p2a: Dugtrio|1/212
+|-unboost|p2a: Dugtrio|spe|1
+|upkeep
+|turn|4
+|switch|p1a: Bisharp|Bisharp, M|89/100
+|move|p2a: Dugtrio|Endure||[still]
+|-fail|p2a: Dugtrio
+|upkeep
+|turn|5
+|move|p1a: Bisharp|Sucker Punch|p2a: Dugtrio
+|-damage|p2a: Dugtrio|0 fnt
+|faint|p2a: Dugtrio
+|upkeep
+|switch|p2a: Shuckle|Shuckle, F|244/244
+|turn|6
+|move|p2a: Shuckle|Protect|p2a: Shuckle
+|-singleturn|p2a: Shuckle|Protect
+|move|p1a: Bisharp|Sucker Punch||[still]
+|-fail|p1a: Bisharp
+|upkeep
+|turn|7
+|switch|p2a: Shedinja|Shedinja|1/1
+|move|p1a: Bisharp|Iron Head|p2a: Shedinja
+|-immune|p2a: Shedinja|[from] ability: Wonder Guard
+|upkeep
+|turn|8
+|switch|p1a: Keldeo|Keldeo|100/100
+|move|p2a: Shedinja|X-Scissor|p1a: Keldeo
+|-resisted|p1a: Keldeo
+|-damage|p1a: Keldeo|79/100
+|upkeep
+|turn|9
+|switch|p1a: Bisharp|Bisharp, M|89/100
+|switch|p2a: Shuckle|Shuckle, F|244/244
+|upkeep
+|turn|10
+|move|p1a: Bisharp|Knock Off|p2a: Shuckle
+|-damage|p2a: Shuckle|153/244
+|-enditem|p2a: Shuckle|Leftovers|[from] move: Knock Off|[of] p1a: Bisharp
+|move|p2a: Shuckle|Sand Tomb|p1a: Bisharp
+|-supereffective|p1a: Bisharp
+|-damage|p1a: Bisharp|84/100
+|-activate|p1a: Bisharp|move: Sand Tomb|[of] p2a: Shuckle
+|-damage|p1a: Bisharp|71/100|[from] move: Sand Tomb|[partiallytrapped]
+|upkeep
+|turn|11
+|move|p1a: Bisharp|Knock Off|p2a: Shuckle
+|-damage|p2a: Shuckle|98/244
+|move|p2a: Shuckle|Sand Tomb|p1a: Bisharp
+|-supereffective|p1a: Bisharp
+|-damage|p1a: Bisharp|65/100
+|-damage|p1a: Bisharp|53/100|[from] move: Sand Tomb|[partiallytrapped]
+|upkeep
+|turn|12
+|switch|p2a: Togekiss|Togekiss, F|374/374
+|move|p1a: Bisharp|Sucker Punch||[still]
+|-fail|p1a: Bisharp
+|-end|p1a: Bisharp|Sand Tomb|[partiallytrapped]|[silent]
+|upkeep
+|turn|13
+|move|p2a: Togekiss|Air Slash|p1a: Bisharp
+|-resisted|p1a: Bisharp
+|-damage|p1a: Bisharp|29/100
+|cant|p1a: Bisharp|flinch
+|upkeep
+|turn|14
+|switch|p2a: Shuckle|Shuckle, F|98/244
+|switch|p1a: Excadrill|Excadrill, M|100/100
+|-ability|p1a: Excadrill|Mold Breaker
+|-item|p1a: Excadrill|Air Balloon
+|upkeep
+|turn|15
+|switch|p1a: Bisharp|Bisharp, M|29/100
+|switch|p2a: Sableye|Sableye, F|304/304
+|upkeep
+|turn|16
+|switch|p1a: Thundurus|Thundurus, M|100/100
+|move|p2a: Sableye|Foul Play|p1a: Thundurus
+|-damage|p1a: Thundurus|50/100
+|upkeep
+|turn|17
+|switch|p2a: Shedinja|Shedinja|1/1
+|move|p1a: Thundurus|Thunderbolt|p2a: Shedinja
+|-immune|p2a: Shedinja|[from] ability: Wonder Guard
+|upkeep
+|turn|18
+|move|p2a: Shedinja|Protect|p2a: Shedinja
+|-singleturn|p2a: Shedinja|Protect
+|move|p1a: Thundurus|Thunder Wave|p2a: Shedinja
+|-activate|p2a: Shedinja|move: Protect
+|upkeep
+|turn|19
+|switch|p1a: Excadrill|Excadrill, M|100/100
+|-ability|p1a: Excadrill|Mold Breaker
+|-item|p1a: Excadrill|Air Balloon
+|switch|p2a: Whimsicott|Whimsicott, F|324/324
+|upkeep
+|turn|20
+|move|p2a: Whimsicott|Leech Seed|p1a: Excadrill
+|-start|p1a: Excadrill|move: Leech Seed
+|move|p1a: Excadrill|Earthquake|p2a: Whimsicott
+|-resisted|p2a: Whimsicott
+|-damage|p2a: Whimsicott|219/324
+|-heal|p2a: Whimsicott|239/324|[from] item: Leftovers
+|-damage|p1a: Excadrill|88/100|[from] Leech Seed|[of] p2a: Whimsicott
+|-heal|p2a: Whimsicott|284/324|[silent]
+|upkeep
+|turn|21
+|switch|p2a: Togekiss|Togekiss, F|374/374
+|move|p1a: Excadrill|Rapid Spin|p2a: Togekiss
+|-damage|p2a: Togekiss|349/374
+|-end|p1a: Excadrill|Leech Seed|[from] move: Rapid Spin|[of] p1a: Excadrill
+|upkeep
+|turn|22
+|switch|p1a: Latias|Latias, F|100/100
+|move|p2a: Togekiss|Flamethrower|p1a: Latias
+|-resisted|p1a: Latias
+|-damage|p1a: Latias|91/100
+|-heal|p1a: Latias|97/100|[from] item: Leftovers
+|upkeep
+|turn|23
+|switch|p1a: Excadrill|Excadrill, M|88/100
+|-ability|p1a: Excadrill|Mold Breaker
+|-item|p1a: Excadrill|Air Balloon
+|switch|p2a: Whimsicott|Whimsicott, F|284/324
+|-heal|p2a: Whimsicott|304/324|[from] item: Leftovers
+|upkeep
+|turn|24
+|switch|p2a: Shedinja|Shedinja|1/1
+|move|p1a: Excadrill|Rapid Spin|p2a: Shedinja
+|-immune|p2a: Shedinja
+|upkeep
+|turn|25
+|switch|p1a: Bisharp|Bisharp, M|29/100
+|switch|p2a: Whimsicott|Whimsicott, F|304/324
+|-heal|p2a: Whimsicott|324/324|[from] item: Leftovers
+|upkeep
+|turn|26
+|switch|p2a: Shuckle|Shuckle, F|98/244
+|switch|p1a: Latias|Latias, F|97/100
+|-heal|p1a: Latias|100/100|[from] item: Leftovers
+|upkeep
+|turn|27
+|switch|p1a: Garchomp|Garchomp, F|100/100
+|move|p2a: Shuckle|Power Split|p1a: Garchomp
+|-activate|p2a: Shuckle|move: Power Split|[of] p1a: Garchomp
+|upkeep
+|turn|28
+|move|p1a: Garchomp|Fire Blast|p2a: Shuckle
+|-damage|p2a: Shuckle|79/244
+|move|p2a: Shuckle|Power Split|p1a: Garchomp
+|-activate|p2a: Shuckle|move: Power Split|[of] p1a: Garchomp
+|upkeep
+|turn|29
+|switch|p1a: Keldeo|Keldeo|79/100
+|move|p2a: Shuckle|Protect||[still]
+|-fail|p2a: Shuckle
+|upkeep
+|turn|30
+|switch|p1a: Thundurus|Thundurus, M|50/100
+|switch|p2a: Whimsicott|Whimsicott, F|324/324
+|upkeep
+|turn|31
+|switch|p1a: Keldeo|Keldeo|79/100
+|move|p2a: Whimsicott|Leech Seed|p1a: Keldeo|[miss]
+|-miss|p2a: Whimsicott|p1a: Keldeo
+|upkeep
+|turn|32
+|switch|p2a: Shuckle|Shuckle, F|79/244
+|move|p1a: Keldeo|Icy Wind|p2a: Shuckle
+|-damage|p2a: Shuckle|35/244
+|-boost|p2a: Shuckle|spe|1
+|upkeep
+|turn|33
+|move|p1a: Keldeo|Icy Wind|p2a: Shuckle
+|-damage|p2a: Shuckle|0 fnt
+|faint|p2a: Shuckle
+|upkeep
+|switch|p2a: Togekiss|Togekiss, F|349/374
+|turn|34
+|switch|p2a: Whimsicott|Whimsicott, F|324/324
+|move|p1a: Keldeo|Icy Wind|p2a: Whimsicott
+|-supereffective|p2a: Whimsicott
+|-damage|p2a: Whimsicott|86/324
+|-unboost|p2a: Whimsicott|spe|1
+|-heal|p2a: Whimsicott|106/324|[from] item: Leftovers
+|upkeep
+|turn|35
+|switch|p1a: Excadrill|Excadrill, M|88/100
+|-ability|p1a: Excadrill|Mold Breaker
+|-item|p1a: Excadrill|Air Balloon
+|switch|p2a: Togekiss|Togekiss, F|349/374
+|upkeep
+|turn|36
+|switch|p1a: Keldeo|Keldeo|79/100
+|move|p2a: Togekiss|Flamethrower|p1a: Keldeo
+|-resisted|p1a: Keldeo
+|-damage|p1a: Keldeo|66/100
+|-status|p1a: Keldeo|brn
+|-damage|p1a: Keldeo|53/100 brn|[from] brn
+|upkeep
+|turn|37
+|switch|p1a: Thundurus|Thundurus, M|50/100
+|switch|p2a: Sableye|Sableye, F|304/304
+|upkeep
+|turn|38
+|switch|p1a: Latias|Latias, F|100/100
+|move|p2a: Sableye|Toxic|p1a: Latias
+|-status|p1a: Latias|tox
+|-damage|p1a: Latias|94/100 tox|[from] psn
+|upkeep
+|turn|39
+|switch|p1a: Thundurus|Thundurus, M|50/100
+|switch|p2a: Shedinja|Shedinja|1/1
+|upkeep
+|turn|40
+|switch|p1a: Bisharp|Bisharp, M|29/100
+|switch|p2a: Togekiss|Togekiss, F|349/374
+|upkeep
+|turn|41
+|switch|p1a: Thundurus|Thundurus, M|50/100
+|move|p2a: Togekiss|Roost|p2a: Togekiss
+|-heal|p2a: Togekiss|374/374
+|-singleturn|p2a: Togekiss|move: Roost
+|upkeep
+|turn|42
+|switch|p2a: Whimsicott|Whimsicott, F|106/324
+|move|p1a: Thundurus|Focus Blast|p2a: Whimsicott
+|-resisted|p2a: Whimsicott
+|-damage|p2a: Whimsicott|1/324
+|-damage|p1a: Thundurus|41/100|[from] item: Life Orb
+|-heal|p2a: Whimsicott|21/324|[from] item: Leftovers
+|upkeep
+|turn|43
+|switch|p2a: Sableye|Sableye, F|304/304
+|switch|p1a: Keldeo|Keldeo|53/100 brn
+|-damage|p1a: Keldeo|41/100 brn|[from] brn
+|upkeep
+|turn|44
+|switch|p1a: Excadrill|Excadrill, M|88/100
+|-ability|p1a: Excadrill|Mold Breaker
+|-item|p1a: Excadrill|Air Balloon
+|move|p2a: Sableye|Foul Play|p1a: Excadrill
+|-damage|p1a: Excadrill|10/100
+|-enditem|p1a: Excadrill|Air Balloon
+|upkeep
+|turn|45
+|switch|p1a: Garchomp|Garchomp, F|100/100
+|switch|p2a: Togekiss|Togekiss, F|374/374
+|upkeep
+|turn|46
+|switch|p2a: Whimsicott|Whimsicott, F|21/324
+|switch|p1a: Bisharp|Bisharp, M|29/100
+|-heal|p2a: Whimsicott|41/324|[from] item: Leftovers
+|upkeep
+|turn|47
+|switch|p1a: Keldeo|Keldeo|41/100 brn
+|move|p2a: Whimsicott|Giga Drain|p1a: Keldeo
+|-supereffective|p1a: Keldeo
+|-damage|p1a: Keldeo|0 fnt
+|-heal|p2a: Whimsicott|106/324|[from] drain|[of] p1a: Keldeo
+|faint|p1a: Keldeo
+|-heal|p2a: Whimsicott|126/324|[from] item: Leftovers
+|upkeep
+|switch|p1a: Garchomp|Garchomp, F|100/100
+|turn|48
+|switch|p2a: Shedinja|Shedinja|1/1
+|switch|p1a: Latias|Latias, F|94/100 tox
+|-heal|p1a: Latias|100/100 tox|[from] item: Leftovers
+|-damage|p1a: Latias|94/100 tox|[from] psn
+|upkeep
+|turn|49
+|switch|p1a: Thundurus|Thundurus, M|41/100
+|move|p2a: Shedinja|Shadow Sneak|p1a: Thundurus
+|-damage|p1a: Thundurus|15/100
+|upkeep
+|turn|50
+|switch|p2a: Sableye|Sableye, F|304/304
+|move|p1a: Thundurus|Thunder Wave|p2a: Sableye
+|-status|p2a: Sableye|par
+|upkeep
+|turn|51
+|move|p1a: Thundurus|Thunder Wave|p2a: Sableye
+|-fail|p2a: Sableye|par
+|move|p2a: Sableye|Recover||[still]
+|-fail|p2a: Sableye|heal
+|upkeep
+|turn|52
+|switch|p1a: Excadrill|Excadrill, M|10/100
+|-ability|p1a: Excadrill|Mold Breaker
+|switch|p2a: Whimsicott|Whimsicott, F|126/324
+|-heal|p2a: Whimsicott|146/324|[from] item: Leftovers
+|upkeep
+|turn|53
+|switch|p2a: Togekiss|Togekiss, F|374/374
+|move|p1a: Excadrill|Earthquake|p2a: Togekiss
+|-immune|p2a: Togekiss
+|upkeep
+|turn|54
+|switch|p1a: Garchomp|Garchomp, F|100/100
+|switch|p2a: Shedinja|Shedinja|1/1
+|upkeep
+|turn|55
+|switch|p1a: Bisharp|Bisharp, M|29/100
+|move|p2a: Shedinja|X-Scissor|p1a: Bisharp
+|-damage|p1a: Bisharp|0 fnt
+|faint|p1a: Bisharp
+|upkeep
+|switch|p1a: Garchomp|Garchomp, F|100/100
+|turn|56
+|switch|p1a: Latias|Latias, F|94/100 tox
+|move|p2a: Shedinja|Swords Dance|p2a: Shedinja
+|-boost|p2a: Shedinja|atk|2
+|-heal|p1a: Latias|100/100 tox|[from] item: Leftovers
+|-damage|p1a: Latias|94/100 tox|[from] psn
+|upkeep
+|turn|57
+|switch|p2a: Sableye|Sableye, F|304/304 par
+|move|p1a: Latias|Draco Meteor|p2a: Sableye
+|-damage|p2a: Sableye|133/304 par
+|-unboost|p1a: Latias|spa|2
+|-heal|p1a: Latias|100/100 tox|[from] item: Leftovers
+|-heal|p2a: Sableye|152/304 par|[from] item: Leftovers
+|-damage|p1a: Latias|88/100 tox|[from] psn
+|upkeep
+|turn|58
+|move|p2a: Sableye|Toxic|p1a: Latias
+|-fail|p1a: Latias|tox
+|move|p1a: Latias|Roost|p1a: Latias
+|-heal|p1a: Latias|100/100 tox
+|-singleturn|p1a: Latias|move: Roost
+|-heal|p2a: Sableye|171/304 par|[from] item: Leftovers
+|-damage|p1a: Latias|82/100 tox|[from] psn
+|upkeep
+|turn|59
+|move|p2a: Sableye|Will-O-Wisp||[still]
+|-fail|p2a: Sableye
+|move|p1a: Latias|Roost|p1a: Latias
+|-heal|p1a: Latias|100/100 tox
+|-singleturn|p1a: Latias|move: Roost
+|-heal|p2a: Sableye|190/304 par|[from] item: Leftovers
+|-damage|p1a: Latias|76/100 tox|[from] psn
+|upkeep
+|turn|60
+|switch|p2a: Whimsicott|Whimsicott, F|146/324
+|move|p1a: Latias|Defog|p2a: Whimsicott
+|-unboost|p2a: Whimsicott|evasion|1
+|-heal|p2a: Whimsicott|166/324|[from] item: Leftovers
+|-heal|p1a: Latias|82/100 tox|[from] item: Leftovers
+|-damage|p1a: Latias|52/100 tox|[from] psn
+|upkeep
+|turn|61
+|switch|p2a: Shedinja|Shedinja|1/1
+|switch|p1a: Excadrill|Excadrill, M|10/100
+|-ability|p1a: Excadrill|Mold Breaker
+|upkeep
+|turn|62
+|switch|p2a: Whimsicott|Whimsicott, F|166/324
+|move|p1a: Excadrill|Earthquake|p2a: Whimsicott
+|-resisted|p2a: Whimsicott
+|-damage|p2a: Whimsicott|67/324
+|-heal|p2a: Whimsicott|87/324|[from] item: Leftovers
+|upkeep
+|turn|63
+|move|p2a: Whimsicott|Protect|p2a: Whimsicott
+|-singleturn|p2a: Whimsicott|Protect
+|move|p1a: Excadrill|Earthquake|p2a: Whimsicott
+|-activate|p2a: Whimsicott|move: Protect
+|-heal|p2a: Whimsicott|107/324|[from] item: Leftovers
+|upkeep
+|turn|64
+|switch|p2a: Shedinja|Shedinja|1/1
+|move|p1a: Excadrill|Earthquake|p2a: Shedinja
+|-resisted|p2a: Shedinja
+|-enditem|p2a: Shedinja|Focus Sash
+|-damage|p2a: Shedinja|1/1
+|upkeep
+|turn|65
+|switch|p2a: Togekiss|Togekiss, F|374/374
+|move|p1a: Excadrill|Iron Head|p2a: Togekiss
+|-supereffective|p2a: Togekiss
+|-damage|p2a: Togekiss|68/374
+|upkeep
+|turn|66
+|switch|p1a: Garchomp|Garchomp, F|100/100
+|move|p2a: Togekiss|Air Slash|p1a: Garchomp
+|-damage|p1a: Garchomp|75/100
+|upkeep
+|turn|67
+|move|p2a: Togekiss|Flamethrower|p1a: Garchomp
+|-resisted|p1a: Garchomp
+|-damage|p1a: Garchomp|63/100
+|move|p1a: Garchomp|Dragon Tail|p2a: Togekiss
+|-immune|p2a: Togekiss
+|upkeep
+|turn|68
+|move|p2a: Togekiss|Air Slash|p1a: Garchomp
+|-damage|p1a: Garchomp|35/100
+|cant|p1a: Garchomp|flinch
+|upkeep
+|turn|69
+|move|p2a: Togekiss|Air Slash|p1a: Garchomp
+|-damage|p1a: Garchomp|9/100
+|move|p1a: Garchomp|Earthquake|p2a: Togekiss
+|-immune|p2a: Togekiss
+|upkeep
+|turn|70
+|move|p2a: Togekiss|Air Slash|p1a: Garchomp
+|-damage|p1a: Garchomp|0 fnt
+|faint|p1a: Garchomp
+|upkeep
+|switch|p1a: Excadrill|Excadrill, M|10/100
+|-ability|p1a: Excadrill|Mold Breaker
+|turn|71
+|switch|p2a: Whimsicott|Whimsicott, F|107/324
+|move|p1a: Excadrill|Rock Slide|p2a: Whimsicott
+|-damage|p2a: Whimsicott|9/324
+|-heal|p2a: Whimsicott|29/324|[from] item: Leftovers
+|upkeep
+|turn|72
+|switch|p1a: Thundurus|Thundurus, M|15/100
+|move|p2a: Whimsicott|Moonblast|p1a: Thundurus
+|-damage|p1a: Thundurus|0 fnt
+|faint|p1a: Thundurus
+|-heal|p2a: Whimsicott|49/324|[from] item: Leftovers
+|upkeep
+|switch|p1a: Latias|Latias, F|52/100 tox
+|turn|73
+|move|p2a: Whimsicott|Protect|p2a: Whimsicott
+|-singleturn|p2a: Whimsicott|Protect
+|move|p1a: Latias|Defog|p2a: Whimsicott
+|-activate|p2a: Whimsicott|move: Protect
+|-heal|p2a: Whimsicott|69/324|[from] item: Leftovers
+|-heal|p1a: Latias|58/100 tox|[from] item: Leftovers
+|-damage|p1a: Latias|52/100 tox|[from] psn
+|upkeep
+|turn|74
+|switch|p2a: Togekiss|Togekiss, F|68/374
+|switch|p1a: Excadrill|Excadrill, M|10/100
+|-ability|p1a: Excadrill|Mold Breaker
+|upkeep
+|turn|75
+|switch|p2a: Whimsicott|Whimsicott, F|69/324
+|move|p1a: Excadrill|Rapid Spin|p2a: Whimsicott
+|-damage|p2a: Whimsicott|43/324
+|-heal|p2a: Whimsicott|63/324|[from] item: Leftovers
+|upkeep
+|turn|76
+|switch|p2a: Shedinja|Shedinja|1/1
+|move|p1a: Excadrill|Iron Head|p2a: Shedinja
+|-damage|p2a: Shedinja|0 fnt
+|faint|p2a: Shedinja
+|upkeep
+|switch|p2a: Sableye|Sableye, F|190/304 par
+|turn|77
+|move|p2a: Sableye|Toxic|p1a: Excadrill
+|-immune|p1a: Excadrill
+|move|p1a: Excadrill|Rapid Spin|p2a: Sableye
+|-immune|p2a: Sableye
+|-heal|p2a: Sableye|209/304 par|[from] item: Leftovers
+|upkeep
+|turn|78
+|switch|p2a: Whimsicott|Whimsicott, F|63/324
+|move|p1a: Excadrill|Rock Slide|p2a: Whimsicott
+|-damage|p2a: Whimsicott|0 fnt
+|faint|p2a: Whimsicott
+|upkeep
+|switch|p2a: Togekiss|Togekiss, F|68/374
+|turn|79
+|move|p1a: Excadrill|Rapid Spin|p2a: Togekiss
+|-damage|p2a: Togekiss|40/374
+|move|p2a: Togekiss|Thunder Wave|p1a: Excadrill
+|-immune|p1a: Excadrill
+|upkeep
+|turn|80
+|move|p1a: Excadrill|Earthquake|p2a: Togekiss
+|-immune|p2a: Togekiss
+|move|p2a: Togekiss|Thunder Wave|p1a: Excadrill
+|-immune|p1a: Excadrill
+|upkeep
+|turn|81
+|move|p1a: Excadrill|Rock Slide|p2a: Togekiss
+|-supereffective|p2a: Togekiss
+|-damage|p2a: Togekiss|0 fnt
+|faint|p2a: Togekiss
+|upkeep
+|switch|p2a: Sableye|Sableye, F|209/304 par
+|turn|82
+|switch|p1a: Latias|Latias, F|52/100 tox
+|move|p2a: Sableye|Will-O-Wisp||[still]
+|-fail|p2a: Sableye
+|-heal|p1a: Latias|58/100 tox|[from] item: Leftovers
+|-heal|p2a: Sableye|228/304 par|[from] item: Leftovers
+|-damage|p1a: Latias|52/100 tox|[from] psn
+|upkeep
+|turn|83
+|move|p1a: Latias|Psyshock|p2a: Sableye
+|-immune|p2a: Sableye
+|move|p2a: Sableye|Foul Play|p1a: Latias
+|-supereffective|p1a: Latias
+|-damage|p1a: Latias|0 fnt
+|faint|p1a: Latias
+|-heal|p2a: Sableye|247/304 par|[from] item: Leftovers
+|upkeep
+|switch|p1a: Excadrill|Excadrill, M|10/100
+|-ability|p1a: Excadrill|Mold Breaker
+|turn|84
+|move|p2a: Sableye|Toxic|p1a: Excadrill
+|-immune|p1a: Excadrill
+|move|p1a: Excadrill|Earthquake|p2a: Sableye
+|-damage|p2a: Sableye|0 fnt
+|faint|p2a: Sableye
+    </script>
+</div>
+
+<div class="battle-log battle-log-inline" style="display:none"></div>
+
+<script>
+    let daily = Math.floor(Date.now() / 1000 / 60 / 60 / 24); document.write('<script src="https://play.pokemonshowdown.com/js/replay-embed.js?version' + daily + '"></' + 'script>');
+</script>
+
+<p style="text-align:center"> Replay created by <a href="https://github.com/hsahovic/poke-env">poke-env</a>, with code from <a
+        href="https://github.com/smogon/pokemon-showdown"> pokemon-showdown</a>. If something goes wrong, don't hesitate
+    to open an <a href="https://github.com/hsahovic/poke-env/issues">issue!</a></p>

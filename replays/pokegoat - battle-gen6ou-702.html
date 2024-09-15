@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<!-- version 1 -->
+<title>battle-gen6ou-702</title>
+<style>
+    html,
+    body {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        padding: 12px 0;
+    }
+
+    .battle-log {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+    }
+
+    .battle-log-inline {
+        border: 1px solid #AAAAAA;
+        background: #EEF2F5;
+        color: black;
+        max-width: 640px;
+        margin: 0 auto 80px;
+        padding-bottom: 5px;
+    }
+
+    .battle-log .inner {
+        padding: 4px 8px 0px 8px;
+    }
+
+    .battle-log .inner-preempt {
+        padding: 0 8px 4px 8px;
+    }
+
+    .battle-log .inner-after {
+        margin-top: 0.5em;
+    }
+
+    .battle-log h2 {
+        margin: 0.5em -8px;
+        padding: 4px 8px;
+        border: 1px solid #AAAAAA;
+        background: #E0E7EA;
+        border-left: 0;
+        border-right: 0;
+        font-family: Verdana, sans-serif;
+        font-size: 13pt;
+    }
+
+    .backprop {
+        top: 0;
+    }
+
+    .battle-log .chat {
+        vertical-align: middle;
+        padding: 3px 0 3px 0;
+        font-size: 8pt;
+    }
+
+    .battle-log .chat strong {
+        color: #40576A;
+    }
+
+    .battle-log .chat em {
+        padding: 1px 4px 1px 3px;
+        color: #000000;
+        font-style: normal;
+    }
+
+    .chat.mine {
+        background: rgba(0, 0, 0, 0.05);
+        margin-left: -8px;
+        margin-right: -8px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .spoiler {
+        color: #BBBBBB;
+        background: #BBBBBB;
+        padding: 0px 3px;
+    }
+
+    .spoiler:hover,
+    .spoiler:active,
+    .spoiler-shown {
+        color: #000000;
+        background: #E2E2E2;
+        padding: 0px 3px;
+    }
+
+    .spoiler a {
+        color: #BBBBBB;
+    }
+
+    .spoiler:hover a,
+    .spoiler:active a,
+    .spoiler-shown a {
+        color: #2288CC;
+    }
+
+    .chat code,
+    .chat .spoiler:hover code,
+    .chat .spoiler:active code,
+    .chat .spoiler-shown code {
+        border: 1px solid #C0C0C0;
+        background: #EEEEEE;
+        color: black;
+        padding: 0 2px;
+    }
+
+    .chat .spoiler code {
+        border: 1px solid #CCCCCC;
+        background: #CCCCCC;
+        color: #CCCCCC;
+    }
+
+    .battle-log .rated {
+        padding: 3px 4px;
+    }
+
+    .battle-log .rated strong {
+        color: white;
+        background: #89A;
+        padding: 1px 4px;
+        border-radius: 4px;
+    }
+
+    .spacer {
+        margin-top: 0.5em;
+    }
+
+    .message-announce {
+        background: #6688AA;
+        color: white;
+        padding: 1px 4px 2px;
+    }
+
+    .message-announce a,
+    .broadcast-green a,
+    .broadcast-blue a,
+    .broadcast-red a {
+        color: #DDEEFF;
+    }
+
+    .broadcast-green {
+        background-color: #559955;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .broadcast-blue {
+        background-color: #6688AA;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .infobox {
+        border: 1px solid #6688AA;
+        padding: 2px 4px;
+    }
+
+    .infobox-limited {
+        max-height: 200px;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
+    .broadcast-red {
+        background-color: #AA5544;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .message-learn-canlearn {
+        font-weight: bold;
+        color: #228822;
+        text-decoration: underline;
+    }
+
+    .message-learn-cannotlearn {
+        font-weight: bold;
+        color: #CC2222;
+        text-decoration: underline;
+    }
+
+    .message-effect-weak {
+        font-weight: bold;
+        color: #CC2222;
+    }
+
+    .message-effect-resist {
+        font-weight: bold;
+        color: #6688AA;
+    }
+
+    .message-effect-immune {
+        font-weight: bold;
+        color: #666666;
+    }
+
+    .message-learn-list {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .message-throttle-notice,
+    .message-error {
+        color: #992222;
+    }
+
+    .message-overflow,
+    .chat small.message-overflow {
+        font-size: 0pt;
+    }
+
+    .message-overflow::before {
+        font-size: 9pt;
+        content: '...';
+    }
+
+    .subtle {
+        color: #3A4A66;
+    }
+</style>
+<div class="wrapper replay-wrapper" style="max-width:1180px;margin:0 auto">
+    <input type="hidden" name="replayid" value="unregisteredserver-gen8randombattle-320064" />
+    <div class="battle"></div>
+    <div class="battle-log"></div>
+    <div class="replay-controls"></div>
+    <div class="replay-controls-2"></div>
+    <h1 style="font-weight:normal;text-align:center"><strong>poke-env battle replay</strong><br />battle-gen6ou-702<br /><a
+            href="http://pokemonshowdown.com/users/randomplayer1" class="subtle" target="_blank">pokegoat</a>
+        vs. <a href="http://pokemonshowdown.com/users/randomplayer2" class="subtle"
+            target="_blank">max_ivanovic</a></h1>
+    <script type="text/plain" class="battle-log-data">
+    >battle-gen6ou-702|init|battle
+|title|max_ivanovic vs. pokegoat
+|j|☆max_ivanovic
+|j|☆pokegoat
+|gametype|singles
+|player|p1|max_ivanovic|170|
+|player|p2|pokegoat|266|
+|teamsize|p1|6
+|teamsize|p2|6
+|gen|6
+|tier|[Gen 6] OU
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|Species Clause: Limit one of each Pokémon
+|rule|OHKO Clause: OHKO moves are banned
+|rule|Moody Clause: Moody is banned
+|rule|Evasion Items Clause: Evasion items are banned
+|rule|Evasion Moves Clause: Evasion moves are banned
+|rule|Endless Battle Clause: Forcing endless battles is banned
+|rule|HP Percentage Mod: HP is shown in percentages
+|rule|Swagger Clause: Swagger is banned
+|clearpoke
+|poke|p1|Sableye, F|item
+|poke|p1|Shuckle, F|item
+|poke|p1|Whimsicott, F|item
+|poke|p1|Dugtrio, M|item
+|poke|p1|Shedinja|item
+|poke|p1|Togekiss, M|item
+|poke|p2|Heatran, F|item
+|poke|p2|Garchomp, M|item
+|poke|p2|Talonflame, F|item
+|poke|p2|Gengar, M|item
+|poke|p2|Serperior, M|item
+|poke|p2|Lopunny, F|item
+|teampreview
+|start
+|switch|p1a: Togekiss|Togekiss, M|100/100
+|switch|p2a: Talonflame|Talonflame, F|308/308
+|turn|1
+|switch|p1a: Whimsicott|Whimsicott, F|100/100
+|move|p2a: Talonflame|Facade|p1a: Whimsicott
+|-damage|p1a: Whimsicott|64/100
+|-heal|p1a: Whimsicott|70/100|[from] item: Leftovers
+|upkeep
+|turn|2
+|switch|p1a: Dugtrio|Dugtrio, M|100/100
+|switch|p2a: Heatran|Heatran, F|323/323
+|upkeep
+|turn|3
+|switch|p1a: Shedinja|Shedinja|100/100
+|switch|p2a: Gengar|Gengar, M|259/259
+|upkeep
+|turn|4
+|move|p1a: Shedinja|Shadow Sneak|p2a: Gengar
+|-supereffective|p2a: Gengar
+|-damage|p2a: Gengar|65/259
+|move|p2a: Gengar|Psychic|p1a: Shedinja
+|-immune|p1a: Shedinja|[from] ability: Wonder Guard
+|upkeep
+|turn|5
+|switch|p2a: Heatran|Heatran, F|323/323
+|move|p1a: Shedinja|Swords Dance|p1a: Shedinja
+|-boost|p1a: Shedinja|atk|2
+|upkeep
+|turn|6
+|switch|p1a: Whimsicott|Whimsicott, F|70/100
+|move|p2a: Heatran|Earth Power|p1a: Whimsicott
+|-resisted|p1a: Whimsicott
+|-damage|p1a: Whimsicott|50/100
+|-heal|p1a: Whimsicott|56/100|[from] item: Leftovers
+|upkeep
+|turn|7
+|move|p1a: Whimsicott|Moonblast|p2a: Heatran
+|-resisted|p2a: Heatran
+|-damage|p2a: Heatran|300/323
+|-unboost|p2a: Heatran|spa|1
+|move|p2a: Heatran|Flash Cannon|p1a: Whimsicott
+|-supereffective|p1a: Whimsicott
+|-damage|p1a: Whimsicott|0 fnt
+|faint|p1a: Whimsicott
+|-heal|p2a: Heatran|320/323|[from] item: Leftovers
+|upkeep
+|switch|p1a: Shuckle|Shuckle, F|100/100
+|turn|8
+|switch|p2a: Gengar|Gengar, M|65/259
+|switch|p1a: Dugtrio|Dugtrio, M|100/100
+|upkeep
+|turn|9
+|switch|p1a: Shedinja|Shedinja|100/100
+|switch|p2a: Talonflame|Talonflame, F|308/308
+|upkeep
+|turn|10
+|switch|p1a: Shuckle|Shuckle, F|100/100
+|move|p2a: Talonflame|Flare Blitz|p1a: Shuckle
+|-damage|p1a: Shuckle|57/100
+|-damage|p2a: Talonflame|273/308|[from] Recoil
+|-heal|p1a: Shuckle|63/100|[from] item: Leftovers
+|upkeep
+|turn|11
+|switch|p2a: Garchomp|Garchomp, M|417/417
+|move|p1a: Shuckle|Power Split|p2a: Garchomp
+|-activate|p1a: Shuckle|move: Power Split|[of] p2a: Garchomp
+|-heal|p1a: Shuckle|69/100|[from] item: Leftovers
+|upkeep
+|turn|12
+|move|p2a: Garchomp|Stealth Rock|p1a: Shuckle
+|-sidestart|p1: max_ivanovic|move: Stealth Rock
+|move|p1a: Shuckle|Toxic|p2a: Garchomp
+|-status|p2a: Garchomp|tox
+|-heal|p1a: Shuckle|75/100|[from] item: Leftovers
+|-damage|p2a: Garchomp|391/417 tox|[from] psn
+|upkeep
+|turn|13
+|switch|p1a: Sableye|Sableye, F|100/100
+|-damage|p1a: Sableye|88/100|[from] Stealth Rock
+|move|p2a: Garchomp|Earthquake|p1a: Sableye
+|-damage|p1a: Sableye|50/100
+|-heal|p1a: Sableye|56/100|[from] item: Leftovers
+|-damage|p2a: Garchomp|339/417 tox|[from] psn
+|upkeep
+|turn|14
+|switch|p2a: Serperior|Serperior, M|291/291
+|switch|p1a: Shuckle|Shuckle, F|75/100
+|-damage|p1a: Shuckle|50/100|[from] Stealth Rock
+|-heal|p1a: Shuckle|57/100|[from] item: Leftovers
+|upkeep
+|turn|15
+|move|p1a: Shuckle|Protect|p1a: Shuckle
+|-singleturn|p1a: Shuckle|Protect
+|move|p2a: Serperior|Leaf Storm|p1a: Shuckle
+|-activate|p1a: Shuckle|move: Protect
+|-heal|p1a: Shuckle|63/100|[from] item: Leftovers
+|upkeep
+|turn|16
+|switch|p2a: Heatran|Heatran, F|320/323
+|move|p1a: Shuckle|Toxic|p2a: Heatran
+|-immune|p2a: Heatran
+|-heal|p2a: Heatran|323/323|[from] item: Leftovers
+|-heal|p1a: Shuckle|69/100|[from] item: Leftovers
+|upkeep
+|turn|17
+|move|p2a: Heatran|Earth Power|p1a: Shuckle
+|-damage|p1a: Shuckle|48/100
+|move|p1a: Shuckle|Power Split|p2a: Heatran
+|-activate|p1a: Shuckle|move: Power Split|[of] p2a: Heatran
+|-heal|p1a: Shuckle|55/100|[from] item: Leftovers
+|upkeep
+|turn|18
+|switch|p2a: Gengar|Gengar, M|65/259
+|move|p1a: Shuckle|Toxic|p2a: Gengar
+|-immune|p2a: Gengar
+|-heal|p1a: Shuckle|61/100|[from] item: Leftovers
+|upkeep
+|turn|19
+|switch|p2a: Garchomp|Garchomp, M|339/417 tox
+|switch|p1a: Dugtrio|Dugtrio, M|100/100
+|-damage|p1a: Dugtrio|94/100|[from] Stealth Rock
+|-damage|p2a: Garchomp|313/417 tox|[from] psn
+|upkeep
+|turn|20
+|switch|p1a: Togekiss|Togekiss, M|100/100
+|-damage|p1a: Togekiss|76/100|[from] Stealth Rock
+|switch|p2a: Gengar|Gengar, M|65/259
+|upkeep
+|turn|21
+|switch|p2a: Heatran|Heatran, F|323/323
+|move|p1a: Togekiss|Thunder Wave|p2a: Heatran
+|-status|p2a: Heatran|par
+|upkeep
+|turn|22
+|switch|p1a: Sableye|Sableye, F|56/100
+|-damage|p1a: Sableye|43/100|[from] Stealth Rock
+|move|p2a: Heatran|Earth Power|p1a: Sableye
+|-damage|p1a: Sableye|9/100
+|-heal|p1a: Sableye|15/100|[from] item: Leftovers
+|upkeep
+|turn|23
+|switch|p1a: Togekiss|Togekiss, M|76/100
+|-damage|p1a: Togekiss|51/100|[from] Stealth Rock
+|move|p2a: Heatran|Flash Cannon|p1a: Togekiss
+|-supereffective|p1a: Togekiss
+|-damage|p1a: Togekiss|0 fnt
+|faint|p1a: Togekiss
+|upkeep
+|switch|p1a: Sableye|Sableye, F|15/100
+|-damage|p1a: Sableye|2/100|[from] Stealth Rock
+|turn|24
+|switch|p2a: Garchomp|Garchomp, M|313/417 tox
+|move|p1a: Sableye|Recover|p1a: Sableye
+|-heal|p1a: Sableye|52/100
+|-heal|p1a: Sableye|59/100|[from] item: Leftovers
+|-damage|p2a: Garchomp|287/417 tox|[from] psn
+|upkeep
+|turn|25
+|switch|p2a: Gengar|Gengar, M|65/259
+|switch|p1a: Shuckle|Shuckle, F|61/100
+|-damage|p1a: Shuckle|36/100|[from] Stealth Rock
+|-heal|p1a: Shuckle|42/100|[from] item: Leftovers
+|upkeep
+|turn|26
+|switch|p2a: Talonflame|Talonflame, F|273/308
+|move|p1a: Shuckle|Power Split|p2a: Talonflame
+|-activate|p1a: Shuckle|move: Power Split|[of] p2a: Talonflame
+|-heal|p1a: Shuckle|48/100|[from] item: Leftovers
+|upkeep
+|turn|27
+|move|p1a: Shuckle|Protect|p1a: Shuckle
+|-singleturn|p1a: Shuckle|Protect
+|move|p2a: Talonflame|Facade|p1a: Shuckle
+|-activate|p1a: Shuckle|move: Protect
+|-heal|p1a: Shuckle|54/100|[from] item: Leftovers
+|upkeep
+|turn|28
+|move|p2a: Talonflame|Facade|p1a: Shuckle
+|-resisted|p1a: Shuckle
+|-damage|p1a: Shuckle|49/100
+|move|p1a: Shuckle|Toxic|p2a: Talonflame
+|-status|p2a: Talonflame|tox
+|-heal|p1a: Shuckle|55/100|[from] item: Leftovers
+|-damage|p2a: Talonflame|254/308 tox|[from] psn
+|upkeep
+|turn|29
+|switch|p2a: Garchomp|Garchomp, M|287/417 tox
+|switch|p1a: Shedinja|Shedinja|100/100
+|-damage|p1a: Shedinja|0 fnt|[from] Stealth Rock
+|faint|p1a: Shedinja
+|-damage|p2a: Garchomp|261/417 tox|[from] psn
+|upkeep
+|switch|p1a: Shuckle|Shuckle, F|55/100
+|-damage|p1a: Shuckle|30/100|[from] Stealth Rock
+|turn|30
+|switch|p2a: Lopunny|Lopunny, F|271/271
+|switch|p1a: Sableye|Sableye, F|59/100
+|-damage|p1a: Sableye|46/100|[from] Stealth Rock
+|-heal|p1a: Sableye|52/100|[from] item: Leftovers
+|upkeep
+|turn|31
+|switch|p1a: Shuckle|Shuckle, F|30/100
+|-damage|p1a: Shuckle|5/100|[from] Stealth Rock
+|detailschange|p2a: Lopunny|Lopunny-Mega, F
+|-mega|p2a: Lopunny|Lopunny|Lopunnite
+|move|p2a: Lopunny|Fake Out|p1a: Shuckle
+|-resisted|p1a: Shuckle
+|-damage|p1a: Shuckle|0 fnt
+|faint|p1a: Shuckle
+|upkeep
+|switch|p1a: Dugtrio|Dugtrio, M|94/100
+|-damage|p1a: Dugtrio|88/100|[from] Stealth Rock
+|turn|32
+|move|p2a: Lopunny|High Jump Kick|p1a: Dugtrio
+|-damage|p1a: Dugtrio|0 fnt
+|faint|p1a: Dugtrio
+|upkeep
+|switch|p1a: Sableye|Sableye, F|52/100
+|-damage|p1a: Sableye|40/100|[from] Stealth Rock
+|turn|33
+|move|p1a: Sableye|Toxic|p2a: Lopunny
+|-status|p2a: Lopunny|tox
+|move|p2a: Lopunny|High Jump Kick|p1a: Sableye
+|-supereffective|p1a: Sableye
+|-damage|p1a: Sableye|0 fnt
+|faint|p1a: Sableye
+    </script>
+</div>
+
+<div class="battle-log battle-log-inline" style="display:none"></div>
+
+<script>
+    let daily = Math.floor(Date.now() / 1000 / 60 / 60 / 24); document.write('<script src="https://play.pokemonshowdown.com/js/replay-embed.js?version' + daily + '"></' + 'script>');
+</script>
+
+<p style="text-align:center"> Replay created by <a href="https://github.com/hsahovic/poke-env">poke-env</a>, with code from <a
+        href="https://github.com/smogon/pokemon-showdown"> pokemon-showdown</a>. If something goes wrong, don't hesitate
+    to open an <a href="https://github.com/hsahovic/poke-env/issues">issue!</a></p>

@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<!-- version 1 -->
+<title>battle-gen6ou-574</title>
+<style>
+    html,
+    body {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        padding: 12px 0;
+    }
+
+    .battle-log {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+    }
+
+    .battle-log-inline {
+        border: 1px solid #AAAAAA;
+        background: #EEF2F5;
+        color: black;
+        max-width: 640px;
+        margin: 0 auto 80px;
+        padding-bottom: 5px;
+    }
+
+    .battle-log .inner {
+        padding: 4px 8px 0px 8px;
+    }
+
+    .battle-log .inner-preempt {
+        padding: 0 8px 4px 8px;
+    }
+
+    .battle-log .inner-after {
+        margin-top: 0.5em;
+    }
+
+    .battle-log h2 {
+        margin: 0.5em -8px;
+        padding: 4px 8px;
+        border: 1px solid #AAAAAA;
+        background: #E0E7EA;
+        border-left: 0;
+        border-right: 0;
+        font-family: Verdana, sans-serif;
+        font-size: 13pt;
+    }
+
+    .backprop {
+        top: 0;
+    }
+
+    .battle-log .chat {
+        vertical-align: middle;
+        padding: 3px 0 3px 0;
+        font-size: 8pt;
+    }
+
+    .battle-log .chat strong {
+        color: #40576A;
+    }
+
+    .battle-log .chat em {
+        padding: 1px 4px 1px 3px;
+        color: #000000;
+        font-style: normal;
+    }
+
+    .chat.mine {
+        background: rgba(0, 0, 0, 0.05);
+        margin-left: -8px;
+        margin-right: -8px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .spoiler {
+        color: #BBBBBB;
+        background: #BBBBBB;
+        padding: 0px 3px;
+    }
+
+    .spoiler:hover,
+    .spoiler:active,
+    .spoiler-shown {
+        color: #000000;
+        background: #E2E2E2;
+        padding: 0px 3px;
+    }
+
+    .spoiler a {
+        color: #BBBBBB;
+    }
+
+    .spoiler:hover a,
+    .spoiler:active a,
+    .spoiler-shown a {
+        color: #2288CC;
+    }
+
+    .chat code,
+    .chat .spoiler:hover code,
+    .chat .spoiler:active code,
+    .chat .spoiler-shown code {
+        border: 1px solid #C0C0C0;
+        background: #EEEEEE;
+        color: black;
+        padding: 0 2px;
+    }
+
+    .chat .spoiler code {
+        border: 1px solid #CCCCCC;
+        background: #CCCCCC;
+        color: #CCCCCC;
+    }
+
+    .battle-log .rated {
+        padding: 3px 4px;
+    }
+
+    .battle-log .rated strong {
+        color: white;
+        background: #89A;
+        padding: 1px 4px;
+        border-radius: 4px;
+    }
+
+    .spacer {
+        margin-top: 0.5em;
+    }
+
+    .message-announce {
+        background: #6688AA;
+        color: white;
+        padding: 1px 4px 2px;
+    }
+
+    .message-announce a,
+    .broadcast-green a,
+    .broadcast-blue a,
+    .broadcast-red a {
+        color: #DDEEFF;
+    }
+
+    .broadcast-green {
+        background-color: #559955;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .broadcast-blue {
+        background-color: #6688AA;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .infobox {
+        border: 1px solid #6688AA;
+        padding: 2px 4px;
+    }
+
+    .infobox-limited {
+        max-height: 200px;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
+    .broadcast-red {
+        background-color: #AA5544;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .message-learn-canlearn {
+        font-weight: bold;
+        color: #228822;
+        text-decoration: underline;
+    }
+
+    .message-learn-cannotlearn {
+        font-weight: bold;
+        color: #CC2222;
+        text-decoration: underline;
+    }
+
+    .message-effect-weak {
+        font-weight: bold;
+        color: #CC2222;
+    }
+
+    .message-effect-resist {
+        font-weight: bold;
+        color: #6688AA;
+    }
+
+    .message-effect-immune {
+        font-weight: bold;
+        color: #666666;
+    }
+
+    .message-learn-list {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .message-throttle-notice,
+    .message-error {
+        color: #992222;
+    }
+
+    .message-overflow,
+    .chat small.message-overflow {
+        font-size: 0pt;
+    }
+
+    .message-overflow::before {
+        font-size: 9pt;
+        content: '...';
+    }
+
+    .subtle {
+        color: #3A4A66;
+    }
+</style>
+<div class="wrapper replay-wrapper" style="max-width:1180px;margin:0 auto">
+    <input type="hidden" name="replayid" value="unregisteredserver-gen8randombattle-320064" />
+    <div class="battle"></div>
+    <div class="battle-log"></div>
+    <div class="replay-controls"></div>
+    <div class="replay-controls-2"></div>
+    <h1 style="font-weight:normal;text-align:center"><strong>poke-env battle replay</strong><br />battle-gen6ou-574<br /><a
+            href="http://pokemonshowdown.com/users/randomplayer1" class="subtle" target="_blank">Gen6Player 8</a>
+        vs. <a href="http://pokemonshowdown.com/users/randomplayer2" class="subtle"
+            target="_blank">Gen6Player 7</a></h1>
+    <script type="text/plain" class="battle-log-data">
+    >battle-gen6ou-574|init|battle
+|title|Gen6Player 7 vs. Gen6Player 8
+|j|☆Gen6Player 7
+|j|☆Gen6Player 8
+|gametype|singles
+|player|p1|Gen6Player 7|169|
+|player|p2|Gen6Player 8|2|
+|teamsize|p1|6
+|teamsize|p2|6
+|gen|6
+|tier|[Gen 6] OU
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|Species Clause: Limit one of each Pokémon
+|rule|OHKO Clause: OHKO moves are banned
+|rule|Moody Clause: Moody is banned
+|rule|Evasion Items Clause: Evasion items are banned
+|rule|Evasion Moves Clause: Evasion moves are banned
+|rule|Endless Battle Clause: Forcing endless battles is banned
+|rule|HP Percentage Mod: HP is shown in percentages
+|rule|Swagger Clause: Swagger is banned
+|clearpoke
+|poke|p1|Keldeo|item
+|poke|p1|Excadrill, M|item
+|poke|p1|Thundurus, M|item
+|poke|p1|Bisharp, F|item
+|poke|p1|Garchomp, F|item
+|poke|p1|Latias, F|item
+|poke|p2|Heatran, F|item
+|poke|p2|Garchomp, F|item
+|poke|p2|Talonflame, M|item
+|poke|p2|Gengar, M|item
+|poke|p2|Serperior, F|item
+|poke|p2|Lopunny, F|item
+|teampreview
+|start
+|switch|p1a: Thundurus|Thundurus, M|100/100
+|switch|p2a: Garchomp|Garchomp, F|417/417
+|turn|1
+|switch|p2a: Heatran|Heatran, F|323/323
+|move|p1a: Thundurus|Thunderbolt|p2a: Heatran
+|-damage|p2a: Heatran|148/323
+|-damage|p1a: Thundurus|91/100|[from] item: Life Orb
+|-heal|p2a: Heatran|168/323|[from] item: Leftovers
+|upkeep
+|turn|2
+|move|p1a: Thundurus|Thunder Wave|p2a: Heatran
+|-status|p2a: Heatran|par
+|move|p2a: Heatran|Earth Power|p1a: Thundurus
+|-immune|p1a: Thundurus
+|-heal|p2a: Heatran|188/323 par|[from] item: Leftovers
+|upkeep
+|turn|3
+|move|p1a: Thundurus|Thunderbolt|p2a: Heatran
+|-damage|p2a: Heatran|0 fnt
+|faint|p2a: Heatran
+|-damage|p1a: Thundurus|81/100|[from] item: Life Orb
+|upkeep
+|switch|p2a: Lopunny|Lopunny, F|271/271
+|turn|4
+|switch|p1a: Garchomp|Garchomp, F|100/100
+|detailschange|p2a: Lopunny|Lopunny-Mega, F
+|-mega|p2a: Lopunny|Lopunny|Lopunnite
+|move|p2a: Lopunny|High Jump Kick|p1a: Garchomp
+|-damage|p1a: Garchomp|55/100
+|-damage|p2a: Lopunny|238/271|[from] ability: Rough Skin|[of] p1a: Garchomp
+|-damage|p2a: Lopunny|193/271|[from] item: Rocky Helmet|[of] p1a: Garchomp
+|upkeep
+|turn|5
+|switch|p1a: Thundurus|Thundurus, M|81/100
+|move|p2a: Lopunny|Fake Out||[still]
+|-hint|Fake Out only works on your first turn out.
+|-fail|p2a: Lopunny
+|upkeep
+|turn|6
+|switch|p1a: Excadrill|Excadrill, M|100/100
+|-ability|p1a: Excadrill|Mold Breaker
+|-item|p1a: Excadrill|Air Balloon
+|move|p2a: Lopunny|Fake Out||[still]
+|-hint|Fake Out only works on your first turn out.
+|-fail|p2a: Lopunny
+|upkeep
+|turn|7
+|move|p2a: Lopunny|High Jump Kick|p1a: Excadrill
+|-supereffective|p1a: Excadrill
+|-damage|p1a: Excadrill|0 fnt
+|-enditem|p1a: Excadrill|Air Balloon
+|faint|p1a: Excadrill
+|upkeep
+|switch|p1a: Bisharp|Bisharp, F|100/100
+|turn|8
+|switch|p1a: Keldeo|Keldeo|100/100
+|move|p2a: Lopunny|Fake Out||[still]
+|-hint|Fake Out only works on your first turn out.
+|-fail|p2a: Lopunny
+|upkeep
+|turn|9
+|switch|p2a: Gengar|Gengar, M|259/259
+|switch|p1a: Garchomp|Garchomp, F|55/100
+|upkeep
+|turn|10
+|switch|p2a: Talonflame|Talonflame, M|308/308
+|switch|p1a: Keldeo|Keldeo|100/100
+|upkeep
+|turn|11
+|switch|p1a: Latias|Latias, F|100/100
+|switch|p2a: Lopunny|Lopunny-Mega, F|193/271
+|upkeep
+|turn|12
+|move|p2a: Lopunny|High Jump Kick|p1a: Latias
+|-resisted|p1a: Latias
+|-damage|p1a: Latias|66/100
+|move|p1a: Latias|Psyshock|p2a: Lopunny
+|-supereffective|p2a: Lopunny
+|-crit|p2a: Lopunny
+|-damage|p2a: Lopunny|0 fnt
+|faint|p2a: Lopunny
+|-heal|p1a: Latias|72/100|[from] item: Leftovers
+|upkeep
+|switch|p2a: Garchomp|Garchomp, F|417/417
+|turn|13
+|switch|p1a: Thundurus|Thundurus, M|81/100
+|switch|p2a: Talonflame|Talonflame, M|308/308
+|upkeep
+|turn|14
+|switch|p1a: Garchomp|Garchomp, F|55/100
+|switch|p2a: Serperior|Serperior, F|291/291
+|upkeep
+|turn|15
+|switch|p2a: Garchomp|Garchomp, F|417/417
+|switch|p1a: Latias|Latias, F|72/100
+|-heal|p1a: Latias|79/100|[from] item: Leftovers
+|upkeep
+|turn|16
+|switch|p1a: Garchomp|Garchomp, F|55/100
+|switch|p2a: Serperior|Serperior, F|291/291
+|upkeep
+|turn|17
+|switch|p2a: Gengar|Gengar, M|259/259
+|move|p1a: Garchomp|Stealth Rock|p2a: Gengar
+|-sidestart|p2: Gen6Player 8|move: Stealth Rock
+|upkeep
+|turn|18
+|move|p2a: Gengar|Shadow Ball|p1a: Garchomp
+|-damage|p1a: Garchomp|2/100
+|-unboost|p1a: Garchomp|spd|1
+|-damage|p2a: Gengar|234/259|[from] item: Life Orb
+|move|p1a: Garchomp|Earthquake|p2a: Gengar
+|-immune|p2a: Gengar|[from] ability: Levitate
+|upkeep
+|turn|19
+|switch|p1a: Latias|Latias, F|79/100
+|move|p2a: Gengar|Sludge Wave|p1a: Latias
+|-damage|p1a: Latias|29/100
+|-damage|p2a: Gengar|209/259|[from] item: Life Orb
+|-heal|p1a: Latias|35/100|[from] item: Leftovers
+|upkeep
+|turn|20
+|switch|p1a: Garchomp|Garchomp, F|2/100
+|move|p2a: Gengar|Focus Blast|p1a: Garchomp|[miss]
+|-miss|p2a: Gengar|p1a: Garchomp
+|upkeep
+|turn|21
+|move|p2a: Gengar|Psychic|p1a: Garchomp
+|-damage|p1a: Garchomp|0 fnt
+|faint|p1a: Garchomp
+|-damage|p2a: Gengar|184/259|[from] item: Life Orb
+|upkeep
+|switch|p1a: Bisharp|Bisharp, F|100/100
+|turn|22
+|switch|p2a: Serperior|Serperior, F|291/291
+|-damage|p2a: Serperior|255/291|[from] Stealth Rock
+|switch|p1a: Latias|Latias, F|35/100
+|-heal|p2a: Serperior|273/291|[from] item: Leftovers
+|-heal|p1a: Latias|41/100|[from] item: Leftovers
+|upkeep
+|turn|23
+|switch|p2a: Garchomp|Garchomp, F|417/417
+|-damage|p2a: Garchomp|391/417|[from] Stealth Rock
+|switch|p1a: Bisharp|Bisharp, F|100/100
+|upkeep
+|turn|24
+|move|p2a: Garchomp|Stealth Rock|p1a: Bisharp
+|-sidestart|p1: Gen6Player 7|move: Stealth Rock
+|move|p1a: Bisharp|Knock Off|p2a: Garchomp
+|-damage|p2a: Garchomp|205/417
+|-damage|p1a: Bisharp|88/100|[from] ability: Rough Skin|[of] p2a: Garchomp
+|-damage|p1a: Bisharp|71/100|[from] item: Rocky Helmet|[of] p2a: Garchomp
+|-enditem|p2a: Garchomp|Rocky Helmet|[from] move: Knock Off|[of] p1a: Bisharp
+|upkeep
+|turn|25
+|move|p2a: Garchomp|Fire Blast|p1a: Bisharp
+|-supereffective|p1a: Bisharp
+|-damage|p1a: Bisharp|7/100
+|move|p1a: Bisharp|Swords Dance|p1a: Bisharp
+|-boost|p1a: Bisharp|atk|2
+|upkeep
+|turn|26
+|switch|p2a: Gengar|Gengar, M|184/259
+|-damage|p2a: Gengar|152/259|[from] Stealth Rock
+|move|p1a: Bisharp|Swords Dance|p1a: Bisharp
+|-boost|p1a: Bisharp|atk|2
+|upkeep
+|turn|27
+|switch|p2a: Garchomp|Garchomp, F|205/417
+|-damage|p2a: Garchomp|179/417|[from] Stealth Rock
+|switch|p1a: Thundurus|Thundurus, M|81/100
+|-damage|p1a: Thundurus|56/100|[from] Stealth Rock
+|upkeep
+|turn|28
+|switch|p2a: Serperior|Serperior, F|273/291
+|-damage|p2a: Serperior|237/291|[from] Stealth Rock
+|move|p1a: Thundurus|Thunderbolt|p2a: Serperior
+|-resisted|p2a: Serperior
+|-damage|p2a: Serperior|132/291
+|-damage|p1a: Thundurus|47/100|[from] item: Life Orb
+|-heal|p2a: Serperior|150/291|[from] item: Leftovers
+|upkeep
+|turn|29
+|switch|p1a: Latias|Latias, F|41/100
+|-damage|p1a: Latias|29/100|[from] Stealth Rock
+|move|p2a: Serperior|Knock Off|p1a: Latias
+|-supereffective|p1a: Latias
+|-damage|p1a: Latias|0 fnt
+|-enditem|p1a: Latias|Leftovers|[from] move: Knock Off|[of] p2a: Serperior
+|faint|p1a: Latias
+|-heal|p2a: Serperior|168/291|[from] item: Leftovers
+|upkeep
+|switch|p1a: Bisharp|Bisharp, F|7/100
+|-damage|p1a: Bisharp|1/100|[from] Stealth Rock
+|turn|30
+|switch|p2a: Gengar|Gengar, M|152/259
+|-damage|p2a: Gengar|120/259|[from] Stealth Rock
+|switch|p1a: Keldeo|Keldeo|100/100
+|-damage|p1a: Keldeo|94/100|[from] Stealth Rock
+|upkeep
+|turn|31
+|switch|p2a: Talonflame|Talonflame, M|308/308
+|-damage|p2a: Talonflame|154/308|[from] Stealth Rock
+|move|p1a: Keldeo|Secret Sword|p2a: Talonflame
+|-resisted|p2a: Talonflame
+|-damage|p2a: Talonflame|10/308
+|upkeep
+|turn|32
+|switch|p1a: Bisharp|Bisharp, F|1/100
+|-damage|p1a: Bisharp|0 fnt|[from] Stealth Rock
+|faint|p1a: Bisharp
+|switch|p2a: Garchomp|Garchomp, F|179/417
+|-damage|p2a: Garchomp|153/417|[from] Stealth Rock
+|upkeep
+|switch|p1a: Thundurus|Thundurus, M|47/100
+|-damage|p1a: Thundurus|22/100|[from] Stealth Rock
+|turn|33
+|switch|p2a: Gengar|Gengar, M|120/259
+|-damage|p2a: Gengar|88/259|[from] Stealth Rock
+|move|p1a: Thundurus|Focus Blast|p2a: Gengar
+|-immune|p2a: Gengar
+|upkeep
+|turn|34
+|switch|p2a: Serperior|Serperior, F|168/291
+|-damage|p2a: Serperior|132/291|[from] Stealth Rock
+|move|p1a: Thundurus|Thunderbolt|p2a: Serperior
+|-resisted|p2a: Serperior
+|-damage|p2a: Serperior|27/291
+|-status|p2a: Serperior|par
+|-damage|p1a: Thundurus|12/100|[from] item: Life Orb
+|-heal|p2a: Serperior|45/291 par|[from] item: Leftovers
+|upkeep
+|turn|35
+|move|p1a: Thundurus|Focus Blast|p2a: Serperior|[miss]
+|-miss|p1a: Thundurus|p2a: Serperior
+|cant|p2a: Serperior|par
+|-heal|p2a: Serperior|63/291 par|[from] item: Leftovers
+|upkeep
+|turn|36
+|switch|p1a: Keldeo|Keldeo|94/100
+|-damage|p1a: Keldeo|88/100|[from] Stealth Rock
+|switch|p2a: Garchomp|Garchomp, F|153/417
+|-damage|p2a: Garchomp|127/417|[from] Stealth Rock
+|upkeep
+|turn|37
+|move|p1a: Keldeo|Icy Wind|p2a: Garchomp
+|-supereffective|p2a: Garchomp
+|-damage|p2a: Garchomp|0 fnt
+|faint|p2a: Garchomp
+|upkeep
+|switch|p2a: Talonflame|Talonflame, M|10/308
+|-damage|p2a: Talonflame|0 fnt|[from] Stealth Rock
+|faint|p2a: Talonflame
+|switch|p2a: Serperior|Serperior, F|63/291 par
+|-damage|p2a: Serperior|27/291 par|[from] Stealth Rock
+|turn|38
+|switch|p1a: Thundurus|Thundurus, M|12/100
+|-damage|p1a: Thundurus|0 fnt|[from] Stealth Rock
+|faint|p1a: Thundurus
+|cant|p2a: Serperior|par
+|-heal|p2a: Serperior|45/291 par|[from] item: Leftovers
+|upkeep
+|switch|p1a: Keldeo|Keldeo|88/100
+|-damage|p1a: Keldeo|82/100|[from] Stealth Rock
+|turn|39
+|switch|p2a: Gengar|Gengar, M|88/259
+|-damage|p2a: Gengar|56/259|[from] Stealth Rock
+|move|p1a: Keldeo|Secret Sword|p2a: Gengar
+|-immune|p2a: Gengar
+|upkeep
+|turn|40
+|move|p2a: Gengar|Shadow Ball|p1a: Keldeo
+|-damage|p1a: Keldeo|18/100
+|-damage|p2a: Gengar|31/259|[from] item: Life Orb
+|move|p1a: Keldeo|Secret Sword|p2a: Gengar
+|-immune|p2a: Gengar
+|upkeep
+|turn|41
+|move|p2a: Gengar|Shadow Ball|p1a: Keldeo
+|-damage|p1a: Keldeo|0 fnt
+|faint|p1a: Keldeo
+|-damage|p2a: Gengar|6/259|[from] item: Life Orb
+    </script>
+</div>
+
+<div class="battle-log battle-log-inline" style="display:none"></div>
+
+<script>
+    let daily = Math.floor(Date.now() / 1000 / 60 / 60 / 24); document.write('<script src="https://play.pokemonshowdown.com/js/replay-embed.js?version' + daily + '"></' + 'script>');
+</script>
+
+<p style="text-align:center"> Replay created by <a href="https://github.com/hsahovic/poke-env">poke-env</a>, with code from <a
+        href="https://github.com/smogon/pokemon-showdown"> pokemon-showdown</a>. If something goes wrong, don't hesitate
+    to open an <a href="https://github.com/hsahovic/poke-env/issues">issue!</a></p>
